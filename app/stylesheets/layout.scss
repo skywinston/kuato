@@ -17,10 +17,22 @@
   align-items: center;
 }
 
+@mixin flex-center-self {
+  align-self: center;
+}
+
 .col {
   @include flex-col;
 }
 
 .row {
   @include flex-row;
+}
+
+.center {
+  @include flex-center;
+}
+
+.centered {
+  @include flex-center-self;
 }

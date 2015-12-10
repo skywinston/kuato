@@ -1,3 +1,6 @@
+.text--danger {
+  color: #e64e3c; }
+
 .col {
   display: flex;
   flex-flow: column; }
@@ -6,3 +9,9 @@
   display: flex;
   flex-flow: row;
   flex-wrap: wrap; }
+
+.center {
+  align-items: center; }
+
+.centered {
+  align-self: center; }

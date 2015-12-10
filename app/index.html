@@ -1,17 +1,22 @@
 <!DOCTYPE html>
-<html ng-app>
+<html ng-app="kuato">
     <header>
         <meta charset="utf-8">
         <title>Kuato</title>
         <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700|Source+Sans+Pro:400,700,400italic,700italic|Source+Serif+Pro:400,700' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" href="../node_modules/normalize.css/normalize.css">
+        <!--<link rel="stylesheet" href="../node_modules/normalize.css/normalize.css">-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css">
         <link rel="stylesheet" href="stylesheets/layout.css">
         <link rel="stylesheet" href="stylesheets/app.css">
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
         <script src="javascripts/app.js"></script>
+        <script src="javascripts/factories/AuthToken.js"></script>
+        <script src="javascripts/directives/dashboard.js"></script>
+        <script src="javascripts/directives/login.js"></script>
+        <base href="/" />
     </header>
     <body>
-    {{1+1}}
+        <ui-view></ui-view>
     </body>
 </html>

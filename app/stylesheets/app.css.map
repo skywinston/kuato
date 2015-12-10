@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAWA,aAAc;EACZ,KAAK,EAPE,OAAO;;ACHhB,UAAW;EACT,WAAW,EAAE,6BAAqB",
+"sources": ["variables.scss","app.scss"],
+"names": [],
+"file": "app.css"
+}
