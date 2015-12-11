@@ -25,7 +25,7 @@ html, body {
 .login__background {
   background-color: #019875;
   width: 100vw;
-  height: 100vh; }
+  min-height: 100vh; }
 
 .login__title {
   color: #FAFAFA;

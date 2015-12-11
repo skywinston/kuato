@@ -5,7 +5,8 @@ angular.module('kuato')
         templateUrl: "templates/login.html",
         scope: {},
         controller: function($scope){
-            // Maybe I'll need some controller code here...
+            $scope.email = '';
+            $scope.password = '';
         },
         link: function (scope, element) {
 
