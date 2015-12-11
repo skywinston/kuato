@@ -1,9 +1,10 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  console.log("req received at / directory");
+router.get('*', function(req, res) {
+  res.sendFile('index.html', {root: __dirname + "/../app/"}, function (err) {
+    if (err) throw new Error("Error in wildcard route sending file.");
+  });
 });
 
 module.exports = router;

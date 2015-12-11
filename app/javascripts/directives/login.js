@@ -1,14 +1,17 @@
 angular.module('kuato')
-.directive('kuatoLogin', ["$state", function ($state){
+.directive('kuatoLogin', ["$state", "$http", "UserFactory", function ($state, $http, UserFactory){
     return {
         restrict: "E",
         templateUrl: "templates/login.html",
         scope: {},
         controller: function($scope){
-            $scope.test = true;
+            // Maybe I'll need some controller code here...
         },
         link: function (scope, elem, attrs) {
-            console.log("You're in the Login directive!");
+            console.log(UserFactory);
+            scope.userLogin = function(){
+                UserFactory.login(scope.email, scope.password);
+            }
         }
-    }
-}])
+    };
+}]);

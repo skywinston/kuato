@@ -1,11 +1,122 @@
 @import 'variables';
-@import '_include-media';
+@import 'layout';
+//@import '_include-media';
 
 html, body {
   font-family: $maintype, sans-serif;
 }
 
 // COMPONENTS
+
+// Login BEGIN
+
+.login__background {
+  background-color: $primary;
+  width: 100vw;
+  height: 100vh;
+}
+
+.login__title {
+  color: $white;
+  font: $secondarytype;
+  font-size: 60px;
+  font-weight: 100;
+  line-height: 75px;
+  text-shadow: -1px 1px 0 $primary--accent--dark;
+
+  margin-top: 32px;
+  margin-bottom: 8px;
+}
+
+.login__byline {
+  color: $white;
+  font-family: $secondarytype, serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
+  text-align: center;
+
+  padding: 0 16px;
+  margin: 0 0 18px 0;
+}
+
+.login__form {
+  @include flex-col;
+  @include card(1);
+
+  background-color: $white;
+
+  min-width: 296px;
+
+  padding: 8px;
+  margin: 0 12px 12px 12px;
+  box-sizing: border-box;
+
+  form {
+    @include flex-col;
+
+    padding-top: 14px;
+  }
+
+  label {
+    font-size: 14px;
+    font-weight: 600;
+    color: $text--primary;
+
+    padding: 0 0 0 4px;
+    margin-bottom: 4px;
+  }
+
+  input {
+    background-color: $offwhite;
+    border: 1px solid $offwhite--accent;
+    border-radius: 2px;
+    outline: none;
+
+    height: 48px;
+    padding: 0 12px;
+    margin-bottom: 12px;
+
+    &:last-of-type {
+      margin-bottom: 16px;
+    }
+  }
+
+  button {
+    &.btn--primary {
+      margin-bottom: 24px;
+    }
+
+    &.btn--secondary {
+      margin-bottom: 8px;
+    }
+  }
+}
+
+.btn {
+  @include card(1);
+
+  border: none;
+  outline: none;
+  border-radius: 8px;
+
+  height: 40px;
+
+  @at-root #{&}--primary {
+    background-color: $primary;
+    color: $white;
+  }
+
+  @at-root #{&}--secondary {
+    background-color: $offwhite;
+    color: $text--primary;
+  }
+
+  @at-root #{&}--big {
+    height: 48px;
+    border-radius: 2px;
+  }
+}
 
 
 

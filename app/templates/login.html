@@ -1,4 +1,21 @@
-<div class="col center login-background">
-    <h1 ng-class="{'text--danger': test}">Hello World</h1>
+<div class="col center login__background">
+    <h1 class="login__title">Kuato</h1>
+    <h3 class="login__byline">A spaced repetition learning system for strengthening your memory & mind.</h3>
+    <div class="login__form">
+
+        <form ng-submit="userLogin()" id="login">
+            <label for="email">What is your email?</label>
+            <input ng-model="email" id="email" type="text" placeholder="iamquaid@rekall.net">
+
+            <label for="password">What is your password?</label>
+            <input ng-model="password" type="password" placeholder="Give deez peepul eaurr" id="password">
+
+            <button type="submit" class="btn btn--primary btn--big">Login</button>
+        </form>
+
+        <label for="goToRegister">Not a user yet?</label>
+        <button id="goToRegister" class="btn btn--secondary btn--big" ng-click="toggleRegister()">Register</button>
+
+    </div>
 </div>
 
