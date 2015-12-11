@@ -1,5 +1,5 @@
 angular.module('kuato')
-.factory('UserFactory', ["$http", "AuthToken", "$q", "$rootScope", "$window", function UserFactory($http, AuthToken, $q, $rootScope, $window){
+.factory('User', ["$http", "AuthToken", "$q", "$rootScope", "$window", function UserFactory($http, AuthToken, $q, $rootScope, $window){
     'use strict';
     return {
         login: login,
