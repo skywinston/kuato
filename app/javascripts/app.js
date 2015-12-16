@@ -6,16 +6,19 @@ var app = angular.module('kuato', ['ui.router'])
     "$locationProvider",
     function config($httpProvider, $stateProvider, $urlRouterProvider, $locationProvider){
 
+        // Config Auth Interceptors to send Token (if present) with all requests
+        $httpProvider.interceptors.push('AuthInterceptor');
+
         // State Declarations
         $stateProvider
             .state('dashboard', {
                 url: '/',
                 template: '<kuato-dashboard></kuato-dashboard>'
             })
-
             .state('login', {
                 url: '/login',
-                template: '<kuato-login></kuato-login>',
+                templateUrl: '../templates/login.html',
+                controller: "loginCtrl"
             });
 
         $urlRouterProvider.otherwise('/');

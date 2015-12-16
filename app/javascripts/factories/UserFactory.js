@@ -30,9 +30,10 @@ angular.module('kuato')
 
     function register(email, password){
         return $http.post('/register', {
-            email: email,
-            password: password
-        }).then(function success(response){
+        email: email,
+        password: password
+    }).then(function success(response){
+            var store = $window.localStorage;
             AuthToken.setToken(response.data.token);
             store.setItem('user', response.data.user);
             return response;
