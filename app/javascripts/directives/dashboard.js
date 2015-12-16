@@ -2,9 +2,13 @@ angular.module('kuato')
 .directive('kuatoDashboard', ["AuthToken", "$state", function (AuthToken, $state) {
     return {
         restrict: "E",
-        templateUrl: './templates/dashboard.html',
-        controller: function () {
-            // Do some cool stuff with the view
+        templateUrl: '../../templates/dashboard.html',
+        // todo — right now this templateUrl is not resolving properly
+        controller: function ($scope) {
+            // todo — see if we can inspect this directive and see the $scope.test value
+            $scope.test = true;
+            console.log("in the dashboard directive's built-in controller!");
+            // Do some cool stuff with the view maybe...
         },
         link: function (scope, elem, attrs) {
             if ( !AuthToken.getToken() ) {
@@ -13,9 +17,5 @@ angular.module('kuato')
             console.log("You're in the DashBoard link function!");
         },
     };
-    //console.log(AuthToken.getToken());
-    //if( AuthToken.getToken() ){
-    //    console.log("No Auth Token Found!");
-    //    $state.go('/login');
-    //}
-}])
+
+}]);

@@ -20,7 +20,8 @@
   align-self: center; }
 
 html, body {
-  font-family: "Source Sans Pro", sans-serif; }
+  font-family: "Source Sans Pro", sans-serif;
+  background-color: #e0e0e0; }
 
 .login__background {
   background-color: #019875;
