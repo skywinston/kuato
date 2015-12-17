@@ -12,9 +12,10 @@ var app = angular.module('kuato', ['ui.router'])
 
         // State Declarations
         $stateProvider
-            .state('dashboard', {
+            .state('app', {
                 url: '/',
-                template: '<kuato-dashboard></kuato-dashboard>'
+                templateUrl: './templates/app.html'
+                // todo — look into substates for the app (dashboard/deckview/cardview)
             })
             .state('login', {
                 url: '/login',

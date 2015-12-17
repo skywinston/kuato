@@ -17,7 +17,7 @@ angular.module('kuato')
                 console.log("User successfully logged in!");
 
                 $login = $(".login__background");
-                Choreographer.revealDashBoard($login);
+                Choreographer.revealApp($login);
 
             }, function rejected(response){
 
@@ -32,7 +32,7 @@ angular.module('kuato')
                 console.log("User successfully registered!");
 
                 $login = $(".login__background");
-                Choreographer.revealDashBoard($login);
+                Choreographer.revealApp($login);
             });
     };
 

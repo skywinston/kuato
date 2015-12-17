@@ -5,10 +5,10 @@ angular.module('kuato')
     function($injector, $state){
 
         return {
-            revealDashBoard: revealDashBoard,
+            revealApp: revealApp,
         };
 
-        function revealDashBoard($loginFormDomNode){
+        function revealApp($loginFormDomNode){
             var $elem = $loginFormDomNode;
             var viewportHeight = $elem.height();
             $elem.velocity({
@@ -17,7 +17,7 @@ angular.module('kuato')
                 duration: 500,
                 easing: $injector.get("fastOut"),
                 complete: function () {
-                    $state.go('dashboard');
+                    $state.go('app');
                 }
             });
         }
