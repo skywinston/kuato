@@ -2,7 +2,7 @@ angular.module('kuato')
 .directive('kuatoDashboard', ["AuthToken", "$state", function (AuthToken, $state) {
     return {
         restrict: "E",
-        templateUrl: '../../templates/dashboard.html',
+        templateUrl: './templates/dashboard.html',
         // todo — right now this templateUrl is not resolving properly
         controller: function ($scope) {
             // todo — see if we can inspect this directive and see the $scope.test value

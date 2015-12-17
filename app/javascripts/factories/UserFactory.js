@@ -20,7 +20,7 @@ angular.module('kuato')
             store.setItem('user', response.data.user);
             return response;
         }, function rejected(reason){
-            console.log("Rejected bc: ", reason);
+            console.log("Rejected bc: ", reason.data);
         });
     }
 

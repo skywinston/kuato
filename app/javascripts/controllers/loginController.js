@@ -13,10 +13,16 @@ angular.module('kuato')
     $scope.userLogin = function(email, password){
         User.login(email, password)
             .then(function success(response){
+
                 console.log("User successfully logged in!");
 
                 $login = $(".login__background");
                 Choreographer.revealDashBoard($login);
+
+            }, function rejected(response){
+
+                console.log("Error logging in: ", response.data);
+
             });
     };
 
