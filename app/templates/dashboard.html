@@ -1,3 +1,16 @@
-<h1>DashBoard</h1>
-<input type="text">
-<button>Enter</button>
+<div class="dashboard__container">
+
+    <!--Empty State BEGIN-->
+    <div ng-if="!decks.length">
+        <button ng-click="getDecks()">Create Deck</button>
+        <p>The journey of a 1,000 miles begins with a single step...</p>
+    </div>
+    <!--Empty State END-->
+
+    <!--Deck Index State BEGIN-->
+    <div ng-if="decks.length">
+        <button>Create Deck</button>
+    </div>
+    <!--Deck Index State END-->
+
+</div>

@@ -100,4 +100,60 @@ html, body {
     height: 48px;
     border-radius: 2px; }
 
+.appnav__bar {
+  display: flex;
+  flex-flow: row;
+  flex-wrap: wrap;
+  align-items: center;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.23), 0 3px 12px rgba(0, 0, 0, 0.16);
+  background-color: #019875;
+  color: #FAFAFA;
+  width: 100%;
+  height: 56px; }
+
+.appnav__container {
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  height: 56px; }
+
+.appnav__menubtn__container {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  margin-right: auto;
+  min-width: 56px;
+  min-height: 56px;
+  border-right: 1px solid #01654E;
+  box-shadow: 1px 0 0 0 #6dbfac; }
+
+.appnav__search {
+  display: flex;
+  flex-flow: row;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: auto; }
+  .appnav__search label {
+    font-size: 20px; }
+
+.appnav__addcard {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  min-width: 56px;
+  min-height: 56px;
+  border-left: 1px solid #01654E;
+  box-shadow: -1px 0 0 0 #6dbfac; }
+
+.appnav__bumper {
+  width: 100%;
+  height: 56px;
+  margin-bottom: 16px; }
+
+.dashboard__container {
+  padding: 12px; }
+
 /*# sourceMappingURL=app.css.map */

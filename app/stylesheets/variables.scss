@@ -1,6 +1,7 @@
 // Color Pallette
 $primary: #019875;
 $primary--accent--dark: #01654E;
+$primary--accent--light: #6dbfac;
 $white: #FAFAFA;
 $offwhite: #e9e9e9;
 $offwhite--accent: #BDBDBD;
@@ -42,6 +43,16 @@ $secondarytype: 'Source Serif Pro';
   } @else {
     box-shadow: bottom-shadow($depth), top-shadow($depth);
     border-radius: 2px;
+  }
+}
+
+@mixin dropshadow($depth) {
+  @if $depth < 1 {
+    box-shadow: none;
+  } @else if $depth > 5 {
+    @warn "Invalid $depth `#{$depth}` for mixin `card`.";
+  } @else {
+    box-shadow: bottom-shadow($depth), top-shadow($depth);
   }
 }
 

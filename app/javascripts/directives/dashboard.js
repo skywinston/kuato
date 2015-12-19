@@ -1,22 +1,16 @@
 angular.module('kuato')
-.directive('kuatoDashboard', ["AuthToken", "$state", function (AuthToken, $state) {
+.directive('kuatoDashboard', ["AuthToken", "Deck" , "$state", function (AuthToken, Deck, $state) {
     return {
         restrict: "E",
         templateUrl: './templates/dashboard.html',
         controller: function ($scope) {
+            if ( !AuthToken.getToken() ) { $state.go('login'); } // Guard clause for active user in local storage
 
-            $scope.logText = function () {
-                alert($scope.text);
-            };
+            $scope.decks = Deck.all(); // Fetch all decks from the db
 
         },
         link: function (scope, elem, attrs) {
             console.log(elem);
-            // Check for token and if none is found, load the login state
-            if ( !AuthToken.getToken() ) {
-                $state.go('login');
-            }
-
         }
     };
 

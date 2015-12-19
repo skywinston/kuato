@@ -1,6 +1,6 @@
 @import 'variables';
 
-// Flexbox Utility Classes
+// Flexbox Utility Mixins
 
 @mixin flex-col {
   display: flex;
@@ -17,9 +17,16 @@
   align-items: center;
 }
 
+@mixin flex-centered {
+  align-items: center;
+  justify-content: center;
+}
+
 @mixin flex-center-self {
   align-self: center;
 }
+
+// Quick layout classes
 
 .col {
   @include flex-col;
