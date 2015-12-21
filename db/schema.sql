@@ -10,7 +10,7 @@ CREATE TABLE users (
 
 CREATE TABLE decks (
     id serial primary key,
-    owner varchar(30) references users(email),
+    owner int references users(id),
     title varchar(80) UNIQUE
 );
 
