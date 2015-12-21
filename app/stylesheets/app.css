@@ -145,8 +145,8 @@ html, body {
   margin-left: auto;
   min-width: 56px;
   min-height: 56px;
-  border-left: 1px solid #01654E;
-  box-shadow: -1px 0 0 0 #6dbfac; }
+  border-left: 1px solid #6dbfac;
+  box-shadow: -1px 0 0 0 #01654E; }
 
 .appnav__bumper {
   width: 100%;

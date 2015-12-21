@@ -2,7 +2,7 @@ require('dotenv').load();
 var express = require('express');
 var router = express.Router();
 var jwt = require('jsonwebtoken');
-var authenticate = require('../lib/authenticate');
+var authenticate = require('../../lib/authenticate');
 var pg = require('pg');
 var conString = process.env.DB_URI;
 var bcrypt = require('bcrypt');
@@ -46,12 +46,6 @@ router.post('/register', function(req, res){
                 return res.status(409).end("User already exists!")
             }
         });
-    });
-});
-
-router.get('*', function(req, res) {
-    res.sendFile('index.html', {root: __dirname + "/../app/"}, function (err) {
-        if (err) throw new Error("Error in wildcard route sending file.");
     });
 });
 
