@@ -13,6 +13,7 @@ angular.module('kuato')
         return $http.post('/login', {
             email: email,
             password: password
+            // todo — encrypt the pw before sending...
         })
         .then(function success(response){
             var store = $window.localStorage;

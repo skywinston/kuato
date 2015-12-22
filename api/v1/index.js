@@ -32,15 +32,15 @@ router.post('/register', function(req, res){
     pg.connect(conString, function(err, client, done){
         client.query('SELECT * FROM users WHERE email=$1', [req.body.email], function(err, user){
             if(user.rows.length === 0){
-                client.query('INSERT INTO users VALUES (default, $1, $2)', [req.body.email, hash], function(err, user){
+                client.query('INSERT INTO users VALUES (default, $1, $2) RETURNING id', [req.body.email, hash], function(err, user){
                     console.log("User in register function: ", user);
                     // todo — how do I have the new user record returned after insertion?
                     // todo — if we can get the new user's id, we need to add it to the token's id prop
-                    req.userId= user.rows[0].id;
+                    var userId = user.rows[0].id;
                     done();
                     var token = jwt.sign({
                         username: req.body.email,
-                        id: req.userId
+                        id: userId
                     }, process.env.JWT_SECRET);
                     res.send({
                         token: token,
