@@ -1,11 +1,9 @@
-require('dotenv').load();
 var express = require('express');
 var router = express.Router();
 var jwt = require('jsonwebtoken');
 var authenticate = require('../../lib/authenticate');
 var pg = require('pg');
 var knex = require('../../db/knex.js');
-var conString = process.env.DB_URI;
 var bcrypt = require('bcrypt');
 var expressJwt = require('express-jwt');
 
@@ -19,7 +17,8 @@ router.post('/login', authenticate, function(req, res){
         username: req.body.email,
         id: req.userId
     }, process.env.JWT_SECRET);
-    res.send({
+
+    res.status(200).json({
         token: token,
         user: req.body.email
     });
@@ -31,7 +30,6 @@ router.post('/register', function(req, res){
     var hash = bcrypt.hashSync(req.body.password, 8);
 
     knex('users').where('email', '=', req.body.email).then(function(users){
-        console.log(users);
         if (users.length === 0) {
             knex('users').insert({email: req.body.email, passworddigest: hash})
                 .returning('*')
@@ -42,7 +40,7 @@ router.post('/register', function(req, res){
                         id: user[0].id
                     }, process.env.JWT_SECRET);
 
-                    res.json({
+                    res.status(200).json({
                         token: token,
                         user: user[0].email
                     });
