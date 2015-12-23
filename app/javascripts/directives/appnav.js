@@ -1,5 +1,5 @@
 angular.module('kuato')
-.directive('appnav', ["AuthToken", function (AuthToken) {
+.directive('appnav', ["AuthToken", "User", "$state", function (AuthToken, User, $state) {
     return {
         restrict: "E",
         templateUrl: './templates/appnav.html',
@@ -7,6 +7,11 @@ angular.module('kuato')
             if (!AuthToken.getToken()) { $state.go('login'); }
 
             $scope.test = true;
+
+            $scope.logout = function(){
+                User.logout();
+                $state.go('login');
+            }
 
         },
         link: function (scope, element, attrs) {
