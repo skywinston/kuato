@@ -156,4 +156,56 @@ html, body {
 .dashboard__container {
   padding: 12px; }
 
+.decks__container {
+  display: flex;
+  flex-flow: column;
+  align-items: center; }
+
+.deck__container {
+  display: flex;
+  flex-flow: row;
+  flex-wrap: wrap;
+  align-items: center;
+  box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.24), 0 1.5px 6px rgba(0, 0, 0, 0.12);
+  width: 100%;
+  max-width: 624px;
+  padding: 16px;
+  box-sizing: border-box;
+  margin-bottom: 12px;
+  border-radius: 12px;
+  background-color: #FAFAFA; }
+
+.deck__checkbox--unselected {
+  border-radius: 4px;
+  width: 18px;
+  height: 18px;
+  transition: border .3s;
+  border: 3px solid #e0e0e0;
+  align-self: flex-start; }
+
+.deck__infotext {
+  display: flex;
+  flex-flow: row;
+  flex-wrap: wrap;
+  flex-wrap: wrap; }
+
+.deck__title {
+  margin: 0;
+  padding-left: 16px;
+  font-family: "Source Serif Pro", serif;
+  font-weight: 700; }
+
+.deck__studybtn__mobile {
+  align-self: center;
+  background-color: #019875;
+  color: #FAFAFA;
+  text-align: center;
+  padding: 8px;
+  width: 100%;
+  border-radius: 2px; }
+
+.deck__timestamp {
+  flex-wrap: wrap;
+  color: #9E9E9E; }
+
 /*# sourceMappingURL=app.css.map */

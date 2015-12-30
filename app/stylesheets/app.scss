@@ -190,3 +190,72 @@ html, body {
   padding: 12px;
 }
 
+// Deck BEGIN //
+
+.decks__container {
+  // Decks Plural
+
+  @include flex-col;
+  @include flex-center;
+}
+
+.deck__container {
+  // Deck Singular
+
+  @include flex-row;
+  @include flex-center;
+  @include dropshadow(1);
+
+  width: 100%;
+  max-width: 624px;
+
+  padding: 16px;
+  box-sizing: border-box;
+  margin-bottom: 12px;
+
+  border-radius: 12px;
+  background-color: $white;
+}
+
+.deck__checkbox--unselected {
+  border-radius: 4px;
+  width: 18px;
+  height: 18px;
+  transition: border .3s;
+  border: 3px solid $background;
+  align-self: flex-start;
+}
+
+.deck__infotext {
+  @include flex-row;
+
+  flex-wrap: wrap;
+}
+
+.deck__title {
+  margin: 0;
+  padding-left: 16px;
+
+  font-family: $secondarytype, serif;
+  font-weight: 700;
+}
+
+.deck_textbreak {
+  //display: block;
+}
+
+.deck__studybtn__mobile {
+  align-self: center;
+  background-color: $primary;
+  color: $white;
+  text-align: center;
+  padding: 8px;
+  width: 100%;
+  border-radius: 2px;
+}
+
+.deck__timestamp {
+  flex-wrap: wrap;
+
+  color: $text--secondary;
+}

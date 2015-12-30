@@ -16,7 +16,7 @@ CREATE TABLE decks (
 
 CREATE TABLE cards (
     id serial primary key,
-    deck varchar(80) references decks(title),
+    deck_id integer references decks(id),
     question varchar(5000),
     answer varchar(5000),
     rating int,
