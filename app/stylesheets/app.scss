@@ -259,3 +259,10 @@ html, body {
 
   color: $text--secondary;
 }
+
+.deck__donut {
+  @include flex-col;
+  @include flex-center;
+
+  margin-bottom: 16px;
+}

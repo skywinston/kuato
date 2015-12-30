@@ -10,7 +10,13 @@
     <!--Deck Index State BEGIN-->
     <button>Create Deck</button>
     <div class="decks__container" ng-if="decks.length">
-
+        <div class="deck__container" ng-repeat="deck in decks">
+            <div class="deck__checkbox--unselected"></div>
+            <h3 class="deck__title">{{deck.title}}</h3>
+            <p class="deck__timestamp">Last studied on November 24th, 2015 &nbsp;</p>
+            <ratings-donut ratings="{{deck.ratings}}"></ratings-donut>
+            <a class="deck__studybtn__mobile" ngclick="studyDeck(deck.id)">Study Now</a>
+        </div>
     </div>
     <!--Deck Index State END-->
 

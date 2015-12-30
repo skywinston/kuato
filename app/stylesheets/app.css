@@ -208,4 +208,10 @@ html, body {
   flex-wrap: wrap;
   color: #9E9E9E; }
 
+.deck__donut {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  margin-bottom: 16px; }
+
 /*# sourceMappingURL=app.css.map */
