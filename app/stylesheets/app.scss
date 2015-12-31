@@ -5,6 +5,7 @@
 html, body {
   font-family: $maintype, sans-serif;
   background-color: $background;
+  color: $text--primary;
 }
 
 // COMPONENTS
@@ -136,6 +137,7 @@ html, body {
 
 .appnav__container {
   position: fixed;
+  z-index: 100;
   top: 0px;
   width: 100%;
   height: 56px;
@@ -261,8 +263,103 @@ html, body {
 }
 
 .deck__donut {
-  @include flex-col;
+  @include flex-row;
   @include flex-center;
+  justify-content: space-around;
+  margin: auto;
 
+  width: 264px;
   margin-bottom: 16px;
+
+  section {
+    @include flex-col;
+    align-content: center;
+    justify-content: space-around;
+    p {
+      margin: 0;
+    }
+  }
+
+  .doughnut-legend {
+    list-style: none;
+    padding: 0 12px 0 0;
+    margin: 0px;
+    li {
+      @include flex-row;
+      @include flex-center;
+
+      text-align: right;
+
+      strong {
+        text-align: right;
+        max-width: 36px;
+      }
+
+      span {
+        width: 8px;
+        height: 8px;
+        border-radius: 8px;
+        margin: 0 8px;
+      }
+    }
+  }
+}
+
+.deck__stats {
+  font-size: 15px;
+  border-right: 1px solid $offwhite;
+  text-align: center;
+  padding-right: 16px;
+}
+
+.deck__schedule {
+  //padding-bottom: 8px;
+  margin-bottom: 8px;
+  .material-icons {
+    font-size: 14px;
+  }
+
+  td {
+    vertical-align: middle;
+  }
+
+  // Card Count Column
+  td:nth-child(1) {
+    text-align: right;
+  }
+
+  // Icon Column
+  td:nth-child(2) {
+    width: 24px;
+    text-align: center;
+  }
+
+  // Label Column
+  td:nth-child(3) {
+    text-align: left;
+  }
+  //border-bottom: 1px solid $offwhite--accent;
+}
+
+.deck__canvas__container {
+  @include flex-center;
+  @include flex-col;
+  width: 96px;
+  height: 96px;
+  position: relative;
+
+  canvas: {
+    position: relative;
+  }
+
+}
+
+.deck__card-count {
+  position: relative;
+  top: -64px;
+
+  margin: 0;
+
+  font-weight: 400;
+  font-size: 24px;
 }

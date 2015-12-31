@@ -2,14 +2,50 @@ angular.module('kuato')
 .directive('ratingsDonut', [function(){
     return {
         restrict: 'EA',
-        template: '<div class="deck__donut"><canvas width="80" height="80"></canvas></div>',
+        template:   '<div class="deck__donut">' +
+                        '<div class="deck__stats">' +
+                            '<section class="deck__schedule">' +
+                                '<table>' +
+                                    '<tr>' +
+                                        '<td><strong>2</strong></td>' + // Give this a scope parameter for due
+                                        '<td><i class="material-icons">alarm</i></td>' +
+                                        '<td>Due</td>' +
+                                    '</tr>' +
+                                    '<tr>' +
+                                        '<td><strong>1</strong></td>' +  // Give this a scope parameter for new
+                                        '<td><i class="material-icons">star</i></td>' +
+                                        '<td>New</td>' +
+                                    '</tr>' +
+                                '</table>' +
+                                //'<p><strong>2 </strong>Due</p>' +
+                                //'<p><strong>1 </strong>New</p>' +
+                            '</section>' +
+                            '<section class="deck__legend__container">' +
+                            '</section>' +
+                        '</div>' +
+                        '<div class="deck__canvas__container">' +
+                            '<canvas width="96" height="96"></canvas>' +
+                        '</div>' +
+                    '</div>',
         scope: {
             ratings: "@"
         },
         link: function (scope, element, attrs) {
+            // Set colors for charts
+            var color1 = "#02E4B0",
+                color2 = "#1380B1",
+                color3 = "#E74E3C";
+
 
             // Convert data passed in back to JSON
             var json = JSON.parse(scope.ratings);
+
+            // Get the card count
+            var cardCount = 0;
+            for (var rating in json) {
+                cardCount += json[rating];
+            }
+
 
             // Build the data object to be given to the charting function
             var data = [];
@@ -18,31 +54,32 @@ angular.module('kuato')
                     case 1 : // Rating of 1 => AKA 'Mature' or 'Learned'
                         data.push({
                             value: json[key],
-                            color: "#02E4B0",
+                            color: color1,
                             label: "Learned"
                         });
                         break;
                     case 2 : // Rating of 2 => AKA 'Young' or 'Learning'
                         data.push({
                             value: json[key],
-                            color: "#1380B1",
+                            color: color2,
                             label: "Learning"
                         });
                         break;
                     case    3 : // Rating of 3 => AKA 'Learn' or 'Learning'
                         data.push({
                             value: json[key],
-                            color: "#E74E3C",
-                            label: "Learn"
+                            color: color3,
+                            label: "Forgetting"
                         });
                         break;
                 }
             }
 
+
             // Instantiate a donut chart
             var options = {
                 //Boolean - Whether we should show a stroke on each segment
-                segmentShowStroke : true,
+                segmentShowStroke : false,
 
                 //String - The colour of each segment stroke
                 segmentStrokeColor : "#fff",
@@ -72,14 +109,25 @@ angular.module('kuato')
                 showTooltips: false,
 
                 //String - A legend template
-                legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>"
-
+                legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><strong><%if(segments[i].value){%><%=segments[i].value%><%}%></strong><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>"
             };
-            //console.log(element);
-            var canvas = element.find('canvas');
+
+
+            // Instantiate the Donut Chart passing in our data and options objects
+            var canvas = element.find('canvas'); // gets a jQuery Object
             var ctx = canvas.get(0).getContext("2d");
-            var donut = new Chart(ctx).Doughnut(data,options);
-            donut.generateLegend();
+            var donut = new Chart(ctx).Doughnut(data, options);
+
+            // Add the card count and legend to the donut directive element
+            var legend = donut.generateLegend();
+            var container = element.find('.deck__legend__container');
+            container.append(legend);
+
+            // Write the cardCount to the center of the rendered canvas element
+            var canvasContainer = element.find('.deck__canvas__container');
+            canvasContainer.append('<h3 class="deck__card-count">' + cardCount + '</h3>');
+
+            // todo — figure out how to render the cardCount to the existing canvas element
         }
     }
 }]);
