@@ -19,6 +19,13 @@
 .centered {
   align-self: center; }
 
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    -webkit-transform: scale3d(0.3, 0.3, 0.3);
+    transform: scale3d(0.3, 0.3, 0.3); }
+  50% {
+    opacity: 1; } }
 html, body {
   font-family: "Source Sans Pro", sans-serif;
   background-color: #e0e0e0;
@@ -177,6 +184,10 @@ html, body {
   border-radius: 12px;
   background-color: #FAFAFA; }
 
+@media screen and (min-device-width: 600px) {
+  .deck__container {
+    display: flex;
+    flex-flow: column; } }
 .deck__checkbox--unselected {
   border-radius: 4px;
   width: 18px;
@@ -185,18 +196,63 @@ html, body {
   border: 3px solid #e0e0e0;
   align-self: flex-start; }
 
+.deck__checkbox--selected {
+  border-radius: 4px;
+  width: 18px;
+  height: 18px;
+  border: 3px solid #019875;
+  align-self: flex-start;
+  background-size: contain;
+  background-image: url(../images/study_checkbox-selected.svg);
+  background-repeat: no-repeat;
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  -moz-transition: all 0.5s; }
+
 .deck__infotext {
   display: flex;
   flex-flow: row;
   flex-wrap: wrap;
   flex-wrap: wrap; }
 
-.deck__title {
+.deck__title--mobile {
   margin: 0;
   padding-left: 16px;
   font-family: "Source Serif Pro", serif;
   font-weight: 700; }
 
+@media only screen and (min-device-width: 400px) and (max-device-width: 600px) {
+  .deck__title--mobile {
+    display: none; }
+
+  .deck__infotext {
+    display: flex;
+    flex-flow: column; }
+
+  .deck__timestamp {
+    padding-left: 16px;
+    margin: 8px 0; }
+
+  .deck__donut__wrapper {
+    margin: auto;
+    margin-top: 16px;
+    margin-bottom: 16px; }
+
+  .deck__studybtn__tablet {
+    display: none; } }
+.deck__title--tablet {
+  margin: 0;
+  padding-left: 16px;
+  font-family: "Source Serif Pro", serif;
+  font-weight: 700; }
+
+@media screen and (max-device-width: 399px) {
+  .deck__title--tablet {
+    display: none; }
+
+  .deck__studybtn__tablet {
+    display: none; } }
 .deck__studybtn__mobile {
   align-self: center;
   background-color: #019875;
@@ -210,13 +266,16 @@ html, body {
   flex-wrap: wrap;
   color: #9E9E9E; }
 
+.deck__donut__wrapper {
+  margin: auto; }
+
 .deck__donut {
   display: flex;
   flex-flow: row;
   flex-wrap: wrap;
   align-items: center;
+  align-self: center;
   justify-content: space-around;
-  margin: auto;
   width: 264px;
   margin-bottom: 16px; }
   .deck__donut section {
@@ -254,7 +313,8 @@ html, body {
 .deck__schedule {
   margin-bottom: 8px; }
   .deck__schedule .material-icons {
-    font-size: 14px; }
+    font-size: 14px;
+    padding-top: 4px; }
   .deck__schedule td {
     vertical-align: middle; }
   .deck__schedule td:nth-child(1) {
@@ -280,5 +340,45 @@ html, body {
   margin: 0;
   font-weight: 400;
   font-size: 24px; }
+
+@media only screen and (min-device-width: 601px) {
+  .deck__container {
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap; }
+
+  .deck__checkbox--unselected {
+    align-self: auto; }
+
+  .deck__checkbox--selected {
+    align-self: auto; }
+
+  .deck__title--mobile {
+    display: none; }
+
+  .deck__infotext {
+    display: flex;
+    flex-flow: column;
+    margin-left: 16px; }
+
+  .deck__title--tablet {
+    padding: 0; }
+
+  .deck__timestamp {
+    margin: 8px 0; }
+
+  .deck__studybtn__mobile {
+    display: none; }
+
+  .deck__studybtn__tablet {
+    color: #019875;
+    text-decoration: underline; }
+
+  .deck__donut__wrapper {
+    margin-left: auto; }
+
+  .deck__donut {
+    margin-bottom: 0px;
+    flex-wrap: nowrap; } }
 
 /*# sourceMappingURL=app.css.map */

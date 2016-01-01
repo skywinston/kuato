@@ -1,5 +1,6 @@
 @import 'variables';
 @import 'layout';
+@import 'animations';
 //@import '_include-media';
 
 html, body {
@@ -219,6 +220,12 @@ html, body {
   background-color: $white;
 }
 
+@media screen and (min-device-width: 600px) {
+  .deck__container {
+    @include flex-col;
+  }
+}
+
 .deck__checkbox--unselected {
   border-radius: 4px;
   width: 18px;
@@ -228,18 +235,89 @@ html, body {
   align-self: flex-start;
 }
 
+.deck__checkbox--selected {
+  //@include zoomIn;
+  border-radius: 4px;
+  width: 18px;
+  height: 18px;
+  border: 3px solid $primary;
+  align-self: flex-start;
+  background-size: contain;
+  background-image: url(../images/study_checkbox-selected.svg);
+  //background-position: center center;
+  background-repeat: no-repeat;
+  transition:all 0.5s;
+  -webkit-transition:all 0.5s;
+  -o-transition:all 0.5s;
+  -moz-transition:all 0.5s;
+}
+
 .deck__infotext {
   @include flex-row;
 
   flex-wrap: wrap;
 }
 
-.deck__title {
+
+.deck__title--mobile {
   margin: 0;
   padding-left: 16px;
 
   font-family: $secondarytype, serif;
   font-weight: 700;
+}
+
+@media only screen
+  and (min-device-width: 400px)
+  and (max-device-width: 600px) {
+  .deck__container {
+    //@include flex-col;
+  }
+
+  .deck__title--mobile {
+    display: none;
+  }
+
+  .deck__infotext {
+    @include flex-col;
+  }
+
+  .deck__timestamp {
+    padding-left: 16px;
+    margin: 8px 0;
+  }
+
+  .deck__checkbox--unselected {
+    //align-self: auto;
+  }
+
+  .deck__donut__wrapper {
+    margin: auto;
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+
+
+  .deck__studybtn__tablet {
+    display: none;
+  }
+}
+
+.deck__title--tablet {
+  margin: 0;
+  padding-left: 16px;
+
+  font-family: $secondarytype, serif;
+  font-weight: 700;
+}
+@media screen and (max-device-width: 399px) {
+  .deck__title--tablet {
+    display: none;
+  }
+
+  .deck__studybtn__tablet {
+    display: none;
+  }
 }
 
 .deck_textbreak {
@@ -262,11 +340,16 @@ html, body {
   color: $text--secondary;
 }
 
+.deck__donut__wrapper {
+  margin: auto;
+}
+
 .deck__donut {
   @include flex-row;
   @include flex-center;
+  @include flex-center-self;
   justify-content: space-around;
-  margin: auto;
+  //margin: auto;
 
   width: 264px;
   margin-bottom: 16px;
@@ -317,6 +400,7 @@ html, body {
   margin-bottom: 8px;
   .material-icons {
     font-size: 14px;
+    padding-top: 4px;
   }
 
   td {
@@ -362,4 +446,57 @@ html, body {
 
   font-weight: 400;
   font-size: 24px;
+}
+
+// TABLET PORTRAIT BREAKPOINT
+@media only screen
+  and (min-device-width: 601px) {
+  .deck__container {
+    @include flex-row;
+  }
+
+  .deck__checkbox--unselected {
+    align-self: auto;
+  }
+
+  .deck__checkbox--selected {
+    align-self: auto;
+  }
+
+  .deck__title--mobile {
+    display: none;
+  }
+
+  .deck__infotext {
+    @include flex-col;
+
+    margin-left: 16px;
+  }
+
+  .deck__title--tablet {
+    padding: 0;
+  }
+
+  .deck__timestamp {
+    margin: 8px 0;
+  }
+
+  .deck__studybtn__mobile {
+    display: none;
+  }
+
+  .deck__studybtn__tablet {
+    color: $primary;
+    text-decoration: underline;
+  }
+
+  .deck__donut__wrapper {
+    margin-left: auto;
+  }
+
+  .deck__donut {
+    margin-bottom: 0px;
+    flex-wrap: nowrap;
+  }
+
 }

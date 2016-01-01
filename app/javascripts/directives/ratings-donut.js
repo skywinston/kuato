@@ -8,7 +8,7 @@ angular.module('kuato')
                                 '<table>' +
                                     '<tr>' +
                                         '<td><strong>2</strong></td>' + // Give this a scope parameter for due
-                                        '<td><i class="material-icons">alarm</i></td>' +
+                                        '<td><i class="material-icons">notifications</i></td>' +
                                         '<td>Due</td>' +
                                     '</tr>' +
                                     '<tr>' +

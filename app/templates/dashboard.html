@@ -11,10 +11,17 @@
     <button>Create Deck</button>
     <div class="decks__container" ng-if="decks.length">
         <div class="deck__container" ng-repeat="deck in decks">
-            <div class="deck__checkbox--unselected"></div>
-            <h3 class="deck__title">{{deck.title}}</h3>
-            <p class="deck__timestamp">Last studied on November 24th, 2015 &nbsp;</p>
-            <ratings-donut ratings="{{deck.ratings}}"></ratings-donut>
+
+
+            <div class="deck__checkbox--unselected" ng-click="toggleStudyThisDeck($event, deck.id)"></div>
+            <h3 class="deck__title--mobile">{{deck.title}}</h3>
+            <div class="deck__infotext">
+                <h3 class="deck__title--tablet">{{deck.title}}</h3>
+                <p class="deck__timestamp">Last studied on November 24th, 2015 &nbsp;</p>
+                <a class="deck__studybtn__tablet" ngclick="studyDeck(deck.id)">Study Now</a>
+            </div>
+
+            <ratings-donut ratings="{{deck.ratings}}" class="deck__donut__wrapper"></ratings-donut>
             <a class="deck__studybtn__mobile" ngclick="studyDeck(deck.id)">Study Now</a>
         </div>
     </div>

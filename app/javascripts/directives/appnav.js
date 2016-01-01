@@ -6,8 +6,6 @@ angular.module('kuato')
         controller: function ($scope) {
             if (!AuthToken.getToken()) { $state.go('login'); }
 
-            $scope.test = true;
-
             $scope.logout = function(){
                 User.logout();
                 $state.go('login');
@@ -15,8 +13,7 @@ angular.module('kuato')
 
         },
         link: function (scope, element, attrs) {
-            console.log(element);
-            element.ready(console.log("appnav component loaded..."));
+            // todo — what is the viability of using global state object to ng-if elems out based on viewport width?
         }
     };
 

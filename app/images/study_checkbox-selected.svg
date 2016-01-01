@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="24px" height="23px" viewBox="0 0 24 23" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.4.2 (15855) - http://www.bohemiancoding.com/sketch -->
+    <title>Shape</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Deck-Index" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Deck-Index---iPad-Copy" sketch:type="MSArtboardGroup" transform="translate(-232.000000, -193.000000)" fill="#01654E">
+            <g id="sample-topic-card" sketch:type="MSLayerGroup" transform="translate(200.000000, 147.000000)">
+                <g id="checked-checkbox" transform="translate(24.000000, 37.000000)" sketch:type="MSShapeGroup">
+                    <g id="noun_76930_cc" transform="translate(8.000000, 9.000000)">
+                        <g id="Group">
+                            <path d="M23.1187271,0 C23.1187271,0 20.504284,1.7625459 17.0673195,4.96450428 C14.4528764,7.40269278 11.3684211,10.6927785 8.57772338,14.6878825 L2.76132191,9.48837209 L0.264381885,11.8384333 L9.34149327,22.3843329 C9.34149327,22.3843329 11.5740514,16.1566707 18.2423501,7.81395349 C19.8286414,5.84577723 21.6499388,3.76009792 23.7356181,1.61566707 L23.1187271,0 L23.1187271,0 Z" id="Shape"></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
