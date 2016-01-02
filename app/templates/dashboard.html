@@ -32,3 +32,14 @@
     <!--Deck Index State END-->
 
 </div>
+<div class="dashnav__studyButton__container" ng-if="queuedForStudy.length">
+    <button class="dashnav__studyButton">
+        Study {{queuedForStudy.length}}
+        <ng-pluralize count="queuedForStudy.length"
+            when="{
+                '1': 'Deck',
+                'other': 'Decks'
+            }">
+        </ng-pluralize>
+    </button>
+</div>

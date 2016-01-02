@@ -26,6 +26,22 @@
     transform: scale3d(0.3, 0.3, 0.3); }
   50% {
     opacity: 1; } }
+@keyframes slideInUp {
+  from {
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0);
+    visibility: visible; }
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0); } }
+@keyframes slideOutDown {
+  from {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0); }
+  to {
+    visibility: hidden;
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0); } }
 html, body {
   font-family: "Source Sans Pro", sans-serif;
   background-color: #e0e0e0;
@@ -203,6 +219,44 @@ html, body {
   padding-left: 16px;
   color: #4A4A4A; }
 
+.dashnav__studyButton__container {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.23), 0 10px 40px rgba(0, 0, 0, 0.19);
+  position: fixed;
+  bottom: 0px;
+  padding: 16px;
+  box-sizing: border-box;
+  width: 100%;
+  background-color: #FAFAFA;
+  transition: all .3s; }
+  .dashnav__studyButton__container.ng-enter {
+    -webkit-animation-duration: .3s;
+    animation-duration: .3s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-name: slideInUp;
+    animation-name: slideInUp;
+    opacity: 1;
+    visibility: visible; }
+  .dashnav__studyButton__container.ng-leave {
+    -webkit-animation-duration: .3s;
+    animation-duration: .3s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-name: slideOutDown;
+    animation-name: slideOutDown; }
+
+.dashnav__studyButton {
+  width: 100%;
+  height: 48px;
+  color: #FAFAFA;
+  background-color: #019875;
+  outline: none;
+  border: none;
+  border-radius: 2px; }
+
 .decks__container {
   display: flex;
   flex-flow: column;
@@ -273,9 +327,7 @@ html, body {
     margin: 8px 0; }
 
   .deck__donut__wrapper {
-    margin: auto;
-    margin-top: 16px;
-    margin-bottom: 16px; }
+    margin: 16px auto; }
 
   .deck__studybtn__tablet {
     display: none; } }

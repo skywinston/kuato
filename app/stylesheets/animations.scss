@@ -1,3 +1,11 @@
+@mixin animated {
+  -webkit-animation-duration: .3s;
+  animation-duration: .3s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  //animation-timing-function: cubic-bezier(.55,0,.1,1);
+}
+
 @keyframes zoomIn {
   from {
     opacity: 0;
@@ -11,6 +19,45 @@
 }
 
 @mixin zoomIn {
+  @include animated;
   -webkit-animation-name: zoomIn;
   animation-name: zoomIn;
+}
+
+@keyframes slideInUp {
+  from {
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0);
+    visibility: visible;
+  }
+
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@mixin slideInUp {
+  @include animated;
+  -webkit-animation-name: slideInUp;
+  animation-name: slideInUp;
+}
+
+@keyframes slideOutDown {
+  from {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    visibility: hidden;
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0);
+  }
+}
+
+@mixin slideOutDown {
+  @include animated;
+  -webkit-animation-name: slideOutDown;
+  animation-name: slideOutDown;
 }

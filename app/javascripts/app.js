@@ -1,4 +1,4 @@
-var app = angular.module('kuato', ['ui.router'])
+var app = angular.module('kuato', ['ngAnimate', 'ui.router'])
 .constant("fastOut", [.55,0,.1,1])
 .config([
     "$httpProvider",

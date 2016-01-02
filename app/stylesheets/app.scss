@@ -240,6 +240,43 @@ html, body {
   color: $text--primary;
 }
 
+.dashnav__studyButton__container {
+  @include flex-col;
+  @include flex-center;
+  @include dropshadow(3);
+
+  position: fixed;
+  bottom: 0px;
+  padding: 16px;
+  box-sizing: border-box;
+
+  width: 100%;
+  background-color: $white;
+  transition: all .3s;
+
+  // Animations
+  &.ng-enter {
+    @include slideInUp;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  &.ng-leave {
+    @include slideOutDown;
+  }
+
+}
+
+.dashnav__studyButton {
+  width: 100%;
+  height: 48px;
+  color: $white;
+  background-color: $primary;
+  outline: none;
+  border: none;
+  border-radius: 2px;
+}
+
 // Deck BEGIN //
 
 .decks__container {
@@ -339,9 +376,7 @@ html, body {
   }
 
   .deck__donut__wrapper {
-    margin: auto;
-    margin-top: 16px;
-    margin-bottom: 16px;
+    margin: 16px auto;
   }
 
 

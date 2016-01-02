@@ -1,5 +1,5 @@
 angular.module('kuato')
-.directive('kuatoDashboard', ["AuthToken", "Deck", "$state", function (AuthToken, Deck, $state) {
+.directive('kuatoDashboard', ["AuthToken", "Deck", "Choreographer" , "$state", function (AuthToken, Deck, Choreographer, $state) {
     return {
         restrict: "E",
         templateUrl: './templates/dashboard.html',
@@ -31,9 +31,10 @@ angular.module('kuato')
             };
 
             $scope.selectAll = function (event) {
-                console.log(event.target);
-                $elem = $(event.target);
-                $unselected = $('.deck__checkbox--unselected');
+                var $elem = $(event.target);
+                var $unselected = $('.deck__checkbox--unselected');
+                var $dashboard = $('.dashboard__container');
+                var $vw = $(window).width();
 
                 // Toggle class on the select all box;
                 $elem.toggleClass('dashnav__selectall--unselected dashnav__selectall--selected');
@@ -47,6 +48,11 @@ angular.module('kuato')
                         $scope.queuedForStudy.push(deck.id);
                     });
                     console.log("Adding all decks to the queue for study: ", $scope.queuedForStudy);
+
+                    // If on mobile viewport, scale the background and slide in the study sheet
+                    if ($vw < 400) {
+                        Choreographer.multipleDeckSelection($scope.queuedForStudy);
+                    }
 
                 // But if select all box is unselected, remove the selected class from checkboxes and empty the queue
                 } else {
