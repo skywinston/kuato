@@ -350,7 +350,12 @@ html, body {
   text-align: center;
   padding: 8px;
   width: 100%;
-  border-radius: 2px; }
+  outline: none;
+  border: none;
+  border-radius: 2px;
+  transition: all .3s; }
+  .deck__studybtn__mobile.disabled {
+    opacity: .4; }
 
 .deck__timestamp {
   flex-wrap: wrap;
@@ -473,8 +478,17 @@ html, body {
     display: none; }
 
   .deck__studybtn__tablet {
+    padding: 0;
+    margin: 0;
+    width: 88px;
     color: #019875;
-    text-decoration: underline; }
+    text-decoration: underline;
+    text-align: left;
+    outline: none;
+    border: none;
+    background-color: #FAFAFA; }
+    .deck__studybtn__tablet.disabled {
+      opacity: .4; }
 
   .deck__donut__wrapper {
     margin-left: auto;

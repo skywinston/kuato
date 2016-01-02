@@ -6,6 +6,7 @@ angular.module('kuato')
         controller: function ($scope) {
             if ( !AuthToken.getToken() ) { $state.go('login'); } // Guard clause for active user in local storage
 
+            // Fetch all decks from api and bind them to scope
             Deck.all()
                 .then(function (response) {
                     $scope.decks = response.data;
@@ -30,11 +31,11 @@ angular.module('kuato')
 
             };
 
+
+            // Handle the select all box selection
             $scope.selectAll = function (event) {
                 var $elem = $(event.target);
                 var $unselected = $('.deck__checkbox--unselected');
-                var $dashboard = $('.dashboard__container');
-                var $vw = $(window).width();
 
                 // Toggle class on the select all box;
                 $elem.toggleClass('dashnav__selectall--unselected dashnav__selectall--selected');
@@ -49,11 +50,6 @@ angular.module('kuato')
                     });
                     console.log("Adding all decks to the queue for study: ", $scope.queuedForStudy);
 
-                    // If on mobile viewport, scale the background and slide in the study sheet
-                    if ($vw < 400) {
-                        Choreographer.multipleDeckSelection($scope.queuedForStudy);
-                    }
-
                 // But if select all box is unselected, remove the selected class from checkboxes and empty the queue
                 } else {
                     $selected = $('.deck__checkbox--selected');
@@ -61,7 +57,18 @@ angular.module('kuato')
                     $scope.queuedForStudy = [];
                     console.log("Removing all decks from the queue: ", $scope.queuedForStudy);
                 }
-            }
+            };
+
+
+            // Study selected decks
+            $scope.studyDecks = function (decks) {
+
+                console.log("Decks to study are: ", decks);
+                console.log("")
+
+                // todo — how to transition state passing array of decks queued for study from this scope
+            };
+
         },
 
         link: function (scope, elem, attrs) {

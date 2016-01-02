@@ -22,18 +22,27 @@
             <div class="deck__infotext">
                 <h3 class="deck__title--tablet">{{deck.title}}</h3>
                 <p class="deck__timestamp">Last studied on November 24th, 2015 &nbsp;</p>
-                <a class="deck__studybtn__tablet" ngclick="studyDeck(deck.id)">Study Now</a>
+                <button class="deck__studybtn__tablet" ng-click="studyDecks(deck.id)"
+                        ng-disabled="queuedForStudy.length"
+                        ng-class="{'disabled': queuedForStudy.length}">
+                    Study Now
+                </button>
             </div>
 
             <ratings-donut ratings="{{deck.ratings}}" class="deck__donut__wrapper"></ratings-donut>
-            <a class="deck__studybtn__mobile" ngclick="studyDeck(deck.id)">Study Now</a>
+            <button class="deck__studybtn__mobile"
+                    ng-click="studyDecks(deck.id)"
+                    ng-disabled="queuedForStudy.length"
+                    ng-class="{'disabled': queuedForStudy.length}">
+                Study Now
+            </button>
         </div>
     </div>
     <!--Deck Index State END-->
 
 </div>
 <div class="dashnav__studyButton__container" ng-if="queuedForStudy.length">
-    <button class="dashnav__studyButton">
+    <button class="dashnav__studyButton" ng-click="studyDecks(queuedForStudy)">
         Study {{queuedForStudy.length}}
         <ng-pluralize count="queuedForStudy.length"
             when="{

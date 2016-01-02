@@ -413,8 +413,17 @@ html, body {
   text-align: center;
   padding: 8px;
   width: 100%;
+  outline: none;
+  border: none;
   border-radius: 2px;
+  transition: all .3s;
+
+  // When disabled
+  &.disabled {
+    opacity: .4;
+  }
 }
+
 
 .deck__timestamp {
   flex-wrap: wrap;
@@ -580,8 +589,20 @@ html, body {
   }
 
   .deck__studybtn__tablet {
+    padding: 0;
+    margin: 0;
+    width: 88px;
     color: $primary;
     text-decoration: underline;
+    text-align: left;
+    outline: none;
+    border: none;
+    background-color: $white;
+
+    // When disabled
+    &.disabled {
+      opacity: .4;
+    }
   }
 
   .deck__donut__wrapper {
