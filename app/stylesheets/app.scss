@@ -193,6 +193,53 @@ html, body {
   padding: 12px;
 }
 
+// DashNav BEGIN //
+
+.dashnav__container {
+  @include flex-row;
+  @include flex-center;
+
+  width: 100%;
+  max-width: 624px;
+  margin-bottom: 16px;
+}
+
+.dashnav__selectall--unselected {
+  border-radius: 4px;
+  width: 18px;
+  height: 18px;
+  transition: border .3s;
+  border: 3px solid $text--secondary;
+  align-self: flex-start;
+
+  margin-left: 16px;
+}
+
+.dashnav__selectall--selected {
+  border-radius: 4px;
+  width: 18px;
+  height: 18px;
+  transition: border .3s;
+  border: 3px solid $primary;
+  align-self: flex-start;
+
+  margin-left: 16px;
+
+  background-size: contain;
+  background-image: url(../images/study_checkbox-selected.svg);
+  //background-position: center center;
+  background-repeat: no-repeat;
+  transition:all 0.5s;
+  -webkit-transition:all 0.5s;
+  -o-transition:all 0.5s;
+  -moz-transition:all 0.5s;
+}
+
+.dashnav__selectAllLabel {
+  padding-left: 16px;
+  color: $text--primary;
+}
+
 // Deck BEGIN //
 
 .decks__container {
@@ -457,10 +504,20 @@ html, body {
 
   .deck__checkbox--unselected {
     align-self: auto;
+    width: 30px;
+    height: 30px;
+    border: 5px solid $background;
+    border-radius: 8px;
+    margin-left: 8px;
   }
 
   .deck__checkbox--selected {
     align-self: auto;
+    width: 30px;
+    height: 30px;
+    border: 5px solid $primary;
+    border-radius: 8px;
+    margin-left: 8px;
   }
 
   .deck__title--mobile {
@@ -470,11 +527,13 @@ html, body {
   .deck__infotext {
     @include flex-col;
 
-    margin-left: 16px;
+    margin-left: 24px;
   }
 
   .deck__title--tablet {
     padding: 0;
+    font-size: 22px;
+    max-width: 256px;
   }
 
   .deck__timestamp {
@@ -492,6 +551,7 @@ html, body {
 
   .deck__donut__wrapper {
     margin-left: auto;
+    margin-right: 0;
   }
 
   .deck__donut {

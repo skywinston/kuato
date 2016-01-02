@@ -165,6 +165,44 @@ html, body {
 .dashboard__container {
   padding: 12px; }
 
+.dashnav__container {
+  display: flex;
+  flex-flow: row;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 100%;
+  max-width: 624px;
+  margin-bottom: 16px; }
+
+.dashnav__selectall--unselected {
+  border-radius: 4px;
+  width: 18px;
+  height: 18px;
+  transition: border .3s;
+  border: 3px solid #9E9E9E;
+  align-self: flex-start;
+  margin-left: 16px; }
+
+.dashnav__selectall--selected {
+  border-radius: 4px;
+  width: 18px;
+  height: 18px;
+  transition: border .3s;
+  border: 3px solid #019875;
+  align-self: flex-start;
+  margin-left: 16px;
+  background-size: contain;
+  background-image: url(../images/study_checkbox-selected.svg);
+  background-repeat: no-repeat;
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  -moz-transition: all 0.5s; }
+
+.dashnav__selectAllLabel {
+  padding-left: 16px;
+  color: #4A4A4A; }
+
 .decks__container {
   display: flex;
   flex-flow: column;
@@ -348,10 +386,20 @@ html, body {
     flex-wrap: wrap; }
 
   .deck__checkbox--unselected {
-    align-self: auto; }
+    align-self: auto;
+    width: 30px;
+    height: 30px;
+    border: 5px solid #e0e0e0;
+    border-radius: 8px;
+    margin-left: 8px; }
 
   .deck__checkbox--selected {
-    align-self: auto; }
+    align-self: auto;
+    width: 30px;
+    height: 30px;
+    border: 5px solid #019875;
+    border-radius: 8px;
+    margin-left: 8px; }
 
   .deck__title--mobile {
     display: none; }
@@ -359,10 +407,12 @@ html, body {
   .deck__infotext {
     display: flex;
     flex-flow: column;
-    margin-left: 16px; }
+    margin-left: 24px; }
 
   .deck__title--tablet {
-    padding: 0; }
+    padding: 0;
+    font-size: 22px;
+    max-width: 256px; }
 
   .deck__timestamp {
     margin: 8px 0; }
@@ -375,7 +425,8 @@ html, body {
     text-decoration: underline; }
 
   .deck__donut__wrapper {
-    margin-left: auto; }
+    margin-left: auto;
+    margin-right: 0; }
 
   .deck__donut {
     margin-bottom: 0px;
