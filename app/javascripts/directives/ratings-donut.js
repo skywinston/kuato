@@ -24,7 +24,7 @@ angular.module('kuato')
                             '</section>' +
                         '</div>' +
                         '<div class="deck__canvas__container">' +
-                            '<canvas width="96" height="96"></canvas>' +
+                            '<canvas></canvas>' +
                         '</div>' +
                     '</div>',
         scope: {
@@ -108,6 +108,12 @@ angular.module('kuato')
                 // Boolean - Determines whether to draw tooltips on the canvas or not
                 showTooltips: false,
 
+                // Boolean - Change the size of the chart as the viewport changes
+                responsive: true,
+
+                // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+                maintainAspectRatio: false,
+
                 //String - A legend template
                 legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><strong><%if(segments[i].value){%><%=segments[i].value%><%}%></strong><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>"
             };
@@ -116,6 +122,8 @@ angular.module('kuato')
             // Instantiate the Donut Chart passing in our data and options objects
             var canvas = element.find('canvas'); // gets a jQuery Object
             var ctx = canvas.get(0).getContext("2d");
+            ctx.canvas.width = 96;
+            ctx.canvas.height = 96;
             var donut = new Chart(ctx).Doughnut(data, options);
 
             // Add the card count and legend to the donut directive element
@@ -127,7 +135,7 @@ angular.module('kuato')
             var canvasContainer = element.find('.deck__canvas__container');
             canvasContainer.append('<h3 class="deck__card-count">' + cardCount + '</h3>');
 
-            // todo — figure out how to render the cardCount to the existing canvas element
+            // todo — chart is squished vertically on mobile browsers (iOS Safari & Chrome)
         }
     }
 }]);
