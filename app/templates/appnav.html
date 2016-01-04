@@ -1,3 +1,4 @@
+<!-- AppNav BEGIN -->
 <div class="appnav__container">
     <div class="appnav__bar">
         <div ng-click="logout()" class="appnav__menubtn__container">
@@ -28,7 +29,8 @@
             <!--<i class="material-icons">search</i>-->
             <label>Search</label>
         </div>
-        <div class="appnav__addcard">
+        <div class="appnav__addcard" ng-click="newCard()">
+            <span>Add Card</span>
             <?xml version="1.0" encoding="UTF-8" standalone="no"?>
             <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
                 <!-- Generator: Sketch 3.4.2 (15855) - http://www.bohemiancoding.com/sketch -->
@@ -50,4 +52,13 @@
         </div>
     </div>
 </div>
+<!-- AppNav END -->
+
+<!-- New Card Form BEGIN -->
+<div ng-if="cardFormVisible" class="card__wrapper--new">
+    <kuato-card></kuato-card>
+</div>
+<!-- New Card Form END -->
+
+<!-- Pushes content under appnav below it's bottom border -->
 <div class="appnav__bumper"></div>

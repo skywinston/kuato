@@ -136,6 +136,7 @@ angular.module('kuato')
             canvasContainer.append('<h3 class="deck__card-count">' + cardCount + '</h3>');
 
             // todo — chart is squished vertically on mobile browsers (iOS Safari & Chrome)
+            // This is happening because we are appending the h3 to the canvas container.  No fix yet.
         }
     }
 }]);

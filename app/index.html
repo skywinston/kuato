@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="kuato">
     <header>
-        <meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1, user-scalable=0 charset="utf-8">
         <title>Kuato</title>
         <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,400italic,700,700italic,600|Source+Code+Pro|Source+Serif+Pro:400,600,700' rel='stylesheet' type='text/css'>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -9,27 +9,32 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css">
         <link rel="stylesheet" href="stylesheets/layout.css">
         <link rel="stylesheet" href="stylesheets/app.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.10.0/codemirror.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.ui.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.0/angular-animate.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.8/angular-animate.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.10.0/codemirror.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.10.0/mode/markdown/markdown.min.js"></script>
         <script src="javascripts/app.js"></script>
         <script src="javascripts/factories/AuthToken.js"></script>
         <script src="javascripts/factories/AuthInterceptor.js"></script>
         <script src="javascripts/factories/UserFactory.js"></script>
         <script src="javascripts/factories/Choreographer.js"></script>
+        <script src="javascripts/factories/Card.js"></script>
         <script src="javascripts/factories/Deck.js"></script>
         <script src="javascripts/directives/appnav.js"></script>
         <script src="javascripts/directives/dashboard.js"></script>
+        <script src="javascripts/directives/card.js"></script>
         <script src="javascripts/directives/ratings-donut.js"></script>
         <script src="javascripts/controllers/loginController.js"></script>
         <base href="/" />
     </header>
     <body>
-        <ui-view></ui-view>
+        <ui-view id="app__container"></ui-view>
     </body>
 </html>

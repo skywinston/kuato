@@ -174,6 +174,11 @@ html, body {
   min-height: 56px;
   border-left: 1px solid $primary--accent--light;
   box-shadow: -1px 0 0 0 $primary--accent--dark;
+
+  // Label - Hidden on mobile
+  span {
+    display: none;
+  }
 }
 
 .appnav__bumper {
@@ -350,6 +355,128 @@ html, body {
   font-family: $secondarytype, serif;
   font-weight: 700;
 }
+//---------------//
+// DashBoard END //
+//---------------//
+
+/////////////////
+// Card BEGIN ///
+/////////////////
+
+// Container for new state (invoked from DashBoard)
+.card__wrapper--new {
+  @include flex-col;
+  @include flex-center;
+  @include card(3);
+
+  display: block;
+  position: fixed;
+  top: 56px;
+  height: 100%;
+  width: 100%;
+  z-index: 20;
+  box-sizing: border-box;
+  background-color: $background;
+
+  // Animations
+  &.ng-animate {
+    background-color: red;
+    color: red;
+  }
+
+  &.ng-enter {
+    @include slideInDown;
+  }
+
+  &.ng-leave {
+    @include slideOutUp;
+  }
+
+}
+
+// Cards Plural
+.cards__stage {
+  @include flex-col;
+  @include flex-center;
+
+  background-color: $background;
+  width: 100%;
+}
+
+.cardnav__container--mobile {
+  @include flex-row;
+  @include flex-center;
+  //@include dropshadow(1);
+
+  position: fixed;
+  top: 56px;
+  z-index: 5;
+  width: 100%;
+  height: 40px;
+  border: 1px solid #dddddd;
+  //border-radius: 2px;
+  background-color: $white;
+}
+
+// Cards Plural
+.cards__container {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 40px;
+  box-sizing: border-box;
+}
+
+.cardnav__question {
+  height: 100%;
+  width: 50%;
+  border: none;
+  outline: none;
+  background: none;
+  //flex: 1 1 auto;
+  border-right: 1px solid #dddddd;
+}
+
+.cardnav__answer {
+  height: 100%;
+  width: 50%;
+  border: none;
+  outline: none;
+  background: none;
+  //flex: 1 1 auto;
+}
+
+// Card Singular
+.card__container {
+  @include card(1);
+
+  width: 100%;
+
+  background-color: $white;
+  color: $text--primary;
+
+  .CodeMirror {
+    font-family: 'Source Code Pro';
+    font-size: 13px;
+    font-weight: 600;
+  }
+}
+
+.card__question {
+  // Z-index must be higher than answer's
+  z-index: 2;
+}
+
+.card__answer {
+  z-index: 1;
+}
+
+// Card END //
+
+
+///////////////////////////
+///// PHONE LANDSCAPE /////
+///////////////////////////
 
 @media only screen
   and (min-device-width: 400px)
@@ -542,6 +669,23 @@ html, body {
 // TABLET PORTRAIT BREAKPOINT
 @media only screen
   and (min-device-width: 601px) {
+
+  .appnav__addcard {
+    @include flex-row;
+    @include flex-center;
+
+    border: none;
+    box-shadow: none;
+    margin-right: 16px;
+
+    // Button Label
+    span {
+      display: inline-block;
+      margin-right: 8px;
+      font-size: 20px;
+    }
+  }
+
   .deck__container {
     @include flex-row;
   }

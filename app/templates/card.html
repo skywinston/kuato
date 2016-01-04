@@ -1,0 +1,18 @@
+<div class="cards__stage">
+    <div class="cardnav__container--mobile">
+        <button class="cardnav__question"
+                ng-click="switchToQ()"
+                ng-class="{'cardnav--active': navStatus === 'question'}">
+            Question
+        </button>
+        <button class="cardnav__answer"
+                ng-click="switchToA()"
+                ng-class="{'cardnav--active': navStatus === 'answer'}">
+            Answer
+        </button>
+    </div>
+    <div class="cards__container">
+        <div id="card__question" class="card__container"><!--CodeMirror Instance--></div>
+        <div id="card__answer" class="card__container"><!--CodeMirror Instance--></div>
+    </div>
+</div>
