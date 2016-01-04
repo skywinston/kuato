@@ -174,9 +174,12 @@ html, body {
   flex-flow: row;
   flex-wrap: wrap;
   align-items: center;
-  margin: auto; }
+  margin: auto;
+  transition: all .3s; }
   .appnav__search label {
     font-size: 20px; }
+  .appnav__search.disabled {
+    opacity: .5; }
 
 .appnav__addcard {
   display: flex;
@@ -190,6 +193,9 @@ html, body {
   box-shadow: -1px 0 0 0 #01654E; }
   .appnav__addcard span {
     display: none; }
+
+.appnav__savecard label {
+  font-size: 20px; }
 
 .appnav__bumper {
   width: 100%;
@@ -363,59 +369,119 @@ html, body {
   flex-flow: column;
   align-items: center;
   background-color: #e0e0e0;
-  width: 100%; }
+  width: auto;
+  height: 100%; }
 
 .cardnav__container--mobile {
   display: flex;
   flex-flow: row;
   flex-wrap: wrap;
   align-items: center;
+  box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.24), 0 1.5px 6px rgba(0, 0, 0, 0.12);
   position: fixed;
   top: 56px;
   z-index: 5;
   width: 100%;
   height: 40px;
-  border: 1px solid #dddddd;
   background-color: #FAFAFA; }
-
-.cards__container {
-  height: 100%;
-  width: 100%;
-  position: absolute;
-  top: 40px;
-  box-sizing: border-box; }
+  .cardnav__container--mobile button:focus {
+    background-color: #BDBDBD; }
 
 .cardnav__question {
   height: 100%;
-  width: 50%;
+  width: 33%;
   border: none;
   outline: none;
   background: none;
+  flex: 1 1 auto;
   border-right: 1px solid #dddddd; }
+  .cardnav__question.active {
+    background-color: #e9e9e9; }
 
 .cardnav__answer {
   height: 100%;
-  width: 50%;
+  width: 33%;
   border: none;
   outline: none;
-  background: none; }
+  background: none;
+  flex: 1 1 auto;
+  border-right: 1px solid #dddddd; }
+  .cardnav__answer.active {
+    background-color: #e9e9e9; }
+
+.cardnav__save {
+  height: 100%;
+  width: 33%;
+  border: none;
+  outline: none;
+  background: none;
+  flex: 1 1 auto; }
+
+.cards__container {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  position: relative;
+  width: 100vw;
+  height: 100%;
+  padding: 8px;
+  margin-top: 40px;
+  box-sizing: border-box;
+  overflow: hidden; }
 
 .card__container {
-  box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.24), 0 1.5px 6px rgba(0, 0, 0, 0.12);
-  border-radius: 2px;
   width: 100%;
-  background-color: #FAFAFA;
-  color: #4A4A4A; }
+  position: relative; }
   .card__container .CodeMirror {
-    font-family: 'Source Code Pro';
+    box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.24), 0 1.5px 6px rgba(0, 0, 0, 0.12);
+    border-radius: 2px;
+    position: absolute;
+    top: 40px;
+    left: 0;
+    border-radius: 0 0 2px 2px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px 4px;
+    margin: auto;
+    font-family: 'Source Code Pro', serif;
     font-size: 13px;
     font-weight: 600; }
 
-.card__question {
+#questionMirrorTarget .CodeMirror, #questionMirrorTarget button {
   z-index: 2; }
 
-.card__answer {
-  z-index: 1; }
+#answerMirrorTarget .CodeMirror, #answerMirrorTarget button {
+  z-index: 1;
+  transform: scale(0.98); }
+
+.card__editprev {
+  box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.24), 0 1.5px 6px rgba(0, 0, 0, 0.12);
+  width: 100%;
+  height: 40px;
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  border-radius: 2px 2px 0 0;
+  background-color: #FAFAFA;
+  color: #4A4A4A;
+  text-align: center; }
+
+.card--preview {
+  display: flex;
+  flex-flow: column;
+  width: 100%;
+  height: auto;
+  position: absolute;
+  top: 40px;
+  z-index: 1000;
+  padding: 8px;
+  box-sizing: border-box;
+  background-color: #FAFAFA; }
 
 @media only screen and (min-device-width: 400px) and (max-device-width: 600px) {
   .deck__title--mobile {

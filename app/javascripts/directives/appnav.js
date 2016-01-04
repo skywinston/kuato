@@ -41,6 +41,12 @@ angular.module('kuato')
 
             };
 
+
+            // CREATE new card
+            $scope.createCard = function () {
+                console.log($scope.test); // Should have 2-way binding to child directive <kuato-card>
+            }
+
         }
     };
 

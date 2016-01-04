@@ -25,4 +25,12 @@ var app = angular.module('kuato', ['ngAnimate', 'ui.router'])
 
         $urlRouterProvider.otherwise('/');
         $locationProvider.html5Mode(true);
+
+
+        // Config marked markdown parser to use highlight.js for <code> highlighting
+        marked.setOptions({
+            highlight: function (code) {
+                return hljs.highlightAuto(code).value;
+            }
+        });
 }]);

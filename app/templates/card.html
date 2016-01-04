@@ -1,18 +1,45 @@
 <div class="cards__stage">
+
     <div class="cardnav__container--mobile">
+
         <button class="cardnav__question"
+                tabindex="1"
                 ng-click="switchToQ()"
-                ng-class="{'cardnav--active': navStatus === 'question'}">
+                ng-class="{'active': navStatus === 'question'}">
             Question
         </button>
+
         <button class="cardnav__answer"
+                tabindex="2"
                 ng-click="switchToA()"
-                ng-class="{'cardnav--active': navStatus === 'answer'}">
+                ng-class="{'active': navStatus === 'answer'}">
             Answer
         </button>
+
+        <button class="cardnav__save"
+                tabindex="3"
+                ng-click="createCard()">
+            Save Card
+        </button>
+
     </div>
+
     <div class="cards__container">
-        <div id="card__question" class="card__container"><!--CodeMirror Instance--></div>
-        <div id="card__answer" class="card__container"><!--CodeMirror Instance--></div>
+
+        <div class="card__container" id="questionMirrorTarget">
+            <button class="card__editprev" ng-click="previewQ()" ng-if="questionEdit">Preview</button>
+            <button class="card__editprev" ng-click="editQ()" ng-if="!questionEdit">Edit</button>
+            <div class="card--preview" id="questionPreviewTarget" ng-show="!questionEdit"></div>
+            <!-- CodeMirror Instance for Question -->
+        </div>
+
+        <div class="card__container" id="answerMirrorTarget">
+            <button class="card__editprev" ng-click="previewA()" ng-if="answerEdit">Preview</button>
+            <button class="card__editprev" ng-click="editA()" ng-if="!answerEdit">Edit</button>
+            <div class="card--preview" id="answerPreviewTarget" ng-show="!answerEdit"></div>
+            <!-- CodeMirror Instance for Answer -->
+        </div>
+
     </div>
+
 </div>
