@@ -412,13 +412,23 @@ html, body {
   @include flex-col;
   @include flex-center;
 
-  position: absolute;
-  z-index: 1000;
+  position: fixed;
+  z-index: 100;
 
   background-color: $background;
-  width: auto;
-  min-height: 600px;
+  width: 100%;
   height: 100%;
+  overflow: scroll;
+}
+
+.cards__mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  width: 100vw;
+  height: 100vh;
+  background: $background;
 }
 
 .cardnav__container--mobile {
@@ -485,16 +495,16 @@ html, body {
   @include flex-col;
   @include flex-center;
 
-  position: relative;
+  position: absolute;
 
   width: 100vw;
-  // Add a max-width
+  // TODO: Add a max-width
   height: 100%;
   padding: 8px;
-  margin-top: 40px;
+  margin-top: 96px;
+  margin-bottom: 8px;
   box-sizing: border-box;
-  //border-radius: 2px;
-  overflow: hidden;
+  overflow: scroll;
 }
 
 .card__container {
@@ -529,7 +539,7 @@ html, body {
 
 #answerMirrorTarget {
   .CodeMirror, button {
-    z-index: 1;
+    z-index: 2;
   }
 }
 
@@ -556,14 +566,17 @@ html, body {
 
 .card--preview {
   @include flex-col;
+  @include dropshadow(1);
 
   width: 100%;
+  min-height: 300px;
   top: 40px;
   position: relative;
-  z-index: 1000;
+  z-index: 2;
   padding: 8px;
   box-sizing: border-box;
   overflow: scroll;
+  border-radius: 0 0 2px 2px;
 
   background-color: $white;
 }

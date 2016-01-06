@@ -1,7 +1,7 @@
 angular.module('kuato')
 .factory('GlobalState', ["$state", function($state){
     return {
-        state: this.state || "home",
+        state: this.state || "deckIndex",
         setState: setState,
         getState: getState
     };

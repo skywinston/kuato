@@ -25,19 +25,20 @@
     </div>
 
     <div class="cards__container">
-        <div class="card__container" id="questionMirrorTarget" ng-show="navFocus === 'question'">
-            <div class="card--preview" id="questionPreviewTarget" ng-show="!questionEdit"></div>
-            <button class="card__editprev" ng-click="previewQ()" ng-if="questionEdit">Preview</button>
-            <button class="card__editprev" ng-click="editQ()" ng-if="!questionEdit">Edit</button>
-            <!-- CodeMirror Instance for Question -->
+        <div class="card__container" ng-show="navFocus === 'question'">
+            <button class="card__editprev" ng-click="previewQ()" ng-show="questionEdit">Preview</button>
+            <button class="card__editprev" ng-click="editQ()" ng-hide="questionEdit">Edit</button>
+            <div id="questionPreviewTarget" class="card--preview" ng-show="!questionEdit"></div>
+            <div id="questionMirrorTarget" ng-show="questionEdit"><!-- CodeMirror Instance for Question --></div>
         </div>
 
-        <div class="card__container" id="answerMirrorTarget" ng-show="navFocus === 'answer'">
-            <div class="card--preview" id="answerPreviewTarget" ng-show="!answerEdit"></div>
-            <button class="card__editprev" ng-click="previewA()" ng-if="answerEdit">Preview</button>
-            <button class="card__editprev" ng-click="editA()" ng-if="!answerEdit">Edit</button>
-            <!-- CodeMirror Instance for Answer -->
+        <div class="card__container" ng-show="navFocus === 'answer'">
+            <button class="card__editprev" ng-click="previewA()" ng-show="answerEdit">Preview</button>
+            <button class="card__editprev" ng-click="editA()" ng-hide="answerEdit">Edit</button>
+            <div id="answerPreviewTarget" class="card--preview" ng-show="!answerEdit"></div>
+            <div id="answerMirrorTarget" ng-show="answerEdit"><!-- CodeMirror Instance for Answer --></div>
         </div>
     </div>
 
 </div>
+<div class="cards__mask"></div> <!-- Used to provide a fade-in background on animation start -->
