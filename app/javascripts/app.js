@@ -14,8 +14,7 @@ var app = angular.module('kuato', ['ngAnimate', 'ui.router'])
         $stateProvider
             .state('app', {
                 url: '/',
-                templateUrl: './templates/app.html'
-                // todo — look into substates for the app (dashboard/deckview/cardview)
+                templateUrl: '../templates/app.html'
             })
             .state('login', {
                 url: '/login',

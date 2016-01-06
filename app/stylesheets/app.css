@@ -153,7 +153,7 @@ html, body {
 
 .appnav__container {
   position: fixed;
-  z-index: 100;
+  z-index: 1000;
   top: 0px;
   width: 100%;
   height: 56px; }
@@ -200,7 +200,7 @@ html, body {
 .appnav__bumper {
   width: 100%;
   height: 56px;
-  margin-bottom: 16px; }
+  margin-bottom: 8px; }
 
 .dashboard__container {
   padding: 12px; }
@@ -368,8 +368,11 @@ html, body {
   display: flex;
   flex-flow: column;
   align-items: center;
+  position: absolute;
+  z-index: 1000;
   background-color: #e0e0e0;
   width: auto;
+  min-height: 600px;
   height: 100%; }
 
 .cardnav__container--mobile {
@@ -451,8 +454,7 @@ html, body {
   z-index: 2; }
 
 #answerMirrorTarget .CodeMirror, #answerMirrorTarget button {
-  z-index: 1;
-  transform: scale(0.98); }
+  z-index: 1; }
 
 .card__editprev {
   box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.24), 0 1.5px 6px rgba(0, 0, 0, 0.12);
@@ -475,12 +477,12 @@ html, body {
   display: flex;
   flex-flow: column;
   width: 100%;
-  height: auto;
-  position: absolute;
   top: 40px;
+  position: relative;
   z-index: 1000;
   padding: 8px;
   box-sizing: border-box;
+  overflow: scroll;
   background-color: #FAFAFA; }
 
 @media only screen and (min-device-width: 400px) and (max-device-width: 600px) {

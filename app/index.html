@@ -26,6 +26,7 @@
         <script src="javascripts/app.js"></script>
         <script src="javascripts/factories/AuthToken.js"></script>
         <script src="javascripts/factories/AuthInterceptor.js"></script>
+        <script src="javascripts/factories/GlobalState.js"></script>
         <script src="javascripts/factories/UserFactory.js"></script>
         <script src="javascripts/factories/Choreographer.js"></script>
         <script src="javascripts/factories/Card.js"></script>
@@ -33,11 +34,14 @@
         <script src="javascripts/directives/appnav.js"></script>
         <script src="javascripts/directives/dashboard.js"></script>
         <script src="javascripts/directives/card.js"></script>
+        <script src="javascripts/directives/new-card.js"></script>
         <script src="javascripts/directives/ratings-donut.js"></script>
         <script src="javascripts/controllers/loginController.js"></script>
         <base href="/" />
     </header>
     <body>
-        <ui-view id="app__container"></ui-view>
+        <div id="app__container">
+            <ui-view></ui-view>
+        </div>
     </body>
 </html>

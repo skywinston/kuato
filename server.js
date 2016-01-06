@@ -9,6 +9,7 @@ var bodyParser = require('body-parser');
 
 var routes = require('./api/v1/index');
 var decks = require('./api/v1/decks');
+var cards = require('./api/v1/cards');
 
 var app = express();
 
@@ -26,6 +27,7 @@ app.use(express.static(path.join(__dirname, 'app')));
 
 app.use('/', routes);
 app.use('/api/v1/decks', decks);
+app.use('/api/v1/cards', cards);
 
 // Wildcard route declared after all other routes
 app.get('*', function(req, res) {

@@ -14,7 +14,7 @@ angular.module('kuato')
         templateUrl: "../templates/card.html",
         link: function (scope, elem, attrs) {
 
-            scope.navStatus = 'question';
+            scope.navFocus = 'question';
             scope.questionEdit = true;
             scope.answerEdit = true;
 

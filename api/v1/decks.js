@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var knex = require('../../db/knex');
 var pg = require('pg');
-var conString = process.env.DB_URI;
 var jwt = require('jsonwebtoken');
 
 module.exports = router;
