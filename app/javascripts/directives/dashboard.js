@@ -34,7 +34,7 @@ angular.module('kuato')
 
             // Handle the select all box selection
             $scope.selectAll = function (event) {
-                var $elem = $(event.target);
+                var $elem = $("#dashnav__selectall");
                 var $unselected = $('.deck__checkbox--unselected');
 
                 // Toggle class on the select all box;
@@ -60,6 +60,23 @@ angular.module('kuato')
             };
 
 
+            // View a deck
+            $scope.viewDeck = function (deckId, event) {
+                var $elem = $(event.target);
+
+                // TODO — get width, height, and position of $elem
+                // TODO - create new element with same class as $elem
+                // TODO - animate from gathered position into top position directly under the appnav
+                // TODO - transition to the card-index state passing the deck-id in the url params.
+
+                // TODO - Bring this call into the card index state passing in the deck-id from url params;
+                Deck.getOne(deckId)
+                    .then(function (response) {
+                        console.log(response.data);
+                    });
+            };
+
+
             // Study selected decks
             $scope.studyDecks = function (decks) {
 
@@ -69,11 +86,8 @@ angular.module('kuato')
                 // todo — how to transition state passing array of decks queued for study from this scope
             };
 
-        },
 
-        link: function (scope, elem, attrs) {
-            // todo — get a handle on the select all label span and when clicked, make it trigger a click on select all box
-        }
+        } // END controller
     };
 
 }]);

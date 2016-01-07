@@ -10,13 +10,13 @@
     <!--Deck Index State BEGIN-->
     <div class="decks__container" ng-if="decks.length">
         <div class="dashnav__container">
-            <div class="dashnav__selectall--unselected" ng-click="selectAll($event)"></div>
-            <span class="dashnav__selectAllLabel">Select All</span>
+            <div class="row center" ng-click="selectAll($event)">
+                <div id="dashnav__selectall" class="dashnav__selectall--unselected"></div>
+                <span class="dashnav__selectAllLabel">Select All</span>
+            </div>
         </div>
 
-        <div class="deck__container" ng-repeat="deck in decks">
-
-
+        <div class="deck__container" ng-repeat="deck in decks" ng-click="viewDeck(deck.id, $event)">
             <div class="deck__checkbox--unselected select-deck-for-study" ng-click="toggleStudyThisDeck($event, deck.id)"></div>
             <h3 class="deck__title--mobile">{{deck.title}}</h3>
             <div class="deck__infotext">
@@ -41,7 +41,9 @@
     <!--Deck Index State END-->
 
 </div>
+
 <div class="dashnav__studyButton__container" ng-if="queuedForStudy.length">
+
     <button class="dashnav__studyButton" ng-click="studyDecks(queuedForStudy)">
         Study {{queuedForStudy.length}}
         <ng-pluralize count="queuedForStudy.length"
@@ -51,4 +53,5 @@
             }">
         </ng-pluralize>
     </button>
+
 </div>

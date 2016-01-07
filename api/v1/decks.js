@@ -44,3 +44,14 @@ router.get('/', function (req, res) {
 
 });
 
+router.get('/:id', function (req, res) {
+    // TODO - How do I protect this route by ensuring the cards served up belongs to the user?
+    var userId = jwt.decode(req.get("Authorization").split(" ")[1]).id;
+
+    return knex('cards')
+        .where('deck_id', '=', req.params.id)
+        .then(function (cards) {
+            res.json(cards);
+        });
+});
+

@@ -8,6 +8,12 @@ angular.module('kuato')
                 url: "/api/v1/decks"
             });
         },
+        getOne: function (id) {
+            return $http({
+                method: "GET",
+                url: "/api/v1/decks/" + id + ""
+            });
+        },
         add: function (deck) {
             return $http({
                 method: "POST",

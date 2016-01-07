@@ -8,6 +8,7 @@ angular.module('kuato')
     function (Card, $compile, GlobalState, CardFactory, $rootScope){
 
         return {
+            restrict: 'A',
             link: function ( scope, elem, attrs ) {
 
 
@@ -73,10 +74,12 @@ angular.module('kuato')
                 } //--  END editCard()  --//
 
 
+                // Cancel creation of new card, broadcast event to propagate scope destruction and elem removal
                 function cancelCard () {
                     // Get handles on the button elements
                     var $label = elem.find('span');
                     var $button = elem.find('svg');
+
 
                     // Reverse rotate button & swap label value
                     $label.text('Add Card');
@@ -91,7 +94,6 @@ angular.module('kuato')
 
                 // Using the GlobalState, which defaults to "home", we can getState() and run a switch statement which will
                 // produce state-aware transitions/animations
-
                 elem.on('click', function(){
                     switch (GlobalState.getState()) {
                         case "deckIndex" :
@@ -109,8 +111,7 @@ angular.module('kuato')
                     }
                 });
 
-            },
-            restrict: 'A'
+            }
         };
 }])
 .directive('kuatoCard', ['Card', 'GlobalState', '$timeout', function (Card, GlobalState, $timeout) {
