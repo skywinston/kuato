@@ -1,5 +1,5 @@
 angular.module('kuato')
-.directive('kuatoDashboard', ["AuthToken", "Deck", "Choreographer" , "$state", function (AuthToken, Deck, Choreographer, $state) {
+.directive('kuatoDashboard', ["AuthToken", "Deck", "Choreographer" , "$state", "$location", function (AuthToken, Deck, Choreographer, $state, $location) {
     return {
         restrict: "E",
         templateUrl: './templates/dashboard.html',
@@ -21,11 +21,9 @@ angular.module('kuato')
             $scope.isDeckEmpty = function (ratingsObject) {
                 for(var key in ratingsObject) {
                     if(ratingsObject.hasOwnProperty(key)){
-                        console.log("false");
                             return false;
                     }
                 }
-                console.log("true");
                 return true;
             };
 
@@ -82,6 +80,8 @@ angular.module('kuato')
 
             // View a deck
             $scope.viewDeck = function (deckId, event) {
+                if (!event) { $state.go('card-index') }
+
                 var $elem = $(event.target);
 
                 // TODO — get width, height, and position of $elem
@@ -97,7 +97,7 @@ angular.module('kuato')
 
 
 
-                // TODO - create new element with same position, width, height as $elem & append to body
+                // create new element with same position, width, height as $elem & append to body
                 var actor = document.createElement('div');
                 var $actor = $(actor);
                 $actor
@@ -105,14 +105,14 @@ angular.module('kuato')
                     .css({
                         width: width,
                         height: height,
-                        position: "absolute",
+                        position: "fixed",
                         "z-index": 90,
                         top: position.top,
                         left: position.left
                     })
                     .appendTo('body');
 
-                // TODO - fade the clicked $elem out;
+                // fade the clicked $elem out so that it doesn't slide under its actor;
                 $elem.velocity({
                     opacity: 0
                 }, {
@@ -120,17 +120,15 @@ angular.module('kuato')
                 });
 
 
-                // TODO - get handle on all deck items and add class fadeOutDown
+                // get handle on all deck items and add class fadeOutDown
                 $('.deck__container').addClass('fadeOutDown');
 
 
-                // TODO - get handle on decknav and add slideOutUp class
+                // get handle on decknav and add slideOutUp class
                 $('.dashnav__container').addClass('slideOutUp');
 
-
-                // TODO - animate from gathered position into top position directly under the appnav
-
-                // TODO - This will need to be conditional upon viewport width to match css styling
+                // animate from gathered position into top position directly under the appnav
+                // This is conditional upon viewport width to match css styling
                 if ($(window).width() < 600) {
                     $actor.velocity({
                         top: "56px",
@@ -138,7 +136,16 @@ angular.module('kuato')
                         width: "100%",
                         height: "200px"
                     }, {
-                        duration: 300
+                        duration: 300,
+                        complete: function () {
+                            // Pass the deckId as params to the new card-index state
+                            $state.go('card-index', {id: deckId});
+
+                            // Destroy scope and remove elem
+                            scope.$destroy();
+                            elem.remove();
+                            // TODO - Remove the $actor element, its lingering in the new view...
+                        }
                     });
                 } else if ($(window).width() >= 600) {
                     $actor.velocity({
@@ -147,18 +154,17 @@ angular.module('kuato')
                         width: "100%",
                         height: "144px"
                     }, {
-                        duration: 300
+                        duration: 300,
+                        complete: function () {
+                            $state.go('card-index', {id: deckId});
+
+                            scope.$destroy();
+                            elem.remove();
+                            // TODO - Remove the $actor element, its lingering in the new view...
+                        }
                     });
                 }
-
-
-                // TODO - transition to the card-index state passing the deck-id in the url params.
-
-                // TODO - Bring this call into the card index state passing in the deck-id from url params;
-                Deck.getOne(deckId)
-                    .then(function (response) {
-                        console.log(response.data);
-                    });
+                
             };
 
 

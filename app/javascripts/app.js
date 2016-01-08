@@ -20,6 +20,12 @@ var app = angular.module('kuato', ['ngAnimate', 'ui.router'])
                 url: '/login',
                 templateUrl: '../templates/login.html',
                 controller: "loginCtrl"
+            })
+            .state('card-index', {
+                url: '/deck/:id',
+                //templateUrl: '../templates/card-index.html',
+                // or use a directive template...
+                template: "<appnav></appnav><card-index></card-index>"
             });
 
         $urlRouterProvider.otherwise('/');

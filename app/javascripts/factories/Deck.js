@@ -15,7 +15,7 @@ angular.module('kuato')
             }.bind(this));
         },
 
-        getOne: function (id) {
+        getCardsForDeck: function (id) {
             return $http({
                 method: "GET",
                 url: "/api/v1/decks/" + id + ""

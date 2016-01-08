@@ -223,13 +223,19 @@ angular.module('kuato')
 }])
 .factory('CardFactory', ["$http", function($http){
     return {
-        one: one,
-        all: all
+        fetch: fetch,
+        one: one
+        //all: all
     };
 
-    function all () {
+    function fetch () {
         return $http.get('/api/v1/cards');
     }
+
+    // Prob don't need this as I refactored it into fetch above.
+    //function all () {
+    //    return $http.get('/api/v1/cards');
+    //}
 
     function one (id) {
         return $http.get('/api/v1/cards/' + id);

@@ -31,7 +31,7 @@
 
                 <div class="deck__buttongroup__mobile">
                     <button class="deck__studybtn__mobile"
-                            ng-click="viewDeck(deck.id)"
+                            ng-click="viewDeck(deck.id, $event)"
                             ng-disabled="queuedForStudy.length"
                             ng-class="{'disabled': queuedForStudy.length}">
                         View Cards

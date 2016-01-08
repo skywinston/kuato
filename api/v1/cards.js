@@ -5,7 +5,7 @@ var jwt = require('jsonwebtoken');
 
 
 router.get('/', function (req, res) {
-
+    // there is not scenario yet where we'll need to get all cards...
 });
 
 router.get('/:id', function (req, res) {
