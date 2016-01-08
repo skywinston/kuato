@@ -2,24 +2,36 @@ angular.module('kuato')
 .factory('Deck', ["$http", "User", function DeckFactory ($http, User) {
 
     return {
-        all: function () {
+
+        index: [],
+
+        fetch: function () {
             return $http({
                 method: "GET",
                 url: "/api/v1/decks"
-            });
+            }).then(function(response){
+                this.index = response.data;
+                return response;
+            }.bind(this));
         },
+
         getOne: function (id) {
             return $http({
                 method: "GET",
                 url: "/api/v1/decks/" + id + ""
             });
         },
-        add: function (deck) {
+
+        create: function (deckTitle) {
             return $http({
                 method: "POST",
                 url: "/api/v1/decks",
-                data: deck
-            });
+                contentType: "application/json",
+                data: {title: deckTitle}
+            }).then(function (response) {
+                this.index.push(response.data);
+                return response;
+            }.bind(this));
         }
     }
 }]);

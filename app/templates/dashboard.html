@@ -1,44 +1,79 @@
 <div class="dashboard__container">
 
+    <!--Deck Index State BEGIN-->
+    <div class="decks__container" ng-if="decks.length">
+
+        <div class="dashnav__container">
+            <div class="row center" ng-click="selectAll($event)">
+                <div id="dashnav__selectall" class="dashnav__selectall--unselected"></div>
+                <span class="dashnav__selectAllLabel">Select All</span>
+            </div>
+
+            <button class="dashnav__newdeck" new-deck-summoner><i class="material-icons">add</i>New Deck</button>
+        </div>
+
+        <div class="deck__wrapper" ng-repeat="deck in decks">
+
+            <div class="deck__container" ng-if="!isDeckEmpty(deck.ratings)">
+                <div class="deck__checkbox--unselected select-deck-for-study" ng-click="toggleStudyThisDeck($event, deck.id)"></div>
+                <h3 class="deck__title--mobile">{{deck.title}}</h3>
+                <div class="deck__infotext">
+                    <h3 class="deck__title--tablet">{{deck.title}}</h3>
+                    <p class="deck__timestamp">Last studied on November 24th, 2015 &nbsp;</p>
+                    <button class="deck__studybtn__tablet" ng-click="studyDecks(deck.id)"
+                            ng-disabled="queuedForStudy.length"
+                            ng-class="{'disabled': queuedForStudy.length}">
+                        Study Now
+                    </button>
+                </div>
+
+                <ratings-donut ratings="{{deck.ratings}}" class="deck__donut__wrapper"></ratings-donut>
+
+                <div class="deck__buttongroup__mobile">
+                    <button class="deck__studybtn__mobile"
+                            ng-click="viewDeck(deck.id)"
+                            ng-disabled="queuedForStudy.length"
+                            ng-class="{'disabled': queuedForStudy.length}">
+                        View Cards
+                    </button>
+                    <button class="deck__studybtn__mobile"
+                            ng-click="studyDecks(deck.id)"
+                            ng-disabled="queuedForStudy.length"
+                            ng-class="{'disabled': queuedForStudy.length}">
+                        Study Now
+                    </button>
+                </div>
+            </div>
+
+            <!-- BEGIN Empty DECK -->
+            <div class="deck__container" ng-if="isDeckEmpty(deck.ratings)">
+                <div class="card__container">
+                    <h3 class="deck__title--mobile--empty">{{deck.title}}</h3>
+                    <div class="deck__infotext">
+                        <h3 class="deck__title--tablet">{{deck.title}}</h3>
+                        <p class="deck__timestamp">What's a deck without some cards? &nbsp;</p>
+                    </div>
+                    <button class="deck__addcards__mobile" ng-click="viewDeck(deck.id)"
+                            ng-disabled="queuedForStudy.length"
+                            ng-class="{'disabled': queuedForStudy.length}">
+                        Add Some Cards
+                    </button>
+                </div>
+            </div>
+            <!-- END Empty Deck -->
+
+        </div>
+        <!-- END Deck Container -->
+
+    </div>
+    <!--Deck Index State END-->
+
     <!--Empty State BEGIN-->
     <div ng-if="!decks.length">
         <button ng-click="getDecks()">Create Deck</button>
         <p>The journey of a 1,000 miles begins with a single step...</p>
     </div>
     <!--Empty State END-->
-
-    <!--Deck Index State BEGIN-->
-    <div class="decks__container" ng-if="decks.length">
-        <div class="dashnav__container">
-            <div class="row center" ng-click="selectAll($event)">
-                <div id="dashnav__selectall" class="dashnav__selectall--unselected"></div>
-                <span class="dashnav__selectAllLabel">Select All</span>
-            </div>
-        </div>
-
-        <div class="deck__container" ng-repeat="deck in decks" ng-click="viewDeck(deck.id, $event)">
-            <div class="deck__checkbox--unselected select-deck-for-study" ng-click="toggleStudyThisDeck($event, deck.id)"></div>
-            <h3 class="deck__title--mobile">{{deck.title}}</h3>
-            <div class="deck__infotext">
-                <h3 class="deck__title--tablet">{{deck.title}}</h3>
-                <p class="deck__timestamp">Last studied on November 24th, 2015 &nbsp;</p>
-                <button class="deck__studybtn__tablet" ng-click="studyDecks(deck.id)"
-                        ng-disabled="queuedForStudy.length"
-                        ng-class="{'disabled': queuedForStudy.length}">
-                    Study Now
-                </button>
-            </div>
-
-            <ratings-donut ratings="{{deck.ratings}}" class="deck__donut__wrapper"></ratings-donut>
-            <button class="deck__studybtn__mobile"
-                    ng-click="studyDecks(deck.id)"
-                    ng-disabled="queuedForStudy.length"
-                    ng-class="{'disabled': queuedForStudy.length}">
-                Study Now
-            </button>
-        </div>
-    </div>
-    <!--Deck Index State END-->
 
 </div>
 

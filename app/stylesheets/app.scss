@@ -130,6 +130,8 @@ html, body {
   @include flex-center;
   @include dropshadow(2);
 
+  position: relative;
+  justify-content: space-between;
   background-color: $primary;
   color: $white;
   width: 100%;
@@ -148,11 +150,15 @@ html, body {
   @include flex-col;
   @include flex-centered;
 
-  margin-right: auto;
+  position: absolute;
+  left: 0;
+
   min-width: 56px;
   min-height: 56px;
-  border-right: 1px solid $primary--accent--dark;
-  box-shadow: 1px 0 0 0 $primary--accent--light;
+
+  // Optional Button Borders
+  //border-right: 1px solid $primary--accent--dark;
+  //box-shadow: 1px 0 0 0 $primary--accent--light;
 }
 
 .appnav__search {
@@ -170,17 +176,19 @@ html, body {
   }
 }
 
-
-
 .appnav__addcard {
   @include flex-col;
   @include flex-centered;
 
-  margin-left: auto;
+  position: absolute;
+  right: 0;
+
   min-width: 56px;
   min-height: 56px;
-  border-left: 1px solid $primary--accent--light;
-  box-shadow: -1px 0 0 0 $primary--accent--dark;
+
+  // Optional Button Borders
+  //border-left: 1px solid $primary--accent--light;
+  //box-shadow: -1px 0 0 0 $primary--accent--dark;
 
   // Label - Hidden on mobile
   span {
@@ -258,6 +266,57 @@ html, body {
   color: $text--primary;
 }
 
+.dashnav__newdeck {  // Candidate for button mixin
+  @include flex-row;
+  @include flex-center;
+
+  padding: 4px 12px 4px 4px;
+  margin-left: auto;
+
+  outline: none;
+  border: none;
+  border-radius: 2px;
+  text-align: center;
+  background-color: $primary;
+  color: $white;
+
+  i {
+    margin-right: 4px;
+  }
+}
+
+
+// New Deck Component
+.newdeck__container {
+
+  position: absolute;
+  z-index: 6;
+  top: 56px;
+  left: 0;
+  padding: 8px;
+  box-sizing: border-box;
+
+  width: 100%;
+  min-height: 80px;
+  max-width: 624px;
+
+  background-color: $white;
+
+  input {
+    border: 1px solid $offwhite;
+    padding: 4px;
+  }
+}
+
+
+// All the classes during the ng-hide on this elem:
+// newdeck__container ng-animate ng-hide-animate ng-hide-add ng-hide
+
+.neckdeck__container .ng-hide-animate {
+  @include slideOutUp;
+}
+
+
 .dashnav__studyButton__container {
   @include flex-col;
   @include flex-center;
@@ -322,8 +381,12 @@ html, body {
   background-color: $white;
 }
 
+.deck__wrapper {
+  width: 100%;
+}
+
 @media screen and (min-device-width: 600px) {
-  .deck__container {
+  .deck__container, .deck__wrapper {
     @include flex-col;
   }
 }
@@ -368,6 +431,13 @@ html, body {
   font-family: $secondarytype, serif;
   font-weight: 700;
 }
+
+.deck__title--mobile--empty {
+  @extend .deck__title--mobile;
+
+  margin-left: 0px;
+}
+
 //---------------//
 // DashBoard END //
 //---------------//
@@ -630,6 +700,13 @@ html, body {
   font-family: $secondarytype, serif;
   font-weight: 700;
 }
+
+.deck__title--mobile--empty {
+  @extend .deck__title--mobile;
+
+  padding-left: 0px;
+}
+
 @media screen and (max-device-width: 399px) {
   .deck__title--tablet {
     display: none;
@@ -644,24 +721,52 @@ html, body {
   //display: block;
 }
 
-.deck__studybtn__mobile {
+.deck__buttongroup__mobile {
+  @include flex-row;
+  @include flex-center;
+
+  width: 100%;
+  border-radius: 2px;
+  overflow: hidden;
+
+
+}
+
+@mixin deck__studybtn__mobile {
   align-self: center;
   background-color: $primary;
   color: $white;
   text-align: center;
   padding: 8px;
-  width: 100%;
+  width: 50%;
   outline: none;
   border: none;
-  border-radius: 2px;
+  //border-radius: 2px;
   transition: all .3s;
 
   // When disabled
   &.disabled {
     opacity: .4;
   }
+
+  &:first-of-type {
+    //border-right: 1px solid $primary--accent--dark;
+  }
+
+  &:last-of-type {
+    //border-left: 1px solid $primary--accent--light;
+    border-left: 1px solid $white;
+  }
 }
 
+.deck__studybtn__mobile {
+  @include deck__studybtn__mobile;
+}
+
+.deck__addcards__mobile {
+  @include deck__studybtn__mobile;
+  width: 100%;
+}
 
 .deck__timestamp {
   flex-wrap: wrap;
@@ -785,6 +890,9 @@ html, body {
     @include flex-row;
     @include flex-center;
 
+    position: absolute;
+    right: 0;
+
     border: none;
     box-shadow: none;
     margin-right: 16px;
@@ -799,6 +907,7 @@ html, body {
 
   .deck__container {
     @include flex-row;
+    background-color: $white;
   }
 
   .deck__checkbox--unselected {
@@ -840,6 +949,10 @@ html, body {
   }
 
   .deck__studybtn__mobile {
+    display: none;
+  }
+
+  .deck__addcards__mobile {
     display: none;
   }
 

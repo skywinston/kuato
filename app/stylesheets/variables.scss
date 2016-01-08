@@ -14,11 +14,6 @@ $text--secondary: #9E9E9E;
 $maintype: 'Source Sans Pro';
 $secondarytype: 'Source Serif Pro';
 
-// Themes
-.text--danger {
-  color: $danger;
-}
-
 // Box Shadow Generator
 @function top-shadow($depth) {
   $primary-offset: nth(1.5 3 10 14 19, $depth) * 1px;
@@ -57,6 +52,32 @@ $secondarytype: 'Source Serif Pro';
   }
 }
 
+@mixin icon-button {
+  @include flex-row;
+  @include flex-center;
+
+  padding: 4px 12px 4px 4px;
+  margin-left: auto;
+
+  outline: none;
+  border: none;
+  border-radius: 2px;
+  text-align: center;
+  background-color: $primary;
+  color: $white;
+
+  i {
+    margin-right: 4px;
+  }
+}
 
 
+// Themes
+.text--danger {
+  color: $danger;
+}
 
+.card {
+  @include dropshadow(1);
+  background-color: $white;
+}

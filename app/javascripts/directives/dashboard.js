@@ -6,12 +6,28 @@ angular.module('kuato')
         controller: function ($scope) {
             if ( !AuthToken.getToken() ) { $state.go('login'); } // Guard clause for active user in local storage
 
-            // Fetch all decks from api and bind them to scope
-            Deck.all()
-                .then(function (response) {
-                    $scope.decks = response.data;
-                });
 
+            // Initialize scope with fetching of all deck resources
+            Deck.fetch().then(function(){
+                $scope.decks = Deck.index || [];
+            });
+
+
+            // TODO - Watch for changes to Deck.index, which updates ng-repeat directive with new decks
+            $scope.$watch('Deck.index', function (newValue, oldValue) {
+               $scope.decks = newValue;
+            });
+
+            $scope.isDeckEmpty = function (ratingsObject) {
+                for(var key in ratingsObject) {
+                    if(ratingsObject.hasOwnProperty(key)){
+                        console.log("false");
+                            return false;
+                    }
+                }
+                console.log("true");
+                return true;
+            };
 
             // Adds or removes deck IDs into the study queue
             $scope.queuedForStudy = [];
@@ -60,13 +76,82 @@ angular.module('kuato')
             };
 
 
+            // Handle creation of new deck
+            $scope.newDeck = false;  // initialize view controller value as false (new deck form hidden by default)
+
+
             // View a deck
             $scope.viewDeck = function (deckId, event) {
                 var $elem = $(event.target);
 
                 // TODO — get width, height, and position of $elem
-                // TODO - create new element with same class as $elem
+                var width = $elem.width();
+                var height = $elem.height();
+                var position = $elem.offset();
+
+                console.log(
+                    "Width: ", width, "\n",
+                    "Height: ", height, "\n",
+                    "Position: ", position, "\n"
+                );
+
+
+
+                // TODO - create new element with same position, width, height as $elem & append to body
+                var actor = document.createElement('div');
+                var $actor = $(actor);
+                $actor
+                    .addClass('card')
+                    .css({
+                        width: width,
+                        height: height,
+                        position: "absolute",
+                        "z-index": 90,
+                        top: position.top,
+                        left: position.left
+                    })
+                    .appendTo('body');
+
+                // TODO - fade the clicked $elem out;
+                $elem.velocity({
+                    opacity: 0
+                }, {
+                    duration: 200
+                });
+
+
+                // TODO - get handle on all deck items and add class fadeOutDown
+                $('.deck__container').addClass('fadeOutDown');
+
+
+                // TODO - get handle on decknav and add slideOutUp class
+                $('.dashnav__container').addClass('slideOutUp');
+
+
                 // TODO - animate from gathered position into top position directly under the appnav
+
+                // TODO - This will need to be conditional upon viewport width to match css styling
+                if ($(window).width() < 600) {
+                    $actor.velocity({
+                        top: "56px",
+                        left: 0,
+                        width: "100%",
+                        height: "200px"
+                    }, {
+                        duration: 300
+                    });
+                } else if ($(window).width() >= 600) {
+                    $actor.velocity({
+                        top: "56px",
+                        left: 0,
+                        width: "100%",
+                        height: "144px"
+                    }, {
+                        duration: 300
+                    });
+                }
+
+
                 // TODO - transition to the card-index state passing the deck-id in the url params.
 
                 // TODO - Bring this call into the card index state passing in the deck-id from url params;

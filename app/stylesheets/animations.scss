@@ -76,6 +76,7 @@
 }
 
 @mixin slideInDown {
+  @include animated;
   -webkit-animation-name: slideInDown;
   animation-name: slideInDown;
 }
@@ -94,6 +95,33 @@
 }
 
 @mixin slideOutUp {
+  @include animated;
   -webkit-animation-name: slideOutUp;
   animation-name: slideOutUp;
+}
+
+.slideOutUp {
+  @include slideOutUp;
+}
+
+@keyframes fadeOutDown {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0);
+  }
+}
+
+@mixin fadeOutDown {
+  @include animated;
+  -webkit-animation-name: fadeOutDown;
+  animation-name: fadeOutDown;
+}
+
+.fadeOutDown {
+  @include fadeOutDown;
 }
