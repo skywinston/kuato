@@ -1,0 +1,54 @@
+// Query for decks with card ratings
+select * from decks INNER JOIN cards on (decks.id = deck_id) where owner = 1;
+
+// Query for decks with no foreign key references in the cards
+select * from decks left outer join cards on (decks.id = deck_id) where (deck_id IS NULL AND decks.owner = 1);
+
+// COMBINED
+select * from decks INNER JOIN cards on (decks.id = deck_id) where owner = 1 UNION select * from decks left outer join cards on (decks.id = deck_id) where (deck_id IS NULL AND decks.owner = 1);
+---
+
+Index Object before cards are accumulated to each deck:
+{ '1':
+   { id: 1,
+     owner: 1,
+     title: 'JavaScript',
+     cards: [],
+     ratings: { '1': 0, '2': 0, '3': 0 } },
+  '2':
+   { id: 2,
+     owner: 1,
+     title: 'AngularJS',
+     cards: [],
+     ratings: { '1': 0, '2': 0, '3': 0 } },
+  '3':
+   { id: 3,
+     owner: 1,
+     title: 'Express',
+     cards: [],
+     ratings: { '1': 0, '2': 0, '3': 0 } } }
+
+Each deck looks like... an array of however many cards are in that deck
+[ { id: 1,
+    deck_id: 1,
+    question: 'This is a sample question',
+    answer: 'This is a sample answer',
+    rating: 1,
+    studied: '12/24/15' },
+  { id: 2,
+    deck_id: 1,
+    question: 'Another sample question',
+    answer: 'Another sample answer',
+    rating: 2,
+    studied: '12/12/15' },
+  { id: 3,
+    deck_id: 1,
+    question: 'Third Question',
+    answer: 'Third Answer',
+    rating: 3,
+    studied: '12/14/2015' } ]
+
+... or if its blank it looks like ...
+
+[]     <- (Literally an empty array)
+
