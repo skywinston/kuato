@@ -6,7 +6,9 @@ angular.module('kuato')
     "$state",
     "$location",
     "GlobalState",
-    function (AuthToken, Deck, Choreographer, $state, $location, GlobalState) {
+    "STATE",
+    "TRANSITION",
+    function (AuthToken, Deck, Choreographer, $state, $location, GlobalState, STATE, TRANSITION) {
 
         return {
             restrict: "E",
@@ -14,12 +16,14 @@ angular.module('kuato')
             controller: function ($scope) {
                 if ( !AuthToken.getToken() ) { $state.go('login'); } // Guard clause for active user in local storage
 
+                GlobalState.setState(STATE['DECK_INDEX']);
+
 
                 // Initialize scope with fetching of all deck resources
                 Deck.fetch().then(function(){
-                    $scope.decks = Deck.index || [];
+                    $scope.decks = Deck.index || {};
                 });
-
+                
 
                 // TODO - Watch for changes to Deck.index, which updates ng-repeat directive with new decks
                 $scope.$watch('Deck.index', function (newValue, oldValue) {
@@ -67,9 +71,9 @@ angular.module('kuato')
                     if ($elem.hasClass('dashnav__selectall--selected')) {
                         $unselected.addClass('deck__checkbox--selected').removeClass('deck__checkbox--unselected');
                         $scope.queuedForStudy = [];
-                        $scope.decks.forEach(function (deck) {
-                            $scope.queuedForStudy.push(deck.id);
-                        });
+                        for (var id in $scope.decks) {
+                            $scope.queuedForStudy.push(Number(id));
+                        }
                         console.log("Adding all decks to the queue for study: ", $scope.queuedForStudy);
 
                     // But if select all box is unselected, remove the selected class from checkboxes and empty the queue

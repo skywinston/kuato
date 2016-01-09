@@ -14,6 +14,23 @@ angular.module('kuato')
 
                 // Handles the creation of a new card with no existing values passed in.
                 function newCard () {
+                    GlobalState.setState(STATE['NEW_CARD']);
+
+                    // If we are given a deck id in the attributes, we know that we are creating a new card
+                    // using the "add a card to this deck" option in the deck header of card index view
+                    if (attrs.deck_id) {
+                        GlobalState.setTransition(TRANSITION['CARD_INDEX->NEW_CARD']);
+                    } else {
+                        GlobalState.setTransition(TRANSITION['DECK_INDEX->NEW_CARD']);
+                    }
+
+                    // Determine transitions based on current state
+                    switch (GlobalState.getState()) {
+                        case STATE['DECK_INDEX'] :
+
+                        case STATE['CARD_INDEX'] :
+                    }
+
                     GlobalState.setState("creatingNewCard");
 
                     // Get handles on the button elements

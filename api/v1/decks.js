@@ -62,50 +62,9 @@ router.get('/', function (req, res) {
             // Send the index object to the client
             res.json(index);
         });
-    
-    //return knex.raw(
-    //                "select * from decks INNER JOIN cards on (decks.id = deck_id) where owner = " + userId  +
-    //                "UNION " +
-    //                "select * from decks left outer join cards on (decks.id = deck_id) where (deck_id IS NULL AND decks.owner = "+ userId + ");"
-    //    ).then(function (result) {
-    //        console.log(result.rows);
-    //        var decks = result.rows;
-    //
-    //        var indexed = decks.map(function (deck) {
-    //                return {
-    //                    id: deck.deck_id,
-    //                    title: deck.title,
-    //                    studied: deck.studied,
-    //                    ratings: {}
-    //                }
-    //            })
-    //            .reduce(function (prev, item) {
-    //                prev[item.id] = item;
-    //                return prev;
-    //            }, {});
-    //
-    //        decks.forEach(function (deck) {
-    //            var target = indexed[deck.deck_id];
-    //
-    //            // If there is a deck with no ratings (and therefore no cards) return null so the ratings object is empty;
-    //            if (deck.rating === null) return;
-    //
-    //            // Otherwise, accumulate each instance of each rating into the ratings object.
-    //            target.ratings[deck.rating] = (target.ratings[deck.rating] || 0) + 1;
-    //        });
-    //
-    //        var result = [];
-    //
-    //        for (var rating in indexed) {
-    //            result.push(indexed[rating]);
-    //        }
-    //
-    //        //console.log(result);
-    //
-    //        res.json(result);
-    //});
 
 });
+
 
 router.get('/:id', function (req, res) {
     //console.log("get to /:id");
@@ -119,6 +78,7 @@ router.get('/:id', function (req, res) {
         });
 });
 
+
 router.get('/deck/:id', function (req, res) {
     //console.log("get to deck/:id");
    return knex('decks')
@@ -128,6 +88,7 @@ router.get('/deck/:id', function (req, res) {
             res.json(result[0]);
         });
 });
+
 
 router.post('/', function (req, res) {
     //console.log("Post to /decks");

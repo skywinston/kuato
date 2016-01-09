@@ -1,7 +1,7 @@
 <div class="dashboard__container">
 
     <!--Deck Index State BEGIN-->
-    <div class="decks__container" ng-if="decks.length">
+    <div class="decks__container" ng-if="decks">
 
         <div class="dashnav__container">
             <div class="row center" ng-click="selectAll($event)">
@@ -12,9 +12,9 @@
             <button class="dashnav__newdeck" new-deck-summoner><i class="material-icons">add</i>New Deck</button>
         </div>
 
-        <div class="deck__wrapper" ng-repeat="deck in decks">
+        <div class="deck__wrapper" ng-repeat="(id, deck) in decks">
 
-            <div class="deck__container" ng-if="!isDeckEmpty(deck.ratings)">
+            <div class="deck__container" ng-if="deck.cards.length">
                 <div class="deck__checkbox--unselected select-deck-for-study" ng-click="toggleStudyThisDeck($event, deck.id)"></div>
                 <h3 class="deck__title--mobile">{{deck.title}}</h3>
                 <div class="deck__infotext">
@@ -46,7 +46,7 @@
             </div>
 
             <!-- BEGIN Empty DECK -->
-            <div class="deck__container" ng-if="isDeckEmpty(deck.ratings)">
+            <div class="deck__container" ng-if="!deck.cards.length">
                 <div class="card__container">
                     <h3 class="deck__title--mobile--empty">{{deck.title}}</h3>
                     <div class="deck__infotext">
@@ -69,7 +69,7 @@
     <!--Deck Index State END-->
 
     <!--Empty State BEGIN-->
-    <div ng-if="!decks.length">
+    <div ng-if="!decks">
         <button ng-click="getDecks()">Create Deck</button>
         <p>The journey of a 1,000 miles begins with a single step...</p>
     </div>

@@ -3,7 +3,7 @@ angular.module('kuato')
 
     return {
 
-        index: [],
+        index: {},
 
         fetch: function () {
             return $http({
