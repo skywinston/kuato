@@ -147,7 +147,7 @@ html, body {
 }
 
 .appnav__menubtn__container {
-  @include flex-col;
+  @include flex-row;
   @include flex-centered;
 
   position: absolute;
@@ -155,6 +155,15 @@ html, body {
 
   min-width: 56px;
   min-height: 56px;
+
+  label {
+    font-size: 20px;
+  }
+
+  i {
+    padding-top: 2px;
+    font-size: 36px;
+  }
 
   // Optional Button Borders
   //border-right: 1px solid $primary--accent--dark;
@@ -651,6 +660,38 @@ html, body {
   background-color: $white;
 }
 
+.card__index__container {
+  @include flex-col;
+
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+
+// PREVIEW CARD COMPONENT //
+
+.card__preview__container {
+  @include flex-col;
+  @include card(1);
+
+  background-color: $white;
+  width: 100%;
+  max-width: 320px;
+  height: 100%;
+  max-height: 200px;
+  padding: 16px;
+  box-sizing: border-box;
+  margin-bottom: 8px;
+}
+
+.card__preview__content {
+  :first-child {
+    margin-top: 0;
+  }
+}
+
+
 //----------//
 // Card END //
 //----------//
@@ -707,6 +748,11 @@ html, body {
   padding-left: 0px;
 }
 
+
+//-------------------------//
+// BREAKPOINT - PHONE ONLY //
+//-------------------------//
+
 @media screen and (max-device-width: 399px) {
   .deck__title--tablet {
     display: none;
@@ -715,7 +761,19 @@ html, body {
   .deck__studybtn__tablet {
     display: none;
   }
+
+  .appnav__menubtn__container {
+    &.hidden {
+      @include slideOutLeft;
+      display: none;
+    }
+  }
 }
+
+//-----------------------------//
+// END BREAKPOINT - PHONE ONLY //
+//-----------------------------//
+
 
 .deck_textbreak {
   //display: block;
@@ -746,7 +804,7 @@ html, body {
 
   // When disabled
   &.disabled {
-    opacity: .4;
+    background-color: $offwhite--accent;
   }
 
   &:first-of-type {
@@ -969,7 +1027,7 @@ html, body {
 
     // When disabled
     &.disabled {
-      opacity: .4;
+      background-color: $offwhite--accent;
     }
   }
 

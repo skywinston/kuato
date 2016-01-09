@@ -91,6 +91,23 @@
   -webkit-animation-name: fadeOutDown;
   animation-name: fadeOutDown; }
 
+@keyframes slideOutLeft {
+  from {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0); }
+  to {
+    visibility: hidden;
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0); } }
+.slideOutLeft {
+  -webkit-animation-duration: .3s;
+  animation-duration: .3s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  animation-timing-function: cubic-bezier(0.55, 0, 0.1, 1);
+  -webkit-animation-name: slideOutLeft;
+  animation-name: slideOutLeft; }
+
 html, body {
   font-family: "Source Sans Pro", sans-serif;
   background-color: #e0e0e0;
@@ -195,13 +212,19 @@ html, body {
 
 .appnav__menubtn__container {
   display: flex;
-  flex-flow: column;
+  flex-flow: row;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   position: absolute;
   left: 0;
   min-width: 56px;
   min-height: 56px; }
+  .appnav__menubtn__container label {
+    font-size: 20px; }
+  .appnav__menubtn__container i {
+    padding-top: 2px;
+    font-size: 36px; }
 
 .appnav__search {
   display: flex;
@@ -587,6 +610,30 @@ html, body {
   border-radius: 0 0 2px 2px;
   background-color: #FAFAFA; }
 
+.card__index__container {
+  display: flex;
+  flex-flow: column;
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box; }
+
+.card__preview__container {
+  display: flex;
+  flex-flow: column;
+  box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.24), 0 1.5px 6px rgba(0, 0, 0, 0.12);
+  border-radius: 2px;
+  background-color: #FAFAFA;
+  width: 100%;
+  max-width: 320px;
+  height: 100%;
+  max-height: 200px;
+  padding: 16px;
+  box-sizing: border-box;
+  margin-bottom: 8px; }
+
+.card__preview__content :first-child {
+  margin-top: 0; }
+
 @media only screen and (min-device-width: 400px) and (max-device-width: 600px) {
   .deck__title--mobile, .deck__title--mobile--empty {
     display: none; }
@@ -618,6 +665,16 @@ html, body {
     display: none; }
 
   .deck__studybtn__tablet {
+    display: none; }
+
+  .appnav__menubtn__container.hidden {
+    -webkit-animation-duration: .3s;
+    animation-duration: .3s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    animation-timing-function: cubic-bezier(0.55, 0, 0.1, 1);
+    -webkit-animation-name: slideOutLeft;
+    animation-name: slideOutLeft;
     display: none; } }
 .deck__buttongroup__mobile {
   display: flex;
@@ -639,7 +696,7 @@ html, body {
   border: none;
   transition: all .3s; }
   .deck__studybtn__mobile.disabled {
-    opacity: .4; }
+    background-color: #BDBDBD; }
   .deck__studybtn__mobile:last-of-type {
     border-left: 1px solid #FAFAFA; }
 
@@ -655,7 +712,7 @@ html, body {
   transition: all .3s;
   width: 100%; }
   .deck__addcards__mobile.disabled {
-    opacity: .4; }
+    background-color: #BDBDBD; }
   .deck__addcards__mobile:last-of-type {
     border-left: 1px solid #FAFAFA; }
 
@@ -809,7 +866,7 @@ html, body {
     border: none;
     background-color: #FAFAFA; }
     .deck__studybtn__tablet.disabled {
-      opacity: .4; }
+      background-color: #BDBDBD; }
 
   .deck__donut__wrapper {
     margin-left: auto;

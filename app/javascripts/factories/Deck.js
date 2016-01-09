@@ -32,6 +32,14 @@ angular.module('kuato')
                 this.index.push(response.data);
                 return response;
             }.bind(this));
+        },
+
+        getOne: function (deckId) {
+            return $http({
+                method: "GET",
+                url: "/api/v1/decks/deck/" + deckId
+            });
         }
+
     }
 }]);

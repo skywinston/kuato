@@ -5,6 +5,7 @@ var pg = require('pg');
 var jwt = require('jsonwebtoken');
 
 router.get('/', function (req, res) {
+    //console.log("get to /");
     var userId = jwt.decode(req.get("Authorization").split(" ")[1]).id;
     
     return knex.raw(
@@ -49,6 +50,7 @@ router.get('/', function (req, res) {
 });
 
 router.get('/:id', function (req, res) {
+    //console.log("get to /:id");
     // TODO - How do I protect this route by ensuring the cards served up belongs to the user?
     var userId = jwt.decode(req.get("Authorization").split(" ")[1]).id;
 
@@ -59,7 +61,18 @@ router.get('/:id', function (req, res) {
         });
 });
 
+router.get('/deck/:id', function (req, res) {
+    //console.log("get to deck/:id");
+   return knex('decks')
+        .where('id', '=', req.params.id)
+        .then( function (result) {
+            console.log(result);
+            res.json(result[0]);
+        });
+});
+
 router.post('/', function (req, res) {
+    //console.log("Post to /decks");
     var userId = jwt.decode(req.get("Authorization").split(" ")[1]).id;
 
     // TODO - What if deck title already exists?  Look for error code sent back from db and catch it.

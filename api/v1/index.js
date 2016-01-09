@@ -10,6 +10,14 @@ var expressJwt = require('express-jwt');
 // Set up express jwt middleware to sign the token with the server-side secret
 router.use(expressJwt({ secret: process.env.JWT_SECRET }).unless({ path: ['/login', '/register', '/favicon.ico'] }));
 
+// If the page is reloaded, send back to the index page for now, until...
+// TODO - How can we remember which state the user is in, and on browser refresh, send them back to that state?
+router.use(function (err, req, res, next) {
+    if (err.name === 'UnauthorizedError') {
+        res.redirect('/');
+    }
+});
+
 router.post('/login', authenticate, function(req, res){
 
     // Authentication passed!
@@ -50,6 +58,10 @@ router.post('/register', function(req, res){
             return res.status(409).end("User already exists!");
         }
     });
+});
+
+router.get('/decks/:id', function (req, res) {
+    res.redirect('/');
 });
 
 module.exports = router;
