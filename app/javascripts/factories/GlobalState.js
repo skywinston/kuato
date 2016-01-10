@@ -2,6 +2,7 @@ angular.module('kuato')
     .constant('STATE', {
         'DECK_INDEX': 'DECK_INDEX',
         'NEW_CARD': 'NEW_CARD',
+        'CANCEL_CARD': 'CANCEL_CARD',
         'CARD_INDEX': 'CARD_INDEX',
         'STUDYING_QUESTION': 'STUDYING_QUESTION',
         'STUDYING_ANSWER': 'STUDYING_ANSWER'
@@ -47,8 +48,10 @@ angular.module('kuato')
     .factory('GlobalState', ["STATE", "TRANSITION", function(STATE, TRANSITION){
         return {
             state: STATE['DECK_INDEX'],
+            prevState: null,
             transition: TRANSITION['LOAD_DECK_INDEX'],
             getState: getState,
+            getPrevState: getPrevState,
             setState: setState,
             getTransition: getTransition,
             setTransition: setTransition
@@ -58,7 +61,12 @@ angular.module('kuato')
             return this.state;
         }
 
+        function getPrevState() {
+            return this.prevState;
+        }
+
         function setState (state) {
+            this.prevState = this.state;
             this.state = state;
         }
 

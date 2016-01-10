@@ -93,7 +93,6 @@ angular.module('kuato')
                     var $label = elem.find('span');
                     var $button = elem.find('svg');
 
-
                     // Reverse rotate button & swap label value
                     $label.text('Add Card');
                     $button.velocity({
@@ -101,7 +100,8 @@ angular.module('kuato')
                     });
 
                     // Emit event from rootScope to trigger deletion of new-card DOM node & scope
-                    $rootScope.$broadcast('cancelNewCard');
+                    $rootScope.$broadcast('CANCEL_CARD');
+
                 }
 
 
@@ -149,20 +149,19 @@ angular.module('kuato')
 
 
                 // Listens for cancel event propagated from rootScope and triggers $detroy on isolate scope
-                scope.$on('cancelNewCard', function () {
-                    GlobalState.setState("deckIndex");
+                scope.$on('CANCEL_CARD', function () {
+                    GlobalState.setState(STATE['DECK_INDEX']);
                     // $timeout runs after the $digest cycle is complete (regardless of delay parameter), prevents err.
                     $timeout(function(){
                         scope.$destroy();
                     });
                 });
-                // which will remove the element from the DOM
+                // on $destroy remove the element from the DOM
                 scope.$on("$destroy", function () {
                     $('.cardnav__container--mobile').velocity({
                         top: "-40px"
                     }, {
                         complete: function () {
-
                             // Remove the card element directive from the DOM after animation completes
                             elem.remove();
                         }

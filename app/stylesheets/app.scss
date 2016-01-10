@@ -170,6 +170,24 @@ html, body {
   //box-shadow: 1px 0 0 0 $primary--accent--light;
 }
 
+.appnav__backToDeckIndex {
+  @include flex-row;
+  @include flex-centered;
+
+  min-width: 56px;
+  min-height: 56px;
+
+  label {
+    font-size: 20px;
+  }
+
+  i {
+    padding-top: 2px;
+    font-size: 36px;
+  }
+
+}
+
 .appnav__search {
   @include flex-row;
   @include flex-center;
@@ -391,6 +409,7 @@ html, body {
 
 .deck__wrapper {
   width: 100%;
+  max-width: 624px;
   margin-bottom: 12px;
   align-self: center;
 }
@@ -442,6 +461,21 @@ html, body {
   @extend .deck__title--mobile;
 
   margin-left: 0px;
+}
+
+// Deck Header Component
+
+.deck__header__container {
+  @include flex-col;
+  @include flex-center;
+  @include dropshadow(2);
+
+  position: absolute;
+  top: 56px;
+
+  background-color: $white;
+  width: 100%;
+  height: 200px;
 }
 
 //---------------//
@@ -661,6 +695,7 @@ html, body {
   @include flex-col;
 
   width: 100%;
+  margin-top: 208px; // height of navbar + deck-header + normal margin
   padding: 8px;
   box-sizing: border-box;
 }
@@ -948,6 +983,30 @@ and (max-device-width: 600px) {
 @media only screen
 and (min-device-width: 601px) {
 
+  .appnav__menubtn__container {
+    border-right: 1px solid $primary--accent--dark;
+    box-shadow: 1px 0 0 0 $primary--accent--light;
+  }
+
+  .appnav__backToDeckIndex {
+    @include flex-row;
+    @include flex-centered;
+
+    margin-left: 72px;
+    min-width: 56px;
+    min-height: 56px;
+
+    label {
+      font-size: 20px;
+    }
+
+    i {
+      padding-top: 2px;
+      font-size: 36px;
+    }
+
+  }
+
   .deck__container, .deck__wrapper {
     @include flex-col;
     align-self: center;
@@ -1048,6 +1107,28 @@ and (min-device-width: 601px) {
   .deck__donut {
     margin-bottom: 0px;
     flex-wrap: nowrap;
+  }
+
+  .deck__header__container {
+    @include flex-col;
+    @include flex-center;
+    @include dropshadow(2);
+
+    position: absolute;
+    top: 56px;
+
+    background-color: $white;
+    width: 100%;
+    height: 141px;
+  }
+
+  .card__index__container {
+    @include flex-col;
+
+    width: 100%;
+    margin-top: 165px; // height of navbar + deck-header + normal margin
+    padding: 8px;
+    box-sizing: border-box;
   }
 
 }

@@ -36,41 +36,21 @@ angular.module('kuato')
             // STATE BASED WATCHERS -  Changes behavior based on state                  //
             //--------------------------------------------------------------------------//
 
-                $scope.$watch('GlobalState.state', function () {
+                $scope.$on('CANCEL_CARD', function () {
                     $scope.state = GlobalState.getState();
+                    console.log("STATE after cancel card in appnav.js controller");
+                    console.log($scope.state);
                 });
 
-                //$scope.$watch('GlobalState.transition', function manageTransition () {
-                //    // Animate appnav elements based on state transitions
-                //    switch (GlobalState.getTransition()) {
-                //        case TRANSITION['CARD_INDEX->DECK_INDEX'] :
-                //            $('.appnav__backToDeckIndex').velocity({
-                //                translateX: "32px",
-                //                opacity: 0
-                //            }, {
-                //                duration: 200,
-                //                complete: function (elem) {
-                //                    elem.hide();
-                //                }
-                //            });
-                //            break;
-                //        case TRANSITION['DECK_INDEX->CARD_INDEX'] :
-                //            $('.appnav__backToDeckIndex').velocity({
-                //                translateX: "0px",
-                //                opacity: 1
-                //            }, {
-                //                duration: 200,
-                //                begin: function (elem) {
-                //                    elem.show();
-                //                }
-                //            });
-                //            break;
-                //
-                //    }
-                //});
 
 
+            //--------------------------------------------------------//
+            // DECK INDEX  -  Logic specific to this state goes here  //
+            //--------------------------------------------------------//
 
+
+                
+                
 
 
             //--------------------------------------------------------//
@@ -84,38 +64,45 @@ angular.module('kuato')
                 }
 
 
-
-
                 $scope.backToDeckIndex = function () {
-                    GlobalState.setTransition(TRANSITION['CARD_INDEX->DECK_INDEX']);
+                    GlobalState.setState(STATE['DECK_INDEX']);
                     $state.go('app');
                 };
 
 
-                // Toggle New Card Form
+                // Initialize card form visible
                 $scope.cardFormVisible = false;
-                $scope.newCard = function () {
 
-                    // Get handles on button elements
-                    var $label = $('.appnav__addcard > span');
-                    var $button = $('.appnav__addcard > svg');
+
+                // Renders a new card form.
+                $scope.newCard = function () {
 
                     // Toggle visibility on container element
                     $scope.cardFormVisible = !$scope.cardFormVisible;
                     // todo — ng-if is not triggering ng-animate classes... why not?
 
-                    // Animate conditioned upon value of visibility, toggling value of card form visibility
-                    if ($scope.cardFormVisible) {// 'Active' state with new card form visible
-                        // todo — This pushes the search label to the left, it shouldn't move, fix its positioning.
-                        $label.text('Cancel Card');
-                        $button.velocity({
+
+                    if (GlobalState.getState() == STATE['DECK_INDEX']) {
+
+                        // Get handles on button elements
+                        var $label = $('.appnav__addcard > span');
+                        var $button = $('.appnav__addcard > svg');
+
+                        // Saved animation that rotates the mini-add-card-FAB in the appnav
+                        var rotatePlusBtn = $button.velocity({
                             rotateZ: "225deg"
                         });
-                    } else if (!$scope.cardFormVisible) {      // 'Inactive state with new card form hidden
+
+                        $label.text('Cancel Card');
+                        rotatePlusBtn();
+
+                    } else if (GlobalState.getState() == STATE['CANCEL_CARD'] && GlobalState.getPrevState() == 'NEW_CARD') {
+
                         $label.text('Add Card');
                         $button.velocity({
                             rotateZ: "-0deg"
                         });
+
                     }
 
                 };

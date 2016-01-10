@@ -96,7 +96,7 @@ angular.module('kuato')
                         GlobalState.setTransition(TRANSITION['DECK_INDEX->CARD_INDEX']);
 
                         // Get handle on deck corresponding to clicked element
-                        var $elem = $(event.target).parent().parent().parent();  // yes, really...
+                        var $elem = $(event.target).closest('.deck__wrapper');
                         console.log($elem);
 
                         // Get width, height, and position offset of deck element
@@ -141,7 +141,7 @@ angular.module('kuato')
                             var callObject = {
                                 e: deck,
                                 p: {
-                                    translateX: "-150%"
+                                    opacity: 0
                                 },
                                 o: {
                                     sequenceQueue: false,

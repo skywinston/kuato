@@ -3,18 +3,23 @@ angular.module('kuato')
 
     function link (scope, elem, attrs) {
 
-        // Build the deck header element
-        scope.deck = Deck.index[$stateParams.id];
-
-
-
-        // Get handle on containers where we'll append card preview directive elements
+        // Handle on insertion points for deck header and card preview components
+        var $header = $('.deck__header__container');
         var $index = $('.card__index__container');
 
-        // For each card in this deck, compile a card element directive passing card data into scope
-        scope.deck.cards.forEach(function (card, index) {
-            console.log(card);
 
+        // Build the deck header element & insert into DOM
+        scope.deck = Deck.index[$stateParams.id];
+        var headerTemplate = '<deck-header></deck-header>';
+        var headerScope = scope.$new(true, scope);
+        for (var prop in scope.deck) {
+            headerScope[prop] = scope.deck[prop]
+        }
+        $header.append($compile(headerTemplate)(headerScope));
+
+
+        // For each card in this deck, compile a card element directive passing card data into scope, and append to DOM
+        scope.deck.cards.forEach(function (card, index) {
             // Template that builds kuato card directive instance
             var template =  '<preview-card></preview-card>';
 
@@ -40,6 +45,19 @@ angular.module('kuato')
     };
 
 }])
+.directive('deckHeader', [function () {
+
+    function link (scope, elem, attrs) {
+
+    }
+
+    return {
+        restrict: 'E',
+        templateUrl: '../templates/deck-header.html',
+        link: link
+    }
+
+}])
 .directive('previewCard', [function () {
 
     function link (scope, elem, attrs) {
@@ -51,18 +69,5 @@ angular.module('kuato')
         templateUrl: '../templates/preview-card.html',
         link: link
     };
-
-}])
-.directive('deckHeader', [function () {
-
-    function link (scope, elem, attrs) {
-
-    }
-
-    return {
-        restrict: 'E',
-        template: '',
-        link: link
-    }
 
 }]);

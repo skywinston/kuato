@@ -20,11 +20,18 @@
                 <div class="deck__infotext">
                     <h3 class="deck__title--tablet">{{deck.title}}</h3>
                     <p class="deck__timestamp">Last studied on November 24th, 2015 &nbsp;</p>
-                    <button class="deck__studybtn__tablet" ng-click="studyDecks(deck.id)"
-                            ng-disabled="queuedForStudy.length"
-                            ng-class="{'disabled': queuedForStudy.length}">
-                        Study Now
-                    </button>
+                    <span class="row">
+                        <button class="deck__studybtn__tablet" ng-click="studyDecks(deck.id)"
+                                ng-disabled="queuedForStudy.length"
+                                ng-class="{'disabled': queuedForStudy.length}">
+                            Study Now
+                        </button>
+                        <button class="deck__studybtn__tablet" ng-click="viewDeck(deck.id, $event)"
+                                ng-disabled="queuedForStudy.length"
+                                ng-class="{'disabled': queuedForStudy.length}">
+                            View Cards
+                        </button>
+                    </span>
                 </div>
 
                 <ratings-donut ratings="{{deck.ratings}}" class="deck__donut__wrapper"></ratings-donut>
