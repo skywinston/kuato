@@ -244,6 +244,7 @@ html, body {
 
 .dashboard__container {
   padding: 12px;
+  margin-bottom: 96px;
 }
 
 // DashNav BEGIN //
@@ -1031,6 +1032,44 @@ and (min-device-width: 601px) {
     }
   }
 
+  .dashnav__selectall--unselected {
+    visibility: visible;
+    opacity: 1;
+    align-self: auto;
+    width: 30px;
+    height: 30px;
+    border: 5px solid $text--secondary;
+    border-radius: 8px;
+    margin-left: 24px;
+    transition: all .3s;
+  }
+
+  .dashnav__selectall--selected {
+    visibility: visible;
+    opacity: 1;
+    align-self: auto;
+    width: 30px;
+    height: 30px;
+    border: 5px solid $primary;
+    border-radius: 8px;
+    margin-left: 24px;
+
+    background-size: contain;
+    background-image: url(../images/study_checkbox-selected.svg);
+    //background-position: center center;
+    background-repeat: no-repeat;
+    transition:all 0.5s;
+    -webkit-transition:all 0.5s;
+    -o-transition:all 0.5s;
+    -moz-transition:all 0.5s;
+  }
+
+  .dashnav__selectAllLabel {
+    padding-left: 16px;
+    color: $text--primary;
+    font-size: 18px;
+  }
+
   .deck__container {
     @include flex-row;
     background-color: $white;
@@ -1078,6 +1117,42 @@ and (min-device-width: 601px) {
     display: none;
   }
 
+  .dashnav__studyButton__container {
+    @include flex-col;
+    @include flex-center;
+    @include dropshadow(4);
+
+    position: fixed;
+    bottom: 0;
+    padding: 16px;
+    box-sizing: border-box;
+
+    width: 100%;
+    background-color: $white;
+    transition: all .3s;
+
+    // Animations
+    &.ng-enter {
+      @include slideInUp;
+      opacity: 1;
+      visibility: visible;
+    }
+
+    &.ng-leave {
+      @include slideOutDown;
+    }
+
+  }
+
+  .dashnav__studyButton {
+    height: 72px;
+    max-width: 624px;
+
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+
   .deck__addcards__mobile {
     display: none;
   }
@@ -1095,7 +1170,7 @@ and (min-device-width: 601px) {
 
     // When disabled
     &.disabled {
-      background-color: $offwhite--accent;
+      color: $text--secondary;
     }
   }
 
