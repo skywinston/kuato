@@ -2,7 +2,7 @@ angular.module('kuato')
     .constant('STATE', {
         'DECK_INDEX': 'DECK_INDEX',
         'NEW_CARD': 'NEW_CARD',
-        'SHOW_DECK': 'SHOW_DECK',  // Same as CARD_INDEX
+        'CARD_INDEX': 'CARD_INDEX',
         'STUDYING_QUESTION': 'STUDYING_QUESTION',
         'STUDYING_ANSWER': 'STUDYING_ANSWER'
     })

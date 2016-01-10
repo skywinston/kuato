@@ -2,48 +2,42 @@ angular.module('kuato')
 .directive('cardIndex', ['Deck', '$stateParams', '$compile', function (Deck, $stateParams, $compile) {
 
     function link (scope, elem, attrs) {
-        // Fetch cards for view using deck_id passed in the URL path
-        Deck.getCardsForDeck($stateParams.id)
-            .then(function (response) {
 
-                scope.cards = response.data;
-
-                // Get handle on card-index container
-                var $index = $('.card__index__container');
+        // Build the deck header element
+        scope.deck = Deck.index[$stateParams.id];
 
 
-                // TODO - forEach over the response.data and build a card element directive using the data in each card
-                scope.cards.forEach(function (card, index) {
 
-                    //var questionStringPreview = marked(card.question);
+        // Get handle on containers where we'll append card preview directive elements
+        var $index = $('.card__index__container');
 
-                    // Template that builds kuato card directive instance
-                    var template =  '<preview-card></preview-card>';
+        // For each card in this deck, compile a card element directive passing card data into scope
+        scope.deck.cards.forEach(function (card, index) {
+            console.log(card);
 
-                    // Scope to pass to template when compiling
-                    var cardScope = scope.$new(true);
-                    // TODO - if we pass tags or study-date data in the future, include that here
-                    cardScope.cardId = card.id;
-                    cardScope.question = card.question;
-                    cardScope.rating = card.rating;
+            // Template that builds kuato card directive instance
+            var template =  '<preview-card></preview-card>';
 
-                    // TODO - Compile and append
-                    var rendered = $compile(template)(cardScope);
-                    var string = ".0" + index.toString();
-                    var delay = Number(string);
-                    $index.append(rendered).addClass('fadeInUp');
-                    // TODO - Add animation with .1s delay between each card
-                });
+            // Scope to pass to template when compiling
+            var cardScope = scope.$new(true, scope);
+            // TODO - if we pass tags or study-date data in the future, include that here
+            cardScope.cardId = card.id;
+            cardScope.question = card.question;
+            cardScope.rating = card.rating;
 
-
-            });
+            // Compile and append
+            var rendered = $compile(template)(cardScope);
+            var delay = Number(".0" + index.toString());
+            $index.append(rendered).addClass('fadeInUp');
+            // TODO - Add animation with .1s delay between each card
+        });
     }
 
     return {
         restrict: 'E',
         templateUrl: '../templates/card-index.html',
         link: link
-    }
+    };
 
 }])
 .directive('previewCard', [function () {
@@ -57,5 +51,18 @@ angular.module('kuato')
         templateUrl: '../templates/preview-card.html',
         link: link
     };
+
+}])
+.directive('deckHeader', [function () {
+
+    function link (scope, elem, attrs) {
+
+    }
+
+    return {
+        restrict: 'E',
+        template: '',
+        link: link
+    }
 
 }]);

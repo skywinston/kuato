@@ -384,7 +384,6 @@ html, body {
 
   padding: 16px;
   box-sizing: border-box;
-  margin-bottom: 12px;
 
   border-radius: 12px;
   background-color: $white;
@@ -392,13 +391,11 @@ html, body {
 
 .deck__wrapper {
   width: 100%;
+  margin-bottom: 12px;
+  align-self: center;
 }
 
-@media screen and (min-device-width: 600px) {
-  .deck__container, .deck__wrapper {
-    @include flex-col;
-  }
-}
+
 
 .deck__checkbox--unselected {
   border-radius: 4px;
@@ -696,43 +693,6 @@ html, body {
 // Card END //
 //----------//
 
-///////////////////////////
-///// PHONE LANDSCAPE /////
-///////////////////////////
-
-@media only screen
-  and (min-device-width: 400px)
-  and (max-device-width: 600px) {
-  .deck__container {
-    //@include flex-col;
-  }
-
-  .deck__title--mobile {
-    display: none;
-  }
-
-  .deck__infotext {
-    @include flex-col;
-  }
-
-  .deck__timestamp {
-    padding-left: 16px;
-    margin: 8px 0;
-  }
-
-  .deck__checkbox--unselected {
-    //align-self: auto;
-  }
-
-  .deck__donut__wrapper {
-    margin: 16px auto;
-  }
-
-
-  .deck__studybtn__tablet {
-    display: none;
-  }
-}
 
 .deck__title--tablet {
   margin: 0;
@@ -747,32 +707,6 @@ html, body {
 
   padding-left: 0px;
 }
-
-
-//-------------------------//
-// BREAKPOINT - PHONE ONLY //
-//-------------------------//
-
-@media screen and (max-device-width: 399px) {
-  .deck__title--tablet {
-    display: none;
-  }
-
-  .deck__studybtn__tablet {
-    display: none;
-  }
-
-  .appnav__menubtn__container {
-    &.hidden {
-      @include slideOutLeft;
-      display: none;
-    }
-  }
-}
-
-//-----------------------------//
-// END BREAKPOINT - PHONE ONLY //
-//-----------------------------//
 
 
 .deck_textbreak {
@@ -940,9 +874,84 @@ html, body {
   font-size: 24px;
 }
 
-// TABLET PORTRAIT BREAKPOINT
+
+//-------------------------//
+// BREAKPOINT - PHONE ONLY //
+//-------------------------//
+
+@media screen and (max-device-width: 399px) {
+  .deck__title--tablet {
+    display: none;
+  }
+
+  .deck__studybtn__tablet {
+    display: none;
+  }
+
+  .appnav__menubtn__container {
+    &.hidden {
+      @include slideOutLeft;
+      display: none;
+    }
+  }
+}
+
+//-----------------------------//
+// END BREAKPOINT - PHONE ONLY //
+//-----------------------------//
+
+
+
+///////////////////////////
+///// PHONE LANDSCAPE /////
+///////////////////////////
+
 @media only screen
-  and (min-device-width: 601px) {
+and (min-device-width: 400px)
+and (max-device-width: 600px) {
+  .deck__container {
+    //@include flex-col;
+  }
+
+  .deck__title--mobile {
+    display: none;
+  }
+
+  .deck__infotext {
+    @include flex-col;
+  }
+
+  .deck__timestamp {
+    padding-left: 16px;
+    margin: 8px 0;
+  }
+
+  .deck__checkbox--unselected {
+    //align-self: auto;
+  }
+
+  .deck__donut__wrapper {
+    margin: 16px auto;
+  }
+
+
+  .deck__studybtn__tablet {
+    display: none;
+  }
+}
+
+
+//------------------------------//
+// BREAKPOINT - TABLET PORTRAIT //
+//------------------------------//
+
+@media only screen
+and (min-device-width: 601px) {
+
+  .deck__container, .deck__wrapper {
+    @include flex-col;
+    align-self: center;
+  }
 
   .appnav__addcard {
     @include flex-row;

@@ -18,7 +18,7 @@ angular.module('kuato')
 
                 GlobalState.setState(STATE['DECK_INDEX']);
 
-
+                
                 // Initialize scope with fetching of all deck resources
                 Deck.fetch().then(function(){
                     $scope.decks = Deck.index || {};
@@ -29,15 +29,7 @@ angular.module('kuato')
                 $scope.$watch('Deck.index', function (newValue, oldValue) {
                    $scope.decks = newValue;
                 });
-
-                $scope.isDeckEmpty = function (ratingsObject) {
-                    for(var key in ratingsObject) {
-                        if(ratingsObject.hasOwnProperty(key)){
-                                return false;
-                        }
-                    }
-                    return true;
-                };
+                
 
                 // Adds or removes deck IDs into the study queue
                 $scope.queuedForStudy = [];
@@ -92,96 +84,93 @@ angular.module('kuato')
 
                 // View a deck
                 $scope.viewDeck = function (deckId, event) {
-                    if (!event) { $state.go('card-index') }
+                    // QUESTION — Why is this guard clause here?
+                    // ANSWER - What if you want to view a deck after creating it?
+                    if (!event) { $state.go('card-index') } // Assume a user pastes a url to a particular deck
+                    
 
-                    var $elem = $(event.target);
+                    // User wants to view a deck by clicking on "view cards" on the deck
+                    if (GlobalState.getState() == STATE['DECK_INDEX']) {
 
-                    // TODO — get width, height, and position of $elem
-                    var width = $elem.width();
-                    var height = $elem.height();
-                    var position = $elem.offset();
+                        // Configure transition between states
+                        GlobalState.setTransition(TRANSITION['DECK_INDEX->CARD_INDEX']);
 
-                    console.log(
-                        "Width: ", width, "\n",
-                        "Height: ", height, "\n",
-                        "Position: ", position, "\n"
-                    );
+                        // Get handle on deck corresponding to clicked element
+                        var $elem = $(event.target).parent().parent().parent();  // yes, really...
+                        console.log($elem);
 
+                        // Get width, height, and position offset of deck element
+                        var width = $elem.width();
+                        var height = $elem.height();
+                        var position = $elem.offset();
 
+                        // create new element with same position, width, height as deck element & append to body
+                        var actor = document.createElement('div');
+                        var $actor = $(actor);
+                        $actor
+                            .addClass('card')
+                            .css({
+                                width: width,
+                                height: height,
+                                position: "fixed",
+                                "z-index": 90,
+                                top: position.top - $(window).scrollTop(),
+                                left: position.left - $(window).scrollLeft(),
+                                "border-radius": "12px"
+                            })
+                            .appendTo('body');
 
-                    // create new element with same position, width, height as $elem & append to body
-                    var actor = document.createElement('div');
-                    var $actor = $(actor);
-                    $actor
-                        .addClass('card')
-                        .css({
-                            width: width,
-                            height: height,
-                            position: "fixed",
-                            "z-index": 90,
-                            top: position.top,
-                            left: position.left
-                        })
-                        .appendTo('body');
+                        // Calculate end state of deck header based on viewport width
+                        var actorStyles = $(window).width() < 600 ? {
+                                top: "56px",
+                                left: 0,
+                                width: "100%",
+                                height: "200px",
+                                "border-radius": "0px"
+                            } : {
+                                top: "56px",
+                                left: 0,
+                                width: "100%",
+                                height: "144px",
+                                "border-radius": "0px"
+                            };
 
-                    // fade the clicked $elem out so that it doesn't slide under its actor;
-                    $elem.velocity({
-                        opacity: 0
-                    }, {
-                        duration: 200
-                    });
+                        // Include every other deck element in the animation sequence
+                        var $decks = $('.deck__container');
+                        var sequence = $.map($decks, function(deck, i){
+                            var callObject = {
+                                e: deck,
+                                p: {
+                                    translateX: "-150%"
+                                },
+                                o: {
+                                    sequenceQueue: false,
+                                    duration: Number("300.0" + i.toString())
+                                }
+                            };
+                            if (i == $decks.length-1) {
+                                callObject.o.complete = function () {
+                                    GlobalState.setState(STATE['CARD_INDEX']);
+                                    $.Velocity({e: $actor, p: actorStyles, o: {duration: 300, easing: [.55,0,.1,1], sequenceQueue: false}})
+                                        .then(function(){
+                                            // Pass the deckId as params to the new card-index state
+                                            $state.go('card-index', {id: deckId});
 
-
-                    // get handle on all deck items and add class fadeOutDown
-                    $('.deck__container').addClass('fadeOutDown');
-
-
-                    // get handle on decknav and add slideOutUp class
-                    $('.dashnav__container').addClass('slideOutUp');
-
-                    // animate from gathered position into top position directly under the appnav
-                    // This is conditional upon viewport width to match css styling
-                    if ($(window).width() < 600) {
-                        $actor.velocity({
-                            top: "56px",
-                            left: 0,
-                            width: "100%",
-                            height: "200px"
-                        }, {
-                            duration: 300,
-                            complete: function () {
-                                // Set GlobalState to cardIndex
-                                GlobalState.setState("cardIndex");
-
-                                // Pass the deckId as params to the new card-index state
-                                $state.go('card-index', {id: deckId});
-
-                                // Destroy scope and remove $actor elem
-                                $scope.$destroy();
-                                $actor.remove();
+                                            // Destroy scope and remove $actor elem
+                                            $scope.$destroy();
+                                            $actor.remove();
+                                        });
+                                }
                             }
-                        });
-                    } else if ($(window).width() >= 600) {
-                        $actor.velocity({
-                            top: "56px",
-                            left: 0,
-                            width: "100%",
-                            height: "144px"
-                        }, {
-                            duration: 300,
-                            complete: function () {
-                                // Set GlobalState to cardIndex
-                                GlobalState.setState("cardIndex");
 
-                                // Pass the deckId as params to the new card-index state
-                                $state.go('card-index', {id: deckId});
-
-                                // Destroy scope nad remove $actor elem
-                                $scope.$destroy();
-                                $actor.remove();
-                            }
+                            return callObject;
                         });
-                    }
+                        // Have the first animation turn opacity all the way down immediately on the clicked deck.
+                        sequence.unshift({e: $elem, p: {opacity: 0}, o: {duration: 0, sequenceQueue: false}});
+                        // Then run the animation sequence, which when complete, will redirect to the card index state.
+                        $.Velocity.RunSequence(sequence);
+
+                    } // END Condition: Transitioning from Deck Index to Card Index
 
                 }; // END viewDeck()
 

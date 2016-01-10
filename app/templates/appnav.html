@@ -1,7 +1,7 @@
 <!-- AppNav BEGIN -->
 <div class="appnav__container">
     <div class="appnav__bar">
-        <div ng-click="logout()" class="appnav__menubtn__container" ng-class="{'hidden': state === 'cardIndex'}">
+        <div ng-click="logout()" class="appnav__menubtn__container" ng-class="{'hidden': state === 'CARD_INDEX'}"> <!--  -->
             <?xml version="1.0" encoding="UTF-8" standalone="no"?>
             <svg width="24px" height="21px" viewBox="0 0 24 21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
                 <!-- Generator: Sketch 3.4.2 (15855) - http://www.bohemiancoding.com/sketch -->
@@ -25,7 +25,7 @@
                 </g>
             </svg>
         </div>
-        <div ng-click="deckIndex()" class="appnav__menubtn__container" ng-if="state === 'cardIndex'">
+        <div ng-click="backToDeckIndex()" class="appnav__menubtn__container appnav__backToDeckIndex" ng-if="state === 'CARD_INDEX'">
             <i class="material-icons md-48">chevron_left</i>
             <label>{{activeDeck}}</label>
         </div>
@@ -33,7 +33,7 @@
             <!--<i class="material-icons">search</i>-->
 
             <!-- Using as Branding spot for now until search is implemented -->
-            <label ng-hide="state === 'cardIndex'">Kuato</label>
+            <label ng-hide="state === 'CARD_INDEX'">Kuato</label>
         </div>
         <div class="appnav__addcard" card-operator> <!-- card id for testing purposes -->
             <span>New Card</span>
