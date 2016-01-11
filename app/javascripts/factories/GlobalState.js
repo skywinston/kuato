@@ -25,6 +25,10 @@ angular.module('kuato')
         'CANCEL_NEW_CARD->CARD_INDEX': 'CANCEL_NEW_CARD->CARD_INDEX',
         'CREATE_NEW_CARD->CARD_INDEX': 'CREATE_NEW_CARD->CARD_INDEX',
 
+        // View/edit existing card from the card index view
+        'CARD_INDEX->VIEW_CARD': 'CARD_INDEX->VIEW_CARD',
+        'VIEW_CARD->CARD_INDEX': 'VIEW_CARD->CARD_INDEX',
+
         // Edit existing cards
         'CARD_INDEX->EDIT_CARD': 'CARD_INDEX->EDIT_CARD',
         'EDIT_CARD->CARD_INDEX': 'EDIT_CARD->CARD_INDEX',

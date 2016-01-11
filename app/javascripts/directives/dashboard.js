@@ -85,7 +85,7 @@ angular.module('kuato')
                 // View a deck
                 $scope.viewDeck = function (deckId, event) {
                     // QUESTION — Why is this guard clause here?
-                    // ANSWER - What if you want to view a deck after creating it?
+                    // GUESS - What if you want to view a deck after creating it?
                     if (!event) { $state.go('card-index') } // Assume a user pastes a url to a particular deck
                     
 

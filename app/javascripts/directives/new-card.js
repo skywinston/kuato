@@ -16,6 +16,7 @@ angular.module('kuato')
                 // Handles the creation of a new card with no existing values passed in.
                 function newCard () {
                     GlobalState.setState(STATE['NEW_CARD']);
+                    $rootScope.$broadcast('NEW_CARD');
 
 
                     // If we are given a deck id in the attributes, we know that we are creating a new card
@@ -59,7 +60,12 @@ angular.module('kuato')
                 // Handle editing operations on existing cards
                 function editCard () {
 
-                    // todo — Check to see if there is a deck_id or card_id present on the attrs
+                    // Log the transition in Global State
+                    if (GlobalState.getState() == STATE['CARD_INDEX']) {
+                        GlobalState.setTransition(TRANSITION['CARD_INDEX->VIEW_CARD']);
+                    }
+
+                    // Check the card-id attr again... (prob dont need to do this twice)
                     if (attrs.cardId) {
                         // Instantiate Isolate Scope & template.
                         var cardScope = scope.$new(true);
@@ -112,8 +118,10 @@ angular.module('kuato')
                     console.log(GlobalState.getState());
                     switch (GlobalState.getState()) {
                         case STATE['DECK_INDEX'] :
-                        case STATE['CARD_INDEX'] :
                             newCard();
+                            break;
+                        case STATE['CARD_INDEX'] :
+                            editCard();
                             break;
                         case STATE['STUDYING_QUESTION'] :
                         case STATE['STUDYING_ANSWER'] :
@@ -142,14 +150,33 @@ angular.module('kuato')
             templateUrl: "../templates/card.html",
             link: function (scope, elem, attrs) {
 
-                // Set initial state to trigger correct ng-show and ng-hide directives
-                scope.navFocus = 'question';
-                scope.questionEdit = true;
-                scope.answerEdit = true;
+                // Which Transition state are we in?  This will determine how we render the element.
+                switch (GlobalState.getTransition()) {
+                    case TRANSITION['CARD_INDEX->VIEW_CARD'] :
+                        console.log("SCOPE for the VIEW CARD from CARD INDEX");
+                        console.log(scope);
+                        scope.navFocus = 'question';
+                        scope.questionEdit = false;
+                        scope.answerEdit = false;
+                        scope.showQ = true;
+                        scope.showA = true;
+                        renderNewCard();
+                        break;
+                    case TRANSITION['STUDY->EDIT_CARD'] :
+                    case TRANSITION['DECK_INDEX->NEW_CARD'] :
+                    case TRANSITION['CARD_INDEX->NEW_CARD'] :
+                        // Set initial state to trigger correct ng-show and ng-hide directives
+                        scope.navFocus = 'question';
+                        scope.questionEdit = true;
+                        scope.answerEdit = true;
+                        renderNewCard();
+                        break;
+                }
 
 
                 // Listens for cancel event propagated from rootScope and triggers $detroy on isolate scope
                 scope.$on('CANCEL_CARD', function () {
+                    console.log("CANCELING CARD! DESTROYING SCOPE");
                     GlobalState.setState(STATE['DECK_INDEX']);
                     // $timeout runs after the $digest cycle is complete (regardless of delay parameter), prevents err.
                     $timeout(function(){
@@ -158,8 +185,8 @@ angular.module('kuato')
                 });
                 // on $destroy remove the element from the DOM
                 scope.$on("$destroy", function () {
-                    $('.cardnav__container--mobile').velocity({
-                        top: "-40px"
+                    $('.cards__container').velocity({
+                        translateY: "-100%"
                     }, {
                         complete: function () {
                             // Remove the card element directive from the DOM after animation completes
@@ -199,13 +226,18 @@ angular.module('kuato')
                 };
 
 
-                // Render element directive using Global State for animation sequencing
-                switch (GlobalState.getState()) {
-                    case STATE['NEW_CARD']:
-                        renderNewCard();
-                        break;
-                    default:
-                        alert("No default action for rendering this state");
+                //// Render element directive using Global State for animation sequencing
+                //switch (GlobalState.getState()) {
+                //    case STATE['NEW_CARD']:
+                //        renderNewCard();
+                //        break;
+                //    default:
+                //        alert("No default action for rendering this state");
+                //}
+
+
+                function renderExistingCard () {
+
                 }
 
 
@@ -214,16 +246,13 @@ angular.module('kuato')
                     $('#app__container').prepend(elem);
 
                     // Get handle on animated elements
-                    var $cardNav = $('.cardnav__container--mobile');
                     var $cardContainer = $('.cards__container');
 
                     // Declare animation sequence for newCard state
                     var entranceSequence = [
-                        { e: $cardNav, p: {translateY: "-40px"}, o: {duration: 0} },
                         { e: $cardContainer, p: {translateY: "-100%"}, o: {duration: 0, sequenceQueue: false} },
-                        { e: $cardNav, p: {translateY: 0}, o: {duration: 300 , sequenceQueue: false } },
                         { e: $cardContainer, p: {translateY: 0}, o: {duration: 400, sequenceQueue: false, easing: [.55,0,.1,1]} }
-                        // TODO — I think we need a fast-in easing curve instead of a fast-out here.
+                        // TODO — I think we need a fast-in easing curve instead of a slow-out here.
                     ] ;
                     $.Velocity.RunSequence(entranceSequence);
                 }

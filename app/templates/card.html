@@ -1,42 +1,26 @@
 <div class="cards__stage">
 
-    <div class="cardnav__container--mobile">
-
-        <button class="cardnav__question"
-                tabindex="1"
-                ng-click="navFocus = 'question'"
-                ng-class="{'active': navFocus === 'question'}">
-            Question
-        </button>
-
-        <button class="cardnav__answer"
-                tabindex="2"
-                ng-click="navFocus = 'answer'"
-                ng-class="{'active': navFocus === 'answer'}">
-            Answer
-        </button>
-
-        <button class="cardnav__save"
-                tabindex="3"
-                ng-click="createCard()">
-            Save Card
-        </button>
-
-    </div>
-
     <div class="cards__container">
-        <div class="card__container" ng-show="navFocus === 'question'">
-            <button class="card__editprev" ng-click="previewQ()" ng-show="questionEdit">Preview</button>
-            <button class="card__editprev" ng-click="editQ()" ng-hide="questionEdit">Edit</button>
-            <div id="questionPreviewTarget" class="card--preview" ng-show="!questionEdit"></div>
-            <div id="questionMirrorTarget" ng-show="questionEdit"><!-- CodeMirror Instance for Question --></div>
+        <div class="deck__selection">
+            <select name="deck" id="deck_select"></select>
         </div>
 
-        <div class="card__container" ng-show="navFocus === 'answer'">
-            <button class="card__editprev" ng-click="previewA()" ng-show="answerEdit">Preview</button>
-            <button class="card__editprev" ng-click="editA()" ng-hide="answerEdit">Edit</button>
-            <div id="answerPreviewTarget" class="card--preview" ng-show="!answerEdit"></div>
-            <div id="answerMirrorTarget" ng-show="answerEdit"><!-- CodeMirror Instance for Answer --></div>
+        <div class="row">
+            <div class="card__container">
+                <h1 class="card__question__label">Question</h1>
+                <button class="card__editprev" ng-click="previewQ()" ng-show="questionEdit">Preview</button>
+                <button class="card__editprev" ng-click="editQ()" ng-hide="questionEdit">Edit</button>
+                <div id="questionPreviewTarget" class="card--preview" ng-show="!questionEdit"></div>
+                <div id="questionMirrorTarget" ng-show="questionEdit"><!-- CodeMirror Instance for Question --></div>
+            </div>
+
+            <div class="card__container">
+                <h1 class="card__answer__label">Answer</h1>
+                <button class="card__editprev" ng-click="previewA()" ng-show="answerEdit">Preview</button>
+                <button class="card__editprev" ng-click="editA()" ng-hide="answerEdit">Edit</button>
+                <div id="answerPreviewTarget" class="card--preview" ng-show="!answerEdit"></div>
+                <div id="answerMirrorTarget" ng-show="answerEdit"><!-- CodeMirror Instance for Answer --></div>
+            </div>
         </div>
     </div>
 

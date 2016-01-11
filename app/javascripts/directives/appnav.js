@@ -18,7 +18,15 @@ angular.module('kuato')
 
             //--------------------------------------------------------------------------//
             // STATE INDEPENDENT SCOPE  -  Functionality required regardless of state   //
-            //--------------------------------------------------------------------------//
+            //--------------------------------------------------------------------------//'
+
+                $scope.$on('NEW_CARD', function(){
+                    $('.appnav__search > label').text("New Card");
+                });
+
+                $scope.$on('CANCEL_CARD', function(){
+                   $('.appnav__search > label').text("Kuato");
+                });
 
                 // Logs user out and redirects to 'login' state
                 $scope.logout = function(){
