@@ -11,6 +11,12 @@ html, body {
 
 // COMPONENTS
 
+
+.app__container {
+  @include flex-col;
+}
+
+
 // Login BEGIN
 
 .login__background {
@@ -483,156 +489,126 @@ html, body {
 // DashBoard END //
 //---------------//
 
-/////////////////
-// Card BEGIN ///
-/////////////////
+//-------------------------------//
+// Card BEGIN                    //
+//-------------------------------//
 
-// Container for new state (invoked from DashBoard)
-.card__wrapper--new {
-  @include flex-col;
-  @include flex-center;
-  @include card(3);
 
-  display: block;
-  position: fixed;
-  top: 56px;
-  height: 100%;
-  width: 100%;
-  z-index: 20;
-  box-sizing: border-box;
-  background-color: $background;
-
-  // Animations
-  &.ng-animate {
-    background-color: red;
-    color: red;
-  }
-
-  &.ng-enter {
-    @include slideInDown;
-  }
-
-  &.ng-leave {
-    @include slideOutUp;
-  }
-
-}
-
-// Cards Staging Area
-.cards__stage {
-  @include flex-col;
-  @include flex-center;
-
-  position: fixed;
-  z-index: 100;
-
-  background-color: $background;
-  width: 100%;
-  height: 100%;
-  overflow: scroll;
-}
-
+// Provides opacity mask for background content
 .cards__mask {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
-  z-index: 3;
+  z-index: 4;
   width: 100vw;
   height: 100vh;
-  background: $background;
+  background-color: #9E9E9E;
+  opacity: 0.75;
+  transition: all .3s;
 }
 
-.cardnav__container--mobile {
-  @include flex-row;
-  @include flex-center;
-  @include dropshadow(1);
+
+// Holds the Q & A cards
+.cards__stage {
+  transition: all .3s;
+  // Should be flex row on tablet and up.
+  @include dropshadow(4);
 
   position: fixed;
-  top: 56px;
   z-index: 5;
+  width: 100%;  // TODO - This needs to be more like 70% on tablet and up.
+  //height: 100%;
+  top: 56px;
+
+  // This block centers it
+  left: 50%;
+  transform: translate(-50%, 0);
+
+  padding: 16px;
+  box-sizing: border-box;
+
+  background-color: $offwhite;
+  border-radius: 2px;
+}
+
+
+.deck__selection__wrapper {
+  @include flex-row;
+  @include flex-center;
+  flex-wrap: nowrap;
+
   width: 100%;
-  height: 40px;
-  //border: 1px solid #dddddd;
-  //border-radius: 2px;
-  background-color: $white;
+  max-width: 320px;
+
+  .selectize-input {
+    border-radius: 2px 0 0 2px;
+  }
 
   button {
-    &:focus {
-      background-color: $offwhite--accent;
-    }
+    height: 36px;
+    width: 80px;
+    outline: none;
+    border: 1px solid #018A6A;
+    border-radius: 0 2px 2px 0px;
+    margin-top: -4px;
+    padding: 0 8px;
+
+    background-color: $primary;
+    color: $white;
   }
 }
 
-.card__question__label {
-  text-align: center;
-  font-family: 'Source Serif Pro';
-  font-size: 36px;
+
+.card__wrapper {
+  @include flex-col; // TODO - This should be a flex-row on tablet and larger...
+  width: 100%;
 }
 
-.card__answer__label {
-  text-align: center;
-  font-family: 'Source Serif Pro';
-  font-size: 36px;
-}
-
-.cardnav__question {
-  height: 100%;
-  width: 33%;
-  border: none;
-  outline: none;
-  background: none;
-  flex: 1 1 auto;
-  border-right: 1px solid #dddddd;
-
-  &.active {
-    background-color: $offwhite;
-  }
-}
-
-.cardnav__answer {
-  height: 100%;
-  width: 33%;
-  border: none;
-  outline: none;
-  background: none;
-  flex: 1 1 auto;
-  border-right: 1px solid #dddddd;
-
-  &.active {
-    background-color: $offwhite;
-  }
-}
-
-.cardnav__save {
-  height: 100%;
-  width: 33%;
-  border: none;
-  outline: none;
-  background: none;
-  //color: $primary;
-  flex: 1 1 auto;
-}
-
-// Cards Plural
-.cards__container {
-  @include flex-col;
-  @include flex-center;
-
-  position: absolute;
-
-  width: 100vw;
-  // TODO: Add a max-width
-  //height: 100%;
-  padding: 8px;
-  margin-top: 64px;
-  margin-bottom: 8px;
-  box-sizing: border-box;
-  overflow: scroll;
-}
 
 .card__container {
+  @include flex-col;
+
   width: 100%;
-  position: relative;
+  max-width: 336px; // TODO - This max-width could be set in tablet and larger
+
+  h1 {
+    font-family: 'Source Serif Pro';
+  }
+
+  .card__editprev {
+    @include dropshadow(1);
+
+    width: 100%;
+    height: 40px;
+    position: relative;
+    z-index: 2;
+    padding: 0;
+    box-sizing: border-box;
+
+    outline: none;
+    border: none;
+    border-radius: 2px 2px 0 0;
+
+    background-color: $white;
+    color: $text--primary;
+    text-align: center;
+  }
+
+  .card--preview {
+    @include flex-col;
+    @include dropshadow(1);
+
+    width: 100%;
+    min-height: 300px;
+    position: relative;
+    z-index: 2;
+    padding: 8px 16px;
+    box-sizing: border-box;
+    overflow: scroll;
+    border-radius: 0 0 2px 2px;
+
+    background-color: $white;
+  }
 
   .CodeMirror {
     @include card(1);
@@ -641,6 +617,7 @@ html, body {
 
     border-radius: 0 0 2px 2px;
     width: 100%;
+    height: 400px;
     box-sizing: border-box;
     padding: 8px 4px;
     margin: auto;
@@ -652,51 +629,15 @@ html, body {
   }
 }
 
-#questionMirrorTarget {
-  .CodeMirror, button {
-    z-index: 2;
-  }
-}
 
-#answerMirrorTarget {
-  .CodeMirror, button {
-    z-index: 2;
-  }
-}
+//-------------------------------//
+// Card END                      //
+//-------------------------------//
 
-.card__editprev {
-  @include dropshadow(1);
 
+.deck__selection {
   width: 100%;
-  height: 40px;
-  position: relative;
-  z-index: 2;
-  padding: 0;
-  box-sizing: border-box;
-
-  outline: none;
-  border: none;
-  border-radius: 2px 2px 0 0;
-
-  background-color: $white;
-  color: $text--primary;
-  text-align: center;
-}
-
-.card--preview {
-  @include flex-col;
-  @include dropshadow(1);
-
-  width: 100%;
-  min-height: 300px;
-  position: relative;
-  z-index: 2;
-  padding: 8px 16px;
-  box-sizing: border-box;
-  overflow: scroll;
-  border-radius: 0 0 2px 2px;
-
-  background-color: $white;
+  max-width: 278px;
 }
 
 .card__index__container {
@@ -1232,27 +1173,89 @@ and (min-device-width: 601px) {
     margin-bottom: 16px;
   }
 
-  .cardnav__container--mobile {
-    display: none;
+  .cards__stage {
+    width: 75%;
+    min-height: 85%;
+    top: 72px;
+    padding: 40px 16px 16px 16px;
+    border-radius: 8px;
+  }
+
+
+  .card__wrapper {
+    @include flex-row;
+    @include flex-center-self;
+    justify-content: center;
+    width: 100%;
+    max-width: 768px;
   }
 
   .card__container {
     @include flex-col;
 
-    width: 336px;
-    height: auto;
-    min-height: 560px;
-    margin-right: 16px;
-  }
+    &:first-of-type {
+      margin-right: 16px;
+    }
 
-  .cards__container {
-    @include flex-col;
-    @include flex-center;
-
-    position: relative;
-    margin-top: 64px;
     width: 100%;
-    justify-content: center;
+    max-width: 336px; // TODO - This max-width could be set in tablet and larger
+
+    h1 {
+      font-family: 'Source Serif Pro';
+    }
+
+    .card__editprev {
+      @include dropshadow(1);
+
+      width: 100%;
+      height: 40px;
+      position: relative;
+      z-index: 2;
+      padding: 0;
+      box-sizing: border-box;
+
+      outline: none;
+      border: none;
+      border-radius: 2px 2px 0 0;
+
+      background-color: $white;
+      color: $text--primary;
+      text-align: center;
+    }
+
+    .card--preview {
+      @include flex-col;
+      @include dropshadow(1);
+
+      width: 100%;
+      min-height: 400px;
+      height: 90%;
+      position: relative;
+      z-index: 2;
+      padding: 8px 16px;
+      box-sizing: border-box;
+      overflow: scroll;
+      border-radius: 0 0 2px 2px;
+
+      background-color: $white;
+    }
+
+    .CodeMirror {
+      @include card(1);
+
+      position: relative;
+
+      border-radius: 0 0 2px 2px;
+      width: 100%;
+      box-sizing: border-box;
+      padding: 8px 4px;
+      margin: auto;
+
+      font-family: 'Source Code Pro', serif;
+      font-size: 13px;
+      font-weight: 600;
+
+    }
   }
 
   .card__question__label {

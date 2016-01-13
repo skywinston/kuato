@@ -44,7 +44,7 @@
                         View Cards
                     </button>
                     <button class="deck__studybtn__mobile"
-                            ng-click="studyDecks(deck.id)"
+                            ng-click="studyDecks([deck.id])"
                             ng-disabled="queuedForStudy.length"
                             ng-class="{'disabled': queuedForStudy.length}">
                         Study Now

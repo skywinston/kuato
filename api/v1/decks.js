@@ -3,6 +3,7 @@ var router = express.Router();
 var knex = require('../../db/knex');
 var pg = require('pg');
 var jwt = require('jsonwebtoken');
+var shuffle = require('../../lib/shuffle');
 
 router.get('/', function (req, res) {
     //console.log("get to /");
@@ -86,6 +87,27 @@ router.get('/deck/:id', function (req, res) {
         .then( function (result) {
             console.log(result);
             res.json(result[0]);
+        });
+});
+
+
+router.post('/study', function (req, res) {
+    var promises = req.body.decks.map(function(deckId){
+        return knex('cards').where('deck_id', '=', deckId);
+    });
+    return Promise.all(promises)
+        .then(function(results){
+            // This gives us an array with sub-arrays with cards matched by deck_id
+
+            // We flatten this into a single array to prep for shuffling
+            var output = results.reduce( function (flatArr, nestedArr) {
+                flatArr = flatArr.concat(nestedArr);
+                return flatArr;
+            }, []);
+
+            var output = shuffle(output);
+
+            res.json(output);
         });
 });
 

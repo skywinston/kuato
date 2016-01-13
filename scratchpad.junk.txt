@@ -52,3 +52,298 @@ Each deck looks like... an array of however many cards are in that deck
 
 []     <- (Literally an empty array)
 
+
+---
+ORIGINAL GUTS OF NEW-DECK ATTRIBUTE DIRECTIVE:
+
+// Handles the creation of a new card with no existing values passed in.
+                function newCard () {
+                    GlobalState.setState(STATE['NEW_CARD']);
+                    $rootScope.$broadcast('NEW_CARD');
+
+
+                    // If we are given a deck id in the attributes, we know that we are creating a new card
+                    // using the "add a card to this deck" option in the deck header of card index view
+                    if (attrs.deck_id) {
+                        GlobalState.setTransition(TRANSITION['CARD_INDEX->NEW_CARD']);
+                    } else {
+                        GlobalState.setTransition(TRANSITION['DECK_INDEX->NEW_CARD']);
+                    }
+
+
+                    // Determine transitions based on current state
+                    switch (GlobalState.getTransition()) {
+                        case TRANSITION['DECK_INDEX->NEW_CARD'] :
+                        case TRANSITION['STUDY->NEW_CARD'] :
+                            // Get handles on the button elements
+                            var $label = elem.find('span');
+                            var $button = elem.find('svg');
+
+
+                            // Animate button rotation and label value changes
+                            $label.text('Cancel Card');
+                            $button.velocity({
+                                rotateZ: "225deg"
+                            });
+
+                            var cardWithDeckId = "<kuato-card deck-id=attrs[deckId]></kuato-card>";
+                            $compile(cardWithDeckId)(scope.$new(true));
+                            break;
+
+                    }
+
+                } // END newCard()
+
+
+                // Handle editing operations on existing cards
+                function editCard () {
+
+                    // Log the transition in Global State
+                    if (GlobalState.getState() == STATE['CARD_INDEX']) {
+                        GlobalState.setTransition(TRANSITION['CARD_INDEX->VIEW_CARD']);
+                    } else if (GlobalState.getState() == STATE['STUDYING']) {
+                        GlobalState.setTransition(TRANSITION['STUDY->EDIT_CARD']);
+                        $rootScope.$broadcast(TRANSITION['STUDY->EDIT_CARD']);
+                    }
+
+
+                    // Check the card-id attr again... (prob dont need to do this twice)
+                    if (attrs.cardId) {
+                        // Instantiate Isolate Scope & template.
+                        var cardScope = scope.$new(true);
+                        var template = "<kuato-card></kuato-card>";
+
+                        // Fetch the data unique to this card
+                        CardFactory.one(attrs.cardId)
+                            .then(function (response) {
+
+                                // Declare state on the scope...
+                                var card = response.data;
+                                cardScope.navFocus = 'question';
+                                cardScope.questionEdit = true;
+                                cardScope.answerEdit = true;
+
+                                // ...passing in current values of card from the db
+                                for (var prop in card) {
+                                    cardScope[prop] = card[prop];
+                                }
+
+                                // and compile the directive passing in the scope
+                                $compile(template)(cardScope);
+                                // TO -> new-card.js - kuatoCard
+                            });
+                    }
+                } //--  END editCard()  --//
+
+
+                // Cancel creation of new card, broadcast event to propagate scope destruction and elem removal
+                function cancelCard () {
+
+                    // Which State are we returning to?
+                    switch (GlobalState.getTransition()) {
+                        case TRANSITION['STUDY->EDIT_CARD'] :
+                            console.log("Broadcast Transition: EDIT_CARD -> STUDY");
+                            GlobalState.setState(STATE['STUDYING']);
+                            break;
+                    }
+
+                    // Get handles on the button elements
+                    var $label = elem.find('span');
+                    var $button = elem.find('svg');
+
+                    // Reverse rotate button & swap label value
+                    $label.text('Add Card');
+                    $button.velocity({
+                        rotateZ: "-0deg"
+                    });
+
+                    // Emit event from rootScope to trigger deletion of new-card DOM node & scope
+                    $rootScope.$broadcast('CANCEL_CARD');
+                }
+
+// OLD CARD.HTML
+<div class="cards__container">
+
+        <div class="deck__selection"></div>
+        <button ng-click="saveCard()">Save</button> <!-- TODO - Move this to under the Answer Card -->
+
+        <div class="row">
+            <div class="card__container">
+                <h1 class="card__question__label">Question</h1>
+                <button class="card__editprev" ng-click="previewQ()" ng-show="questionEdit">Preview</button>
+                <button class="card__editprev" ng-click="editQ()" ng-hide="questionEdit">Edit</button>
+                <div id="questionPreviewTarget" class="card--preview" ng-show="!questionEdit"></div>
+                <div id="questionMirrorTarget" ng-show="questionEdit"><!-- CodeMirror Instance for Question --></div>
+            </div>
+
+            <div class="card__container">
+                <h1 class="card__answer__label">Answer</h1>
+                <button class="card__editprev" ng-click="previewA()" ng-show="answerEdit">Preview</button>
+                <button class="card__editprev" ng-click="editA()" ng-hide="answerEdit">Edit</button>
+                <div id="answerPreviewTarget" class="card--preview" ng-show="!answerEdit"></div>
+                <div id="answerMirrorTarget" ng-show="answerEdit"><!-- CodeMirror Instance for Answer --></div>
+            </div>
+        </div>
+
+</div>
+<div class="cards__mask"></div> <!-- Used to provide a fade-in background on animation start -->
+
+// OLD CARD.CSS
+ .cardnav__container--mobile {
+   @include flex-row;
+   @include flex-center;
+   @include dropshadow(1);
+
+   position: fixed;
+   top: 56px;
+   z-index: 5;
+   width: 100%;
+   height: 40px;
+   //border: 1px solid #dddddd;
+   //border-radius: 2px;
+   background-color: $white;
+
+   button {
+     &:focus {
+       background-color: $offwhite--accent;
+     }
+   }
+ }
+
+ .card__question__label {
+   text-align: center;
+   font-family: 'Source Serif Pro';
+   font-size: 36px;
+ }
+
+ .card__answer__label {
+   text-align: center;
+   font-family: 'Source Serif Pro';
+   font-size: 36px;
+ }
+
+ .cardnav__question {
+   height: 100%;
+   width: 33%;
+   border: none;
+   outline: none;
+   background: none;
+   flex: 1 1 auto;
+   border-right: 1px solid #dddddd;
+
+   &.active {
+     background-color: $offwhite;
+   }
+ }
+
+ .cardnav__answer {
+   height: 100%;
+   width: 33%;
+   border: none;
+   outline: none;
+   background: none;
+   flex: 1 1 auto;
+   border-right: 1px solid #dddddd;
+
+   &.active {
+     background-color: $offwhite;
+   }
+ }
+
+ .cardnav__save {
+   height: 100%;
+   width: 33%;
+   border: none;
+   outline: none;
+   background: none;
+   //color: $primary;
+   flex: 1 1 auto;
+ }
+
+ // Cards Plural
+ .cards__container {
+   @include flex-col;
+   @include flex-center;
+
+   position: fixed;
+   top: 0;
+   z-index: 4;
+
+   width: 100vw;
+   // TODO: Add a max-width
+   height: 100vh;
+   padding: 8px;
+   margin-top: 64px;
+   margin-bottom: 8px;
+   box-sizing: border-box;
+   overflow: scroll;
+ }
+
+ .card__container {
+   width: 100%;
+   position: relative;
+
+   .CodeMirror {
+     @include card(1);
+
+     position: relative;
+
+     border-radius: 0 0 2px 2px;
+     width: 100%;
+     box-sizing: border-box;
+     padding: 8px 4px;
+     margin: auto;
+
+     font-family: 'Source Code Pro', serif;
+     font-size: 13px;
+     font-weight: 600;
+
+   }
+ }
+
+ #questionMirrorTarget {
+   .CodeMirror, button {
+     z-index: 2;
+   }
+ }
+
+ #answerMirrorTarget {
+   .CodeMirror, button {
+     z-index: 2;
+   }
+ }
+
+ .card__editprev {
+   @include dropshadow(1);
+
+   width: 100%;
+   height: 40px;
+   position: relative;
+   z-index: 2;
+   padding: 0;
+   box-sizing: border-box;
+
+   outline: none;
+   border: none;
+   border-radius: 2px 2px 0 0;
+
+   background-color: $white;
+   color: $text--primary;
+   text-align: center;
+ }
+
+ .card--preview {
+   @include flex-col;
+   @include dropshadow(1);
+
+   width: 100%;
+   min-height: 300px;
+   position: relative;
+   z-index: 2;
+   padding: 8px 16px;
+   box-sizing: border-box;
+   overflow: scroll;
+   border-radius: 0 0 2px 2px;
+
+   background-color: $white;
+ }

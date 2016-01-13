@@ -34,10 +34,29 @@ angular.module('kuato')
             }.bind(this));
         },
 
+        update: function (updates) {
+            return $http({
+                method: "PATCH",
+                url: "/api/v1/decks/update/" + updates.id,
+                updates: updates
+            }).then(function (response) {
+                this.index.push(response.data);
+                return response;
+            }.bind(this));
+        },
+
         getOne: function (deckId) {
             return $http({
                 method: "GET",
                 url: "/api/v1/decks/deck/" + deckId
+            });
+        },
+
+        study: function (deckArray) {
+            return $http({
+                method: "POST",
+                url: '/api/v1/decks/study',
+                data: {decks: deckArray}
             });
         }
 

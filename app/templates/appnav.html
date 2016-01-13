@@ -27,7 +27,8 @@
         </div>
         <div ng-click="backToDeckIndex()" class="appnav__backToDeckIndex" ng-if="state === 'CARD_INDEX'">
             <i class="material-icons md-48">chevron_left</i>
-            <label>{{activeDeck}}</label>
+            <label ng-show="state == 'CARD_INDEX'">All Decks</label>
+            <label ng-show="state == 'SHOW_CARD'">{{activeDeck}}</label>
         </div>
         <div class="appnav__search" ng-class="{'disabled': cardFormVisible}">
             <!--<i class="material-icons">search</i>-->

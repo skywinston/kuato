@@ -1,11 +1,10 @@
 angular.module('kuato')
     .constant('STATE', {
         'DECK_INDEX': 'DECK_INDEX',
-        'NEW_CARD': 'NEW_CARD',
-        'CANCEL_CARD': 'CANCEL_CARD',
+        'SHOW_CARD': 'SHOW_CARD',
+        'REMOVE_CARD': 'REMOVE_CARD',
         'CARD_INDEX': 'CARD_INDEX',
-        'STUDYING_QUESTION': 'STUDYING_QUESTION',
-        'STUDYING_ANSWER': 'STUDYING_ANSWER'
+        'STUDYING': 'STUDYING'
     })
     .constant('TRANSITION', {
         // Initial loading of Deck Index
@@ -15,10 +14,12 @@ angular.module('kuato')
         'DECK_INDEX->CARD_INDEX': 'DECK_INDEX->CARD_INDEX',
         'CARD_INDEX->DECK_INDEX': 'CARD_INDEX->DECK_INDEX',
 
+        // REMOVE THE CARD FROM VIEW
+        'REMOVE_CARD': 'REMOVE_CARD',
+
         // Create/cancel new card from the deck index view
-        'DECK_INDEX->NEW_CARD': 'DECK_INDEX->NEW_CARD',
-        'CANCEL_NEW_CARD->DECK_INDEX': 'CANCEL_NEW_CARD->DECK_INDEX',
-        'CREATE_NEW_CARD->DECK_INDEX': 'CREATE_NEW_CARD->DECK_INDEX',
+        'DECK_INDEX->SHOW_CARD': 'DECK_INDEX->SHOW_CARD',
+        'SHOW_CARD->DECK_INDEX': 'SHOW_CARD->DECK_INDEX',
 
         // Create/cancel new card from the card index view
         'CARD_INDEX->NEW_CARD': 'CARD_INDEX->NEW_CARD',
@@ -34,8 +35,8 @@ angular.module('kuato')
         'EDIT_CARD->CARD_INDEX': 'EDIT_CARD->CARD_INDEX',
 
         // Begin Studying from the deck index or the card index
-        'DECK_INDEX->STUDYING': 'DECK_INDEX->STUDYING',
-        'CARD_INDEX->STUDYING': 'CARD_INDEX->STUDYING',
+        'DECK_INDEX->STUDY': 'DECK_INDEX->STUDY',
+        'CARD_INDEX->STUDY': 'CARD_INDEX->STUDY',
 
         // During Study
         'STUDY->EDIT_CARD': 'STUDY->EDIT_CARD',

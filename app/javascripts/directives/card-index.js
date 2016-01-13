@@ -26,6 +26,7 @@ angular.module('kuato')
             // Scope to pass to template when compiling
             var cardScope = scope.$new(true, scope);
             // TODO - if we pass tags or study-date data in the future, include that here
+            cardScope.deckId = card.deck_id;
             cardScope.cardId = card.id;
             cardScope.question = card.question;
             cardScope.rating = card.rating;

@@ -18,15 +18,8 @@ angular.module('kuato')
 
             //--------------------------------------------------------------------------//
             // STATE INDEPENDENT SCOPE  -  Functionality required regardless of state   //
-            //--------------------------------------------------------------------------//'
+            //--------------------------------------------------------------------------//
 
-                $scope.$on('NEW_CARD', function(){
-                    $('.appnav__search > label').text("New Card");
-                });
-
-                $scope.$on('CANCEL_CARD', function(){
-                   $('.appnav__search > label').text("Kuato");
-                });
 
                 // Logs user out and redirects to 'login' state
                 $scope.logout = function(){
@@ -44,21 +37,35 @@ angular.module('kuato')
             // STATE BASED WATCHERS -  Changes behavior based on state                  //
             //--------------------------------------------------------------------------//
 
-                $scope.$on('CANCEL_CARD', function () {
-                    $scope.state = GlobalState.getState();
-                    console.log("STATE after cancel card in appnav.js controller");
-                    console.log($scope.state);
+
+                $scope.$on('REMOVE_CARD', function () {
+                    buttonActive(false, 'Kuato', 'New Card');
+                });
+
+                $scope.$on('DECK_INDEX->SHOW_CARD', function (event) {
+                    buttonActive(true, 'New Card', 'Cancel Card');
+                });
+
+                $scope.$on(TRANSITION['STUDY->EDIT_CARD'], function () {
+
                 });
 
 
+                // Utility function to handle state/value changes
+                function buttonActive (boolean, stateLabel, buttonLabel) {
+                    // Get handles on button elements
+                    var $label = $('.appnav__addcard > span');
+                    var $button = $('.appnav__addcard > svg');
 
-            //--------------------------------------------------------//
-            // DECK INDEX  -  Logic specific to this state goes here  //
-            //--------------------------------------------------------//
 
+                    // Saved animation that rotates the mini-add-card-FAB in the appnav
+                    boolean == true ? $button.velocity({rotateZ: "225deg"}) : $button.velocity({rotateZ: "0deg"});
 
-                
-                
+                    $('.appnav__search > label').text(stateLabel);
+
+                    $label.text(buttonLabel);
+                }
+
 
 
             //--------------------------------------------------------//
@@ -78,50 +85,13 @@ angular.module('kuato')
                 };
 
 
-                // Initialize card form visible
-                $scope.cardFormVisible = false;
-
-
-                // Renders a new card form.
-                $scope.newCard = function () {
-
-                    // Toggle visibility on container element
-                    $scope.cardFormVisible = !$scope.cardFormVisible;
-                    // todo — ng-if is not triggering ng-animate classes... why not?
-
-
-                    if (GlobalState.getState() == STATE['DECK_INDEX']) {
-
-                        // Get handles on button elements
-                        var $label = $('.appnav__addcard > span');
-                        var $button = $('.appnav__addcard > svg');
-
-                        // Saved animation that rotates the mini-add-card-FAB in the appnav
-                        var rotatePlusBtn = $button.velocity({
-                            rotateZ: "225deg"
-                        });
-
-                        $label.text('Cancel Card');
-                        rotatePlusBtn();
-
-                    } else if (GlobalState.getState() == STATE['CANCEL_CARD'] && GlobalState.getPrevState() == 'NEW_CARD') {
-
-                        $label.text('Add Card');
-                        $button.velocity({
-                            rotateZ: "-0deg"
-                        });
-
-                    }
-
-                };
-
-
                 // CREATE new card
                 $scope.createCard = function () {
                     console.log($scope.test); // Should have 2-way binding to child directive <kuato-card>
                 }
 
-            }
+
+            } // END controller //
         };
 
 }]);
