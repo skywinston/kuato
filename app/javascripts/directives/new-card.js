@@ -20,9 +20,11 @@ angular.module('kuato')
                             renderCard();
                             break;
                         case STATE['CARD_INDEX'] :
+                            $rootScope.$broadcast(TRANSITION['CARD_INDEX->SHOW_CARD']);
                             renderCard();
                             break;
                         case STATE['STUDYING'] :
+                            $rootScope.$broadcast(TRANSITION['STUDY->SHOW_CARD']);
                             renderCard();
                             break;
                         case STATE['SHOW_CARD'] :
@@ -86,6 +88,10 @@ angular.module('kuato')
                             scope.answerEdit = true;
                         }
                     });
+            // No card is passed in so we assume it a new card, therefore, show the editor.
+            } else {
+                scope.questionEdit = true;
+                scope.answerEdit = true;
             }
 
         //---------------------------------------------------//

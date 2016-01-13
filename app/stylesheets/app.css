@@ -484,14 +484,16 @@ html, body {
 .cards__stage {
   transition: all .3s;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.22), 0 14px 56px rgba(0, 0, 0, 0.25);
-  position: fixed;
+  position: absolute;
   z-index: 5;
   width: 100%;
   top: 56px;
+  overflow: scroll;
   left: 50%;
   transform: translate(-50%, 0);
   padding: 16px;
   box-sizing: border-box;
+  margin-bottom: 16px;
   background-color: #e9e9e9;
   border-radius: 2px; }
 

@@ -514,11 +514,12 @@ html, body {
   // Should be flex row on tablet and up.
   @include dropshadow(4);
 
-  position: fixed;
+  position: absolute;
   z-index: 5;
   width: 100%;  // TODO - This needs to be more like 70% on tablet and up.
   //height: 100%;
   top: 56px;
+  overflow: scroll;
 
   // This block centers it
   left: 50%;
@@ -526,6 +527,7 @@ html, body {
 
   padding: 16px;
   box-sizing: border-box;
+  margin-bottom: 16px;
 
   background-color: $offwhite;
   border-radius: 2px;

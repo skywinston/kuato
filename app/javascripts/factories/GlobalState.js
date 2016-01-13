@@ -22,7 +22,7 @@ angular.module('kuato')
         'SHOW_CARD->DECK_INDEX': 'SHOW_CARD->DECK_INDEX',
 
         // Create/cancel new card from the card index view
-        'CARD_INDEX->NEW_CARD': 'CARD_INDEX->NEW_CARD',
+        'CARD_INDEX->SHOW_CARD': 'CARD_INDEX->SHOW_CARD',
         'CANCEL_NEW_CARD->CARD_INDEX': 'CANCEL_NEW_CARD->CARD_INDEX',
         'CREATE_NEW_CARD->CARD_INDEX': 'CREATE_NEW_CARD->CARD_INDEX',
 
@@ -39,7 +39,7 @@ angular.module('kuato')
         'CARD_INDEX->STUDY': 'CARD_INDEX->STUDY',
 
         // During Study
-        'STUDY->EDIT_CARD': 'STUDY->EDIT_CARD',
+        'STUDY->SHOW_CARD': 'STUDY->SHOW_CARD',
         'EDIT_CARD->STUDY': 'EDIT_CARD->STUDY',
         'RATE_CARD_1': 'RATE_CARD_1',
         'RATE_CARD_2': 'RATE_CARD_2',
