@@ -1198,6 +1198,10 @@ and (max-device-width: 600px) {
 @media only screen
 and (min-device-width: 601px) {
 
+  .end_studying {
+    margin-left: 72px;
+  }
+
   .appnav__menubtn__container {
     border-right: 1px solid $primary--accent--dark;
     box-shadow: 1px 0 0 0 $primary--accent--light;
@@ -1737,5 +1741,8 @@ and (min-device-width: 601px) {
       }
     }
   } // END STUDY COMPONENT
+
+
+
 } // END TABLET BREAKPOINT
 
