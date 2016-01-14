@@ -1289,6 +1289,7 @@ html, body {
       z-index: 2;
       padding: 8px 16px;
       box-sizing: border-box;
+      overflow: scroll;
       border-radius: 0 0 2px 2px;
       background-color: #FAFAFA; }
     .card__container .CodeMirror {
@@ -1475,6 +1476,12 @@ html, body {
         border-radius: 2px; }
 
   .deck__header__component {
-    padding-top: 24px; } }
+    padding-top: 24px; }
+
+  .login__title {
+    margin-top: 72px; }
+
+  .login__byline {
+    margin-bottom: 24px; } }
 
 /*# sourceMappingURL=app.css.map */
