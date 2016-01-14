@@ -545,7 +545,8 @@ html, body {
 
 .deck__header__container {
   display: flex;
-  flex-flow: column;
+  flex-flow: row;
+  flex-wrap: wrap;
   align-items: center;
   box-shadow: 0 3px 12px rgba(0, 0, 0, 0.23), 0 3px 12px rgba(0, 0, 0, 0.16);
   position: absolute;
@@ -573,7 +574,6 @@ html, body {
   z-index: 5;
   width: 100%;
   top: 56px;
-  overflow: scroll;
   left: 50%;
   transform: translate(-50%, 0);
   padding: 16px;
@@ -675,7 +675,7 @@ html, body {
   flex-wrap: wrap;
   min-width: 100%;
   max-width: 768px;
-  padding: 24px 8px 8px 8px;
+  padding: 8px 8px 8px 16px;
   box-sizing: border-box; }
   .deck__header__component h1 {
     font-family: 'Source Serif Pro', serif;
@@ -687,7 +687,11 @@ html, body {
     font-size: 18px;
     font-weight: normal;
     color: #9E9E9E;
-    margin: 0; }
+    margin: 0;
+    margin-bottom: 8px; }
+  .deck__header__component a {
+    text-decoration: underline;
+    color: #019875; }
 
 .deck__header__title {
   display: flex;
@@ -1285,7 +1289,6 @@ html, body {
       z-index: 2;
       padding: 8px 16px;
       box-sizing: border-box;
-      overflow: scroll;
       border-radius: 0 0 2px 2px;
       background-color: #FAFAFA; }
     .card__container .CodeMirror {
@@ -1469,6 +1472,9 @@ html, body {
         color: #FAFAFA;
         font-size: 24px;
         font-weight: bolder;
-        border-radius: 2px; } }
+        border-radius: 2px; }
+
+  .deck__header__component {
+    padding-top: 24px; } }
 
 /*# sourceMappingURL=app.css.map */

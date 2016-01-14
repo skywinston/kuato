@@ -526,7 +526,7 @@ html, body {
 // Deck Header Component
 
 .deck__header__container {
-  @include flex-col;
+  @include flex-row;
   @include flex-center;
   @include dropshadow(2);
 
@@ -575,7 +575,7 @@ html, body {
   width: 100%;  // TODO - This needs to be more like 70% on tablet and up.
   //height: 100%;
   top: 56px;
-  overflow: scroll;
+  //overflow: scroll;
 
   // This block centers it
   left: 50%;
@@ -713,7 +713,7 @@ html, body {
   @include flex-row;
   min-width: 100%;
   max-width: 768px;
-  padding: 24px 8px 8px 8px;
+  padding: 8px 8px 8px 16px;
   box-sizing: border-box;
 
   h1 {
@@ -729,6 +729,12 @@ html, body {
     font-weight: normal;
     color: $text--secondary;
     margin: 0;
+    margin-bottom: 8px;
+  }
+
+  a {
+    text-decoration: underline;
+    color: $primary;
   }
 }
 
@@ -1746,7 +1752,9 @@ and (min-device-width: 601px) {
     }
   } // END STUDY COMPONENT
 
-
+  .deck__header__component {
+    padding-top: 24px;
+  }
 
 } // END TABLET BREAKPOINT
 
