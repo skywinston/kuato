@@ -14,7 +14,7 @@
 
         <div class="deck__wrapper" ng-repeat="(id, deck) in decks">
 
-            <div class="deck__container" ng-if="deck.cards.length">
+            <div class="deck__container" ng-if="deck.cards.length > 0">
                 <div class="deck__checkbox--unselected select-deck-for-study" ng-click="toggleStudyThisDeck($event, deck.id)"></div>
                 <h3 class="deck__title--mobile">{{deck.title}}</h3>
                 <div class="deck__infotext">
@@ -60,7 +60,7 @@
                         <h3 class="deck__title--tablet">{{deck.title}}</h3>
                         <p class="deck__timestamp">What's a deck without some cards? &nbsp;</p>
                     </div>
-                    <button class="deck__addcards__mobile" ng-click="viewDeck(deck.id)"
+                    <button class="deck__addcards__mobile" ng-click="viewDeck(deck.id, $event)"
                             ng-disabled="queuedForStudy.length"
                             ng-class="{'disabled': queuedForStudy.length}">
                         Add Some Cards

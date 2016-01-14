@@ -380,6 +380,7 @@ html, body {
     margin-right: 4px; }
 
 .newdeck__container {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.23), 0 10px 40px rgba(0, 0, 0, 0.19);
   position: absolute;
   z-index: 6;
   top: 56px;
@@ -390,9 +391,47 @@ html, body {
   min-height: 80px;
   max-width: 624px;
   background-color: #FAFAFA; }
+  .newdeck__container.ng-show {
+    -webkit-animation-duration: .3s;
+    animation-duration: .3s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    animation-timing-function: cubic-bezier(0.55, 0, 0.1, 1);
+    -webkit-animation-name: slideInDown;
+    animation-name: slideInDown; }
+  .newdeck__container.ng-hide {
+    -webkit-animation-duration: .3s;
+    animation-duration: .3s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    animation-timing-function: cubic-bezier(0.55, 0, 0.1, 1);
+    -webkit-animation-name: slideOutUp;
+    animation-name: slideOutUp; }
   .newdeck__container input {
     border: 1px solid #e9e9e9;
-    padding: 4px; }
+    padding: 4px 8px;
+    box-sizing: border-box;
+    height: 40px;
+    width: 100%;
+    max-width: 304px;
+    margin-bottom: 16px;
+    outline: none; }
+  .newdeck__container .deck__buttongroup__mobile {
+    width: 100%;
+    margin-bottom: 8px; }
+    .newdeck__container .deck__buttongroup__mobile button {
+      outline: none;
+      border: none;
+      height: 40px;
+      color: #FAFAFA;
+      width: 50%; }
+    .newdeck__container .deck__buttongroup__mobile button.newdeck__cancel {
+      border-radius: 2px 0 0 2px;
+      background-color: #e74e3c;
+      border-right: 1px solid #FAFAFA; }
+    .newdeck__container .deck__buttongroup__mobile button.newdeck__save {
+      border-radius: 0 2px 2px 0;
+      background-color: #019875; }
 
 .neckdeck__container .ng-hide-animate {
   -webkit-animation-duration: .3s;
@@ -636,7 +675,7 @@ html, body {
   flex-wrap: wrap;
   min-width: 100%;
   max-width: 768px;
-  padding-top: 24px;
+  padding: 24px 8px 8px 8px;
   box-sizing: border-box; }
   .deck__header__component h1 {
     font-family: 'Source Serif Pro', serif;

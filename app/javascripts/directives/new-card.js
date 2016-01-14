@@ -186,10 +186,6 @@ angular.module('kuato')
 
                     CardFactory.update(updates)
                         .then(function (response) {
-                            console.log("Did the card get updated?");
-                            console.log(response.data);
-
-
                             // If the update was made while studying we need to update the card currently being
                             // studied with the new info.
                             if (GlobalState.getPrevState() == STATE['STUDYING']) {
@@ -211,21 +207,14 @@ angular.module('kuato')
                         newCard.studied = false;
                         CardFactory.create(newCard)
                             .then(function (response) {
-                                console.log("Response in the ctrl after POST to create new card");
-                                console.log(response.data);
-
-                                console.log("Check the deck index to see if it has an updated card in it");
-                                console.log(Deck.index);
                                 $rootScope.$broadcast(TRANSITION['REMOVE_CARD']);
                             });
                     } else {
                         // The deck does not exist, so we save it to the DB, and then save the card with the new deck id
                         Deck.create(selected)
                             .then(function (response) {
-                                console.log("Show the response object from the original call to create a new deck: ");
-                                console.log(response.data);
 
-                                // TODO - Create the card object and send it with the deck id from the above response.data obj
+                                // Create the card object and send it with the deck id from the above response.data obj
                                 var newCard = {};
                                 newCard.deck_id = response.data.id;
                                 newCard.question = questionMirror.getValue();
@@ -234,11 +223,6 @@ angular.module('kuato')
                                 newCard.studied = false;
                                 CardFactory.create(newCard)
                                     .then(function (response) {
-                                        console.log("Response after creating new deck and THEN creating new card");
-                                        console.log(response.data);
-
-                                        // TODO - Remove the card upon successful save
-                                        console.log(Deck.index);
                                         $rootScope.$broadcast(TRANSITION['REMOVE_CARD']);
                                     })
                             });
@@ -297,7 +281,6 @@ angular.module('kuato')
                 $select[0].selectize.setValue(scope.deckId);
             }
 
-            console.log("Context in scope", scope);
             // If there is a context-attribute, then we know exactly which element it came from
             if (scope.context == 'preview-card') {
                 // We could do context-aware animations from these conditionals
@@ -353,12 +336,8 @@ angular.module('kuato')
             url: "/api/v1/cards",
             data: card
         }).then( function (response) {
-            console.log("response in the CardFactory.create method");
-            console.log(response.data);
             // Get handle on target deck in the index
             var target = Deck.index[response.data.deck_id];
-            console.log("What does the target deck look like?");
-            console.log(target);
             // Check to see if the cards deck has a cards array
             if (target.hasOwnProperty("cards")){
                 // The cards array exists!  Push the newly created card into the proper deck in the Deck index.
@@ -368,7 +347,7 @@ angular.module('kuato')
                 target.cards.push(response.data);
             }
             if (target.hasOwnProperty("ratings")){
-                target.ratings.new++;
+                target.ratings["new"]++;
             }
             return response;
         })

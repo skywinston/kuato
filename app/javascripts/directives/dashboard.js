@@ -6,10 +6,11 @@ angular.module('kuato')
     "$state",
     "$location",
     "$rootScope",
+    "$timeout",
     "GlobalState",
     "STATE",
     "TRANSITION",
-    function (AuthToken, Deck, Choreographer, $state, $location, $rootScope, GlobalState, STATE, TRANSITION) {
+    function (AuthToken, Deck, Choreographer, $state, $location, $rootScope, $timeout, GlobalState, STATE, TRANSITION) {
 
             return {
                 restrict: "E",
@@ -19,6 +20,14 @@ angular.module('kuato')
 
                     GlobalState.setState(STATE['DECK_INDEX']);
                     $rootScope.$broadcast('DECK_INDEX');
+
+
+                    // Listen for card changes to apply new scope
+                    $scope.$on('REMOVE_CARD', function () {
+                        $timeout(function(){
+                            $scope.decks = Deck.index;
+                        });
+                    });
 
 
                     // Initialize scope with fetching of all deck resources

@@ -336,6 +336,15 @@ html, body {
 
 // New Deck Component
 .newdeck__container {
+  @include dropshadow(3);
+
+  &.ng-show {
+    @include slideInDown;
+  }
+
+  &.ng-hide {
+    @include slideOutUp;
+  }
 
   position: absolute;
   z-index: 6;
@@ -352,7 +361,37 @@ html, body {
 
   input {
     border: 1px solid $offwhite;
-    padding: 4px;
+    padding: 4px 8px;
+    box-sizing: border-box;
+    height: 40px;
+    width: 100%;
+    max-width: 304px;
+    margin-bottom: 16px;
+    outline: none;
+  }
+
+  .deck__buttongroup__mobile {
+    width: 100%;
+    margin-bottom: 8px;
+
+    button {
+      outline: none;
+      border: none;
+      height: 40px;
+      color: $white;
+      width: 50%;
+    }
+
+    button.newdeck__cancel {
+      border-radius: 2px 0 0 2px;
+      background-color: #e74e3c;
+      border-right: 1px solid $white;
+    }
+
+    button.newdeck__save {
+      border-radius: 0 2px 2px 0;
+      background-color: $primary;
+    }
   }
 }
 
@@ -674,7 +713,7 @@ html, body {
   @include flex-row;
   min-width: 100%;
   max-width: 768px;
-  padding-top: 24px;
+  padding: 24px 8px 8px 8px;
   box-sizing: border-box;
 
   h1 {
