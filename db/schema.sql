@@ -17,7 +17,7 @@ CREATE TABLE decks (
 
 CREATE TABLE cards (
     id serial primary key,
-    deck_id integer references decks(id),
+    deck_id integer references decks(id) on delete cascade,
     question varchar(5000),
     answer varchar(5000),
     rating int,

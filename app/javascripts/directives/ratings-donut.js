@@ -40,7 +40,6 @@ angular.module('kuato')
             // Convert data passed in back to JSON
             var json = JSON.parse(scope.ratings);
             scope.stats = JSON.parse(scope.ratings);
-            console.log(scope);
 
             // Get the card count
             var cardCount = 0;

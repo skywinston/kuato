@@ -128,10 +128,19 @@ router.post('/', function (req, res) {
 
     // TODO - What if deck title already exists?  Look for error code sent back from db and catch it.
     return knex('decks')
-        .insert({owner: userId, title: req.body.title})
+        .insert({owner: userId, title: req.body.title, studied: moment()._d.toString()})
         .returning('*')
         .then(function (result) {
-            result[0].ratings = null;
+            var readableTimeStamp = moment(result[0].studied).format("MMMM Do YYYY");
+
+            result[0].ratings = {
+                "1": 0,
+                "2": 0,
+                "3": 0,
+                "new": 0
+            };
+            result[0].cards = [];
+            result[0].studied = readableTimeStamp;
             res.json(result[0]);
         });
 });

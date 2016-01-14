@@ -29,7 +29,10 @@ angular.module('kuato')
                 contentType: "application/json",
                 data: {title: deckTitle}
             }).then(function (response) {
-                this.index.push(response.data);
+                console.log("what does a new deck look like?");
+                console.log(response);
+                // bind the new deck object to the deck index.
+                this.index[response.data.id] = response.data;
                 return response;
             }.bind(this));
         },
