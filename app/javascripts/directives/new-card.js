@@ -74,6 +74,12 @@ angular.module('kuato')
             // Sets State to SHOW_CARD
             GlobalState.setState(STATE['SHOW_CARD']);
 
+
+            // Get click listener on elem.cards__mask div to remove card (tablet and up)
+            elem.find('.cards__mask').on('click', function () {
+                $rootScope.$broadcast('REMOVE_CARD');
+            });
+
             // If a card id is present on scope, fetch it
             if (scope.cardId) {
                 CardFactory.one(scope.cardId)
