@@ -117,7 +117,7 @@ angular.module('kuato')
                 maintainAspectRatio: false,
 
                 //String - A legend template
-                legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><strong><%if(segments[i].value){%><%=segments[i].value%><%}%></strong><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>"
+                legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><strong><%if(segments[i].value){%><%=segments[i].value%><%}%><%if(!segments[i].value){%><%=0%><%}%></strong><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>"
             };
 
 
