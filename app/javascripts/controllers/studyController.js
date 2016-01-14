@@ -45,6 +45,15 @@ angular.module('kuato')
         });
 
 
+        // Listen for clicks on the study-card questions and answers to toggle their visibility
+        $scope.$on('SHOW_ANSWER', function () {
+           $scope.showAnswer = true;
+        });
+        $scope.$on('HIDE_ANSWER', function() {
+            $scope.showAnswer = false;
+        });
+
+
         // Function to compile <kuato-card></kuato-card> directive using active card for scope
         function renderCard () {
             // Prep template & scope

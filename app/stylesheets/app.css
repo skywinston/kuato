@@ -108,6 +108,40 @@
   -webkit-animation-name: slideOutLeft;
   animation-name: slideOutLeft; }
 
+@keyframes zoomOut {
+  from {
+    opacity: 1; }
+  50% {
+    opacity: 0;
+    -webkit-transform: scale3d(0.3, 0.3, 0.3);
+    transform: scale3d(0.3, 0.3, 0.3); }
+  to {
+    opacity: 0; } }
+.zoomOut {
+  -webkit-animation-duration: .3s;
+  animation-duration: .3s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  animation-timing-function: cubic-bezier(0.55, 0, 0.1, 1);
+  -webkit-animation-name: zoomOut;
+  animation-name: zoomOut; }
+
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    -webkit-transform: scale3d(0.3, 0.3, 0.3);
+    transform: scale3d(0.3, 0.3, 0.3); }
+  50% {
+    opacity: 1; } }
+.zoomIn {
+  -webkit-animation-duration: .3s;
+  animation-duration: .3s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  animation-timing-function: cubic-bezier(0.55, 0, 0.1, 1);
+  -webkit-animation-name: zoomIn;
+  animation-name: zoomIn; }
+
 html, body {
   font-family: "Source Sans Pro", sans-serif;
   background-color: #e0e0e0;
@@ -756,22 +790,6 @@ html, body {
 .study__component {
   display: flex;
   flex-flow: column; }
-  .study__component.ng-add-hide {
-    -webkit-animation-duration: .3s;
-    animation-duration: .3s;
-    -webkit-animation-fill-mode: both;
-    animation-fill-mode: both;
-    animation-timing-function: cubic-bezier(0.55, 0, 0.1, 1);
-    -webkit-animation-name: slideInDown;
-    animation-name: slideInDown; }
-  .study__component.ng-add-show {
-    -webkit-animation-duration: .3s;
-    animation-duration: .3s;
-    -webkit-animation-fill-mode: both;
-    animation-fill-mode: both;
-    animation-timing-function: cubic-bezier(0.55, 0, 0.1, 1);
-    -webkit-animation-name: slideInUp;
-    animation-name: slideInUp; }
   .study__component .cards_to_study_wrapper {
     width: 100%;
     padding: 8px;
@@ -796,11 +814,30 @@ html, body {
       margin: 0;
       outline: none;
       background-color: #FAFAFA; }
+  .study__component .study__preview__container {
+    display: flex;
+    flex-flow: column;
+    box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.24), 0 1.5px 6px rgba(0, 0, 0, 0.12);
+    border-radius: 2px;
+    background-color: #FAFAFA;
+    width: 100%;
+    height: 100%;
+    padding: 16px;
+    box-sizing: border-box;
+    margin-right: 16px;
+    margin-bottom: 16px; }
   .study__component .study__ratings__component {
     display: flex;
     flex-flow: column;
     align-items: center;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.23), 0 10px 40px rgba(0, 0, 0, 0.19);
+    box-shadow: 0 15px 24px rgba(0, 0, 0, 0.22), 0 19px 76px rgba(0, 0, 0, 0.3);
+    -webkit-animation-duration: .3s;
+    animation-duration: .3s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    animation-timing-function: cubic-bezier(0.55, 0, 0.1, 1);
+    -webkit-animation-name: slideInUp;
+    animation-name: slideInUp;
     position: fixed;
     width: 100%;
     bottom: 0;
@@ -808,6 +845,14 @@ html, body {
     padding: 16px 16px 24px 16px;
     box-sizing: border-box;
     background-color: #FAFAFA; }
+    .study__component .study__ratings__component.ng-hide {
+      -webkit-animation-duration: .3s;
+      animation-duration: .3s;
+      -webkit-animation-fill-mode: both;
+      animation-fill-mode: both;
+      animation-timing-function: cubic-bezier(0.55, 0, 0.1, 1);
+      -webkit-animation-name: slideOutDown;
+      animation-name: slideOutDown; }
     .study__component .study__ratings__component h3 {
       font-family: "Source Serif Pro", serif;
       margin: 8px; }
@@ -842,6 +887,28 @@ html, body {
     font-family: 'Source Serif Pro', serif;
     padding-left: 8px;
     margin: 20px 0 12px 0; }
+  .study__component .study__card.study__card--answer {
+    position: absolute;
+    top: 136px;
+    left: 8px;
+    right: 8px;
+    margin-bottom: 128px; }
+    .study__component .study__card.study__card--answer.ng-show {
+      -webkit-animation-duration: .3s;
+      animation-duration: .3s;
+      -webkit-animation-fill-mode: both;
+      animation-fill-mode: both;
+      animation-timing-function: cubic-bezier(0.55, 0, 0.1, 1);
+      -webkit-animation-name: slideInUp;
+      animation-name: slideInUp; }
+  .study__component .study__card.hidden {
+    -webkit-animation-duration: .3s;
+    animation-duration: .3s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    animation-timing-function: cubic-bezier(0.55, 0, 0.1, 1);
+    -webkit-animation-name: zoomOut;
+    animation-name: zoomOut; }
 
 @media screen and (max-device-width: 399px) {
   .deck__title--tablet {

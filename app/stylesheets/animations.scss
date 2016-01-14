@@ -148,3 +148,53 @@
 .slideOutLeft {
   @include slideOutLeft;
 }
+
+
+@keyframes zoomOut {
+  from {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+    -webkit-transform: scale3d(.3, .3, .3);
+    transform: scale3d(.3, .3, .3);
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@mixin zoomOut {
+  @include animated;
+  -webkit-animation-name: zoomOut;
+  animation-name: zoomOut;
+}
+
+.zoomOut {
+  @include zoomOut;
+}
+
+
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    -webkit-transform: scale3d(.3, .3, .3);
+    transform: scale3d(.3, .3, .3);
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+@mixin zoomIn {
+  @include animated;
+  -webkit-animation-name: zoomIn;
+  animation-name: zoomIn;
+}
+
+.zoomIn {
+  @include zoomIn;
+}

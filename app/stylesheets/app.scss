@@ -898,16 +898,6 @@ html, body {
 .study__component {
   @include flex-col;
 
-  // ANIMATION CLASSES
-  &.ng-add-hide {
-    @include slideInDown;
-  }
-
-  &.ng-add-show {
-    @include slideInUp;
-  }
-
-
   .cards_to_study_wrapper {
     width: 100%;
     padding: 8px;
@@ -939,10 +929,33 @@ html, body {
     }
   }
 
+
+  .study__preview__container {
+    @include flex-col;
+    @include card(1);
+
+    background-color: $white;
+    width: 100%;
+    height: 100%;
+    padding: 16px;
+    box-sizing: border-box;
+    margin-right: 16px;
+    margin-bottom: 16px;
+  }
+
+
+
   .study__ratings__component {
     @include flex-col;
     @include flex-center;
-    @include dropshadow(3);
+    @include dropshadow(5);
+
+    // animation classes
+    @include slideInUp;
+    &.ng-hide {
+      @include slideOutDown;
+    }
+
 
     position: fixed;
     width: 100%;
@@ -1000,6 +1013,26 @@ html, body {
       font-family: 'Source Serif Pro', serif;
       padding-left: 8px;
       margin: 20px 0 12px 0;
+    }
+
+    &.study__card--answer {
+      position: absolute;
+      top: 136px;
+
+    // This mimics the padding provided by the parent were this element not positioned absolutely //
+      left: 8px;
+      right: 8px;
+      margin-bottom: 128px;
+    //-----------//
+
+      &.ng-show {
+        @include slideInUp;
+      }
+    }
+
+
+    &.hidden {   // TODO - Omit this on tablet and larger
+      @include zoomOut;
     }
   }
 } // END STUDY COMPONENT

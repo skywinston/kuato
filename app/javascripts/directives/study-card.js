@@ -34,6 +34,15 @@ angular.module('kuato')
         });
 
         scope.showAnswer = false;
+
+
+        // If a ques is clicked, emit showAnswer to parent elem
+        scope.revealAnswer = function () {
+            $rootScope.$broadcast('SHOW_ANSWER');
+        };
+        scope.hideAnswer = function () {
+            $rootScope.$broadcast('HIDE_ANSWER');
+        };
     }
 
     return {
