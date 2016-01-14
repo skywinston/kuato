@@ -6,13 +6,13 @@ angular.module('kuato')
                         '<div class="deck__stats">' +
                             '<section class="deck__schedule">' +
                                 '<table>' +
+                                    //'<tr>' +
+                                    //    '<td><strong>2</strong></td>' + // Give this a scope parameter for due
+                                    //    '<td><i class="material-icons">notifications</i></td>' +
+                                    //    '<td>Due</td>' +
+                                    //'</tr>' +
                                     '<tr>' +
-                                        '<td><strong>2</strong></td>' + // Give this a scope parameter for due
-                                        '<td><i class="material-icons">notifications</i></td>' +
-                                        '<td>Due</td>' +
-                                    '</tr>' +
-                                    '<tr>' +
-                                        '<td><strong>1</strong></td>' +  // Give this a scope parameter for new
+                                        '<td><strong>{{stats.new}}</strong></td>' +  // Give this a scope parameter for new
                                         '<td><i class="material-icons">star</i></td>' +
                                         '<td>New</td>' +
                                     '</tr>' +
@@ -39,6 +39,8 @@ angular.module('kuato')
 
             // Convert data passed in back to JSON
             var json = JSON.parse(scope.ratings);
+            scope.stats = JSON.parse(scope.ratings);
+            console.log(scope);
 
             // Get the card count
             var cardCount = 0;

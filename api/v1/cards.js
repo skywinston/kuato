@@ -20,6 +20,21 @@ router.get('/:id', function (req, res) {
         });
 });
 
+router.post('/', function (req, res) {
+    console.log("Req received at POST to cards");
+    return knex('cards')
+        .insert({
+            deck_id: req.body.deck_id,
+            question: req.body.question,
+            answer: req.body.answer,
+            rating: req.body.rating,
+            studied: req.body.studied
+        }, "*")
+        .then(function (response) {
+            res.json(response[0]);
+        });
+});
+
 
 router.post('/update/:id', function (req, res) {
     console.log(req.body);
@@ -45,6 +60,8 @@ router.post('/update/:id', function (req, res) {
             }
         });
 });
+
+
 
 module.exports = router;
 

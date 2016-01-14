@@ -28,7 +28,8 @@ router.get('/', function (req, res) {
                 deck.ratings = {
                     "1": 0,
                     "2": 0,
-                    "3": 0
+                    "3": 0,
+                    "new": 0
                 };
                 index[deck.id] = deck;
                 promises.push(knex('cards').where('deck_id', '=', deck.id));
@@ -60,6 +61,8 @@ router.get('/', function (req, res) {
                         case 3:
                             index[deck[0].deck_id].ratings["3"]++;
                             break;
+                        case 0:
+                            index[deck[0].deck_id].ratings["new"]++;
                     }
                 });
             });
@@ -138,11 +141,10 @@ router.post('/update/:id', function (req, res) {
     console.log("POST request received at /update/:id");
 
     return knex('decks')
-        .where('id', '=', req,params.id)
+        .where('id', req.params.id)
         .update({
             studied: req.body.studied
-        })
-        .returning('*')
+        }, "*")
         .then(function (updates) {
             res.json(updates);
         });

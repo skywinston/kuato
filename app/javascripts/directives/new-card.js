@@ -105,6 +105,8 @@ angular.module('kuato')
                     });
             // No card is passed in so we assume it a new card, therefore, show the editor.
             } else {
+                // There is no card, so activeCard must be represented by a blank object.
+                scope.activeCard = {};
                 scope.questionEdit = true;
                 scope.answerEdit = true;
             }
@@ -171,8 +173,8 @@ angular.module('kuato')
                 var selected = $select[0].value;
                 console.log(selected);
 
-                // If the returned id is already in the Deck.index, update it.
-                if (Deck.index.hasOwnProperty(selected)) {
+                // If the returned id is already in the Deck.index & the card has an idea, update it.
+                if (Deck.index.hasOwnProperty(selected) && scope.activeCard.id) {
                     console.log("Deck ID found!");
                     // build PATCH data object
                     var updates = {};
@@ -197,6 +199,25 @@ angular.module('kuato')
                             // Upon successful update, remove the card elem directive
                             $rootScope.$broadcast(TRANSITION['REMOVE_CARD']);
                         });
+                } else if (Object.keys(scope.activeCard).length == 0) {
+                    // We know the card is new, but is the deck?
+                    if (Deck.index.hasOwnProperty(selected)) {
+                        // The deck exists already, so we need to create the Card with this existing deck's id as the deck_id
+                        var newCard = {};
+                        newCard.deck_id = selected;
+                        newCard.question = questionMirror.getValue();
+                        newCard.answer = answerMirror.getValue();
+                        newCard.rating = 0;
+                        newCard.studied = false;
+                        CardFactory.create(newCard)
+                            .then(function (response) {
+                                console.log("Response in the ctrl after POST to create new card");
+                                console.log(response.data);
+
+                                console.log("Check the deck index to see if it has an updated card in it");
+                                console.log(Deck.index);
+                            });
+                    }
                 }
 
             };
@@ -272,7 +293,8 @@ angular.module('kuato')
     return {
         fetch: fetch,
         one: one,
-        update: update
+        update: update,
+        create: create
     };
 
     function fetch () {
@@ -291,11 +313,25 @@ angular.module('kuato')
         }).then(function (response) {
             // Search the Deck index by deck_id and replace the updated card in the cards array
             Deck.index[response.data.deck_id].cards.forEach(function (card, i, arr) {
-                if (card.id = response.data.id) {
+                if (card.id == response.data.id) {
                     arr[i] = response.data;
                 }
             });
 
+            return response;
+        })
+    }
+
+    function create (card) {
+        return $http({
+            method: "POST",
+            url: "/api/v1/cards",
+            data: card
+        }).then( function (response) {
+            console.log("response in the CardFactory.create method");
+            console.log(response.data);
+            // Push the newly created card into the proper deck in the Deck index.
+            Deck.index[response.data.deck_id].cards.push(response.data);
             return response;
         })
     }
