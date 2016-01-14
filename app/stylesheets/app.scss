@@ -699,6 +699,7 @@ html, body {
 }
 
 .card__preview__content {
+  overflow: hidden;
   :first-child {
     margin-top: 0;
   }
@@ -1015,26 +1016,48 @@ html, body {
       margin: 20px 0 12px 0;
     }
 
-    &.study__card--answer {
-      position: absolute;
-      top: 136px;
-
-    // This mimics the padding provided by the parent were this element not positioned absolutely //
-      left: 8px;
-      right: 8px;
-      margin-bottom: 128px;
-    //-----------//
-
-      &.ng-show {
-        @include slideInUp;
-      }
+    &.hidden--mobile {
+      display: none;
     }
 
+    &.study__card--answer {
+      margin-bottom: 124px;
+    }
 
-    &.hidden {   // TODO - Omit this on tablet and larger
-      @include zoomOut;
+  }
+
+
+  .end_studying_session {
+    @include slideInDown;
+    @include card(2);
+    width: 100%;
+    background-color: $white;
+    padding: 16px;
+    box-sizing: border-box;
+
+    h1 {
+      font-family: "Source Serif Pro", serif;
+    }
+
+    h3 {
+      font-family: "Source Sans Pro", sans-serif;
+      font-size: 24px;
+      font-weight: lighter;
+    }
+
+    button {
+      outline: none;
+      border: none;
+      width: 100%;
+      height: 48px;
+      padding: 8px 16px;
+      background-color: $primary;
+      color: $white;
+      font-size: 16px;
+      border-radius: 2px;
     }
   }
+
 } // END STUDY COMPONENT
 
 
@@ -1357,6 +1380,11 @@ and (min-device-width: 601px) {
     margin-bottom: 16px;
   }
 
+  .card__preview__content {
+    overflow: hidden;
+    height: 200px;
+  }
+
   .cards__stage {
     width: 75%;
     min-height: 85%;
@@ -1450,4 +1478,206 @@ and (min-device-width: 601px) {
     text-align: right;
     margin-left: auto;
   }
-}
+
+  //--------------------------//
+  // STUDY COMPONENTS         //
+  //--------------------------//
+
+
+  .study__component {
+    @include flex-col;
+
+    .cards_to_study_wrapper {
+      @include flex-col;
+      @include flex-center;
+      width: 100%;
+      padding: 8px;
+      box-sizing: border-box;
+    }
+
+
+    .study__nav {
+      @include flex-row;
+      @include flex-center;
+
+      outline: none;
+      border: 1px solid #d0d0d0;
+      width: 512px;
+
+      button:first-of-type {
+        border: none;
+        border-radius: 2px 0 0 2px;
+        border-right: 1px solid #d0d0d0;
+      }
+
+      button {
+        border: none;
+        border-radius: 0 2px 2px 0;
+        height: 48px;
+        width: 50%;
+        padding: 8px;
+        margin:0;
+        outline: none;
+        background-color: $white;
+      }
+    }
+
+
+    .study__cards__container {
+      @include flex-row;
+      justify-content: center;
+    }
+
+
+    .study__preview__container {
+      @include flex-col;
+      @include card(1);
+
+      background-color: $white;
+      width: 100%;
+      height: 100%;
+      padding: 16px;
+      box-sizing: border-box;
+      margin-right: 16px;
+      margin-bottom: 16px;
+    }
+
+
+
+    .study__ratings__component {
+      @include flex-col;
+      @include flex-center;
+      box-shadow: none;
+
+      // animation classes
+      @include slideInUp;
+      &.ng-hide {
+        @include slideOutDown;
+      }
+
+      background: none;
+      position: fixed;
+      width: 100%;
+      bottom: 0;
+      left: 0;
+
+
+      .study__ratings__component__wrapper {
+        @include dropshadow(5);
+        @include flex-col;
+        margin: auto;
+
+        min-width: 512px;
+        padding: 16px 16px 24px 16px;
+        box-sizing: border-box;
+        border-radius: 8px;
+        background-color: $white;
+
+        h3 {
+          font-family: "Source Serif Pro", serif;
+          margin: 12px;
+          //text-align: center;
+        }
+
+        .button-group {
+          @include flex-row;
+          @include flex-center;
+          overflow: hidden;
+          border-radius: 2px;
+          width: 100%;
+          height: 40px;
+
+          button {
+            outline: none;
+            border: none;
+            padding: 8px 16px;
+            flex: 1 0 auto;
+          }
+
+          button:nth-of-type(1) {
+            border-radius: 2px 0 0 2px;
+            background-color: #019875;
+            color: $white;
+            margin-right: 1px; // gives a gap between colors
+          }
+
+          button:nth-of-type(2) {
+            background-color: #1380b1;
+            color: $white;
+            margin-right: 1px; // gives a gap between colors
+          }
+
+          button:nth-of-type(3) {
+            border-radius: 0 2px 2px 0;
+            background-color: #e74e3c;
+            color: $white;
+          }
+        }
+      }
+    }
+
+
+    .study__card {
+      @include flex-col;
+      min-width: 334px;
+      max-width: 336px;
+
+      &:first-of-type {
+        margin-right: 16px;
+      }
+
+      h1 {
+        font-family: 'Source Serif Pro', serif;
+        padding-left: 8px;
+        margin: 20px 0 12px 0;
+
+        &.answer {
+          text-align: right;
+        }
+      }
+
+      &.hidden--mobile {
+        display: flex;
+      }
+
+      &.study__card--answer, &.study__card--question {
+        margin-bottom: 128px;
+      }
+    }
+
+
+    .end_studying_session {
+      @include slideInDown;
+      @include card(2);
+      align-self: center;
+      width: 512px;
+      background-color: $white;
+      padding: 16px;
+      box-sizing: border-box;
+
+      h1 {
+        font-family: "Source Serif Pro", serif;
+      }
+
+      h3 {
+        font-family: "Source Sans Pro", sans-serif;
+        font-size: 24px;
+        font-weight: lighter;
+      }
+
+      button {
+        outline: none;
+        border: none;
+        width: 100%;
+        height: 64px;
+        padding: 8px 16px;
+        background-color: $primary;
+        color: $white;
+        font-size: 24px;
+        font-weight: bolder;
+        border-radius: 2px;
+      }
+    }
+  } // END STUDY COMPONENT
+} // END TABLET BREAKPOINT
+

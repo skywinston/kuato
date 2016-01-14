@@ -1,10 +1,10 @@
 <div class="study__cards__container">
-    <div class="study__card study__card--question" ng-class="{hidden: showAnswer == true}" ng-click="revealAnswer()">
+    <div class="study__card study__card--question" ng-class="{'hidden--mobile': showAnswer == true}" ng-click="revealAnswer()">
         <h1 class="question">Question</h1>
         <div class="study__preview__container" id="questionPreviewTarget"></div>
     </div>
 
-    <div class="study__card study__card--answer" ng-show="showAnswer" ng-click="hideAnswer()">
+    <div class="study__card study__card--answer" ng-show="showAnswer == true" ng-click="hideAnswer()">
         <h1 class="answer">Answer</h1>
         <div class="study__preview__container" id="answerPreviewTarget"></div>
     </div>

@@ -656,8 +656,10 @@ html, body {
   box-sizing: border-box;
   margin-bottom: 8px; }
 
-.card__preview__content :first-child {
-  margin-top: 0; }
+.card__preview__content {
+  overflow: hidden; }
+  .card__preview__content :first-child {
+    margin-top: 0; }
 
 .deck__title--tablet {
   margin: 0;
@@ -887,28 +889,40 @@ html, body {
     font-family: 'Source Serif Pro', serif;
     padding-left: 8px;
     margin: 20px 0 12px 0; }
+  .study__component .study__card.hidden--mobile {
+    display: none; }
   .study__component .study__card.study__card--answer {
-    position: absolute;
-    top: 136px;
-    left: 8px;
-    right: 8px;
-    margin-bottom: 128px; }
-    .study__component .study__card.study__card--answer.ng-show {
-      -webkit-animation-duration: .3s;
-      animation-duration: .3s;
-      -webkit-animation-fill-mode: both;
-      animation-fill-mode: both;
-      animation-timing-function: cubic-bezier(0.55, 0, 0.1, 1);
-      -webkit-animation-name: slideInUp;
-      animation-name: slideInUp; }
-  .study__component .study__card.hidden {
+    margin-bottom: 124px; }
+  .study__component .end_studying_session {
     -webkit-animation-duration: .3s;
     animation-duration: .3s;
     -webkit-animation-fill-mode: both;
     animation-fill-mode: both;
     animation-timing-function: cubic-bezier(0.55, 0, 0.1, 1);
-    -webkit-animation-name: zoomOut;
-    animation-name: zoomOut; }
+    -webkit-animation-name: slideInDown;
+    animation-name: slideInDown;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.23), 0 3px 12px rgba(0, 0, 0, 0.16);
+    border-radius: 2px;
+    width: 100%;
+    background-color: #FAFAFA;
+    padding: 16px;
+    box-sizing: border-box; }
+    .study__component .end_studying_session h1 {
+      font-family: "Source Serif Pro", serif; }
+    .study__component .end_studying_session h3 {
+      font-family: "Source Sans Pro", sans-serif;
+      font-size: 24px;
+      font-weight: lighter; }
+    .study__component .end_studying_session button {
+      outline: none;
+      border: none;
+      width: 100%;
+      height: 48px;
+      padding: 8px 16px;
+      background-color: #019875;
+      color: #FAFAFA;
+      font-size: 16px;
+      border-radius: 2px; }
 
 @media screen and (max-device-width: 399px) {
   .deck__title--tablet {
@@ -1157,6 +1171,10 @@ html, body {
     margin-right: 16px;
     margin-bottom: 16px; }
 
+  .card__preview__content {
+    overflow: hidden;
+    height: 200px; }
+
   .cards__stage {
     width: 75%;
     min-height: 85%;
@@ -1228,6 +1246,169 @@ html, body {
 
   .card__answer__label {
     text-align: right;
-    margin-left: auto; } }
+    margin-left: auto; }
+
+  .study__component {
+    display: flex;
+    flex-flow: column; }
+    .study__component .cards_to_study_wrapper {
+      display: flex;
+      flex-flow: column;
+      align-items: center;
+      width: 100%;
+      padding: 8px;
+      box-sizing: border-box; }
+    .study__component .study__nav {
+      display: flex;
+      flex-flow: row;
+      flex-wrap: wrap;
+      align-items: center;
+      outline: none;
+      border: 1px solid #d0d0d0;
+      width: 512px; }
+      .study__component .study__nav button:first-of-type {
+        border: none;
+        border-radius: 2px 0 0 2px;
+        border-right: 1px solid #d0d0d0; }
+      .study__component .study__nav button {
+        border: none;
+        border-radius: 0 2px 2px 0;
+        height: 48px;
+        width: 50%;
+        padding: 8px;
+        margin: 0;
+        outline: none;
+        background-color: #FAFAFA; }
+    .study__component .study__cards__container {
+      display: flex;
+      flex-flow: row;
+      flex-wrap: wrap;
+      justify-content: center; }
+    .study__component .study__preview__container {
+      display: flex;
+      flex-flow: column;
+      box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.24), 0 1.5px 6px rgba(0, 0, 0, 0.12);
+      border-radius: 2px;
+      background-color: #FAFAFA;
+      width: 100%;
+      height: 100%;
+      padding: 16px;
+      box-sizing: border-box;
+      margin-right: 16px;
+      margin-bottom: 16px; }
+    .study__component .study__ratings__component {
+      display: flex;
+      flex-flow: column;
+      align-items: center;
+      box-shadow: none;
+      -webkit-animation-duration: .3s;
+      animation-duration: .3s;
+      -webkit-animation-fill-mode: both;
+      animation-fill-mode: both;
+      animation-timing-function: cubic-bezier(0.55, 0, 0.1, 1);
+      -webkit-animation-name: slideInUp;
+      animation-name: slideInUp;
+      background: none;
+      position: fixed;
+      width: 100%;
+      bottom: 0;
+      left: 0; }
+      .study__component .study__ratings__component.ng-hide {
+        -webkit-animation-duration: .3s;
+        animation-duration: .3s;
+        -webkit-animation-fill-mode: both;
+        animation-fill-mode: both;
+        animation-timing-function: cubic-bezier(0.55, 0, 0.1, 1);
+        -webkit-animation-name: slideOutDown;
+        animation-name: slideOutDown; }
+      .study__component .study__ratings__component .study__ratings__component__wrapper {
+        box-shadow: 0 15px 24px rgba(0, 0, 0, 0.22), 0 19px 76px rgba(0, 0, 0, 0.3);
+        display: flex;
+        flex-flow: column;
+        margin: auto;
+        min-width: 512px;
+        padding: 16px 16px 24px 16px;
+        box-sizing: border-box;
+        border-radius: 8px;
+        background-color: #FAFAFA; }
+        .study__component .study__ratings__component .study__ratings__component__wrapper h3 {
+          font-family: "Source Serif Pro", serif;
+          margin: 12px; }
+        .study__component .study__ratings__component .study__ratings__component__wrapper .button-group {
+          display: flex;
+          flex-flow: row;
+          flex-wrap: wrap;
+          align-items: center;
+          overflow: hidden;
+          border-radius: 2px;
+          width: 100%;
+          height: 40px; }
+          .study__component .study__ratings__component .study__ratings__component__wrapper .button-group button {
+            outline: none;
+            border: none;
+            padding: 8px 16px;
+            flex: 1 0 auto; }
+          .study__component .study__ratings__component .study__ratings__component__wrapper .button-group button:nth-of-type(1) {
+            border-radius: 2px 0 0 2px;
+            background-color: #019875;
+            color: #FAFAFA;
+            margin-right: 1px; }
+          .study__component .study__ratings__component .study__ratings__component__wrapper .button-group button:nth-of-type(2) {
+            background-color: #1380b1;
+            color: #FAFAFA;
+            margin-right: 1px; }
+          .study__component .study__ratings__component .study__ratings__component__wrapper .button-group button:nth-of-type(3) {
+            border-radius: 0 2px 2px 0;
+            background-color: #e74e3c;
+            color: #FAFAFA; }
+    .study__component .study__card {
+      display: flex;
+      flex-flow: column;
+      min-width: 334px;
+      max-width: 336px; }
+      .study__component .study__card:first-of-type {
+        margin-right: 16px; }
+      .study__component .study__card h1 {
+        font-family: 'Source Serif Pro', serif;
+        padding-left: 8px;
+        margin: 20px 0 12px 0; }
+        .study__component .study__card h1.answer {
+          text-align: right; }
+      .study__component .study__card.hidden--mobile {
+        display: flex; }
+      .study__component .study__card.study__card--answer, .study__component .study__card.study__card--question {
+        margin-bottom: 128px; }
+    .study__component .end_studying_session {
+      -webkit-animation-duration: .3s;
+      animation-duration: .3s;
+      -webkit-animation-fill-mode: both;
+      animation-fill-mode: both;
+      animation-timing-function: cubic-bezier(0.55, 0, 0.1, 1);
+      -webkit-animation-name: slideInDown;
+      animation-name: slideInDown;
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.23), 0 3px 12px rgba(0, 0, 0, 0.16);
+      border-radius: 2px;
+      align-self: center;
+      width: 512px;
+      background-color: #FAFAFA;
+      padding: 16px;
+      box-sizing: border-box; }
+      .study__component .end_studying_session h1 {
+        font-family: "Source Serif Pro", serif; }
+      .study__component .end_studying_session h3 {
+        font-family: "Source Sans Pro", sans-serif;
+        font-size: 24px;
+        font-weight: lighter; }
+      .study__component .end_studying_session button {
+        outline: none;
+        border: none;
+        width: 100%;
+        height: 64px;
+        padding: 8px 16px;
+        background-color: #019875;
+        color: #FAFAFA;
+        font-size: 24px;
+        font-weight: bolder;
+        border-radius: 2px; } }
 
 /*# sourceMappingURL=app.css.map */

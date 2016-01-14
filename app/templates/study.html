@@ -13,11 +13,13 @@
         <div class="col" id="currentCardTarget"></div>
 
         <div class="study__ratings__component" ng-show="showAnswer == true">
-            <h3>Recalling the answer was:</h3>
-            <div class="button-group row">
-                <button ng-click="rateCard(1)">Easy</button>
-                <button ng-click="rateCard(2)">Medium</button>
-                <button ng-click="rateCard(3)">Hard</button>
+            <div class="study__ratings__component__wrapper">
+                <h3>Recalling the answer was:</h3>
+                <div class="button-group row">
+                    <button ng-click="rateCard(1)">Easy</button>
+                    <button ng-click="rateCard(2)">Medium</button>
+                    <button ng-click="rateCard(3)">Hard</button>
+                </div>
             </div>
         </div>
     </div>
