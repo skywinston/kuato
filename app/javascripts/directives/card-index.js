@@ -46,11 +46,20 @@ angular.module('kuato')
     };
 
 }])
-.directive('deckHeader', [function () {
+.directive('deckHeader', ["Deck", "$state", function (Deck, $state) {
 
     function link (scope, elem, attrs) {
         console.log("Scope in deck header element");
         console.log(scope);
+
+        scope.studyDeck = function (deckId) {
+            // Push id to array bc thats what study requires
+            var singleDeck = [];
+            singleDeck.push(deckId);
+            $state.go('study', {decks: singleDeck});
+        }
+
+
     }
 
     return {

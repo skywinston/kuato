@@ -2,9 +2,9 @@ INSERT INTO users VALUES
     (default, 'demo@kuato.com', '$2a$08$Saidu4Z5VkIdChZg78xqJOzuW.HwEaSGbmGy3C4HiKlSsMK1z3.sy');
 
 INSERT INTO decks VALUES
-    (default, 1, 'JavaScript'),
-    (default, 1, 'AngularJS'),
-    (default, 1, 'Express');
+    (default, 1, 'JavaScript', 'Wed Jan 13 2016 22:58:08 GMT-0700 (MST)'),
+    (default, 1, 'AngularJS', 'Wed Jan 13 2016 22:58:08 GMT-0700 (MST)'),
+    (default, 1, 'Express', 'Wed Jan 13 2016 22:58:08 GMT-0700 (MST)');
 
 INSERT INTO cards VALUES
     (default, 1, 'This is a sample question', 'This is a sample answer', 1, '12/24/15'),

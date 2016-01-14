@@ -5,11 +5,12 @@ angular.module('kuato')
     "Card",
     "Deck",
     "$state",
+    "$rootScope",
     "GlobalState",
     "$stateParams",
     "STATE",
     "TRANSITION",
-    function (AuthToken, User, Card, Deck, $state, GlobalState, $stateParams, STATE, TRANSITION) {
+    function (AuthToken, User, Card, Deck, $state, $rootScope, GlobalState, $stateParams, STATE, TRANSITION) {
         return {
             restrict: "E",
             templateUrl: './templates/appnav.html',
@@ -37,6 +38,10 @@ angular.module('kuato')
             // STATE BASED WATCHERS -  Changes behavior based on state                  //
             //--------------------------------------------------------------------------//
 
+
+                $scope.$on('DECK_INDEX', function () {
+                    $scope.state = GlobalState.getState();
+                });
 
                 $scope.$on('REMOVE_CARD', function () {
                     buttonActive(false, 'Kuato', 'New Card');
@@ -94,6 +99,11 @@ angular.module('kuato')
                 $scope.backToDeckIndex = function () {
                     GlobalState.setState(STATE['DECK_INDEX']);
                     $state.go('app');
+                };
+
+
+                $scope.endStudySession = function () {
+                    $rootScope.$broadcast('END_STUDYING');
                 };
 
 

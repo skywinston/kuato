@@ -1,7 +1,7 @@
 <!-- AppNav BEGIN -->
 <div class="appnav__container">
     <div class="appnav__bar">
-        <div ng-click="logout()" class="appnav__menubtn__container" ng-class="{'hidden': state === 'CARD_INDEX'}"> <!--  -->
+        <div ng-click="logout()" class="appnav__menubtn__container" ng-class="{'hidden': state === 'CARD_INDEX' || state === 'STUDYING'}"> <!--  -->
             <?xml version="1.0" encoding="UTF-8" standalone="no"?>
             <svg width="24px" height="21px" viewBox="0 0 24 21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
                 <!-- Generator: Sketch 3.4.2 (15855) - http://www.bohemiancoding.com/sketch -->
@@ -30,11 +30,15 @@
             <label ng-show="state == 'CARD_INDEX'">All Decks</label>
             <label ng-show="state == 'SHOW_CARD'">{{activeDeck}}</label>
         </div>
+        <div class="end_studying" ng-click="endStudySession()" ng-if="state === 'STUDYING'">
+            <i class="material-icons md-48">clear</i>
+            <label>End Studying</label>
+        </div>
         <div class="appnav__search" ng-class="{'disabled': cardFormVisible}">
             <!--<i class="material-icons">search</i>-->
 
             <!-- Using as Branding spot for now until search is implemented -->
-            <label ng-hide="state === 'CARD_INDEX'">Kuato</label>
+            <label ng-hide="state === 'CARD_INDEX' || state === 'STUDYING'">Kuato</label>
         </div>
         <div class="appnav__addcard" preview="false" card-operator> <!-- card id for testing purposes -->
             <span>New Card</span>

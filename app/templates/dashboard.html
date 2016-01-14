@@ -19,7 +19,7 @@
                 <h3 class="deck__title--mobile">{{deck.title}}</h3>
                 <div class="deck__infotext">
                     <h3 class="deck__title--tablet">{{deck.title}}</h3>
-                    <p class="deck__timestamp">Last studied on November 24th, 2015 &nbsp;</p>
+                    <p class="deck__timestamp">Last studied on {{deck.studied}} &nbsp;</p>
                     <span class="row">
                         <button class="deck__studybtn__tablet" ng-click="studyDecks(deck.id)"
                                 ng-disabled="queuedForStudy.length"

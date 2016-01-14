@@ -36,11 +36,13 @@ angular.module('kuato')
 
         update: function (updates) {
             return $http({
-                method: "PATCH",
+                method: "POST",
                 url: "/api/v1/decks/update/" + updates.id,
                 updates: updates
             }).then(function (response) {
-                this.index.push(response.data);
+                //this.index.push(response.data);
+                console.log("What comes back from a studied update?");
+                console.log(response.data);
                 return response;
             }.bind(this));
         },
@@ -59,6 +61,5 @@ angular.module('kuato')
                 data: {decks: deckArray}
             });
         }
-
     }
 }]);

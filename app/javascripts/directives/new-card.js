@@ -289,7 +289,6 @@ angular.module('kuato')
             url: "/api/v1/cards/update/" + updates.id,
             data: updates
         }).then(function (response) {
-            console.log("UPDATES TO CARD: ", response.data);
             // Search the Deck index by deck_id and replace the updated card in the cards array
             Deck.index[response.data.deck_id].cards.forEach(function (card, i, arr) {
                 if (card.id = response.data.id) {

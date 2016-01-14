@@ -18,6 +18,7 @@ angular.module('kuato')
                     if ( !AuthToken.getToken() ) { $state.go('login'); } // Guard clause for active user in local storage
 
                     GlobalState.setState(STATE['DECK_INDEX']);
+                    $rootScope.$broadcast('DECK_INDEX');
 
 
                     // Initialize scope with fetching of all deck resources

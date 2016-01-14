@@ -3,6 +3,7 @@ var router = express.Router();
 var knex = require('../../db/knex');
 var pg = require('pg');
 var jwt = require('jsonwebtoken');
+var moment = require('moment');
 var shuffle = require('../../lib/shuffle');
 
 router.get('/', function (req, res) {
@@ -18,6 +19,11 @@ router.get('/', function (req, res) {
             var promises = [];
 
             decks.forEach( function (deck) {
+
+                // Convert the last studied timestamp into human-readable format with moment.js
+                deck.studied = moment(deck.studied).format("MMMM Do YYYY");
+
+                // Initialize cards array and ratings counter
                 deck.cards = [];
                 deck.ratings = {
                     "1": 0,
@@ -37,6 +43,7 @@ router.get('/', function (req, res) {
             decksOfCards.forEach( function (deck) {
                 // If the deck has no cards, skip it
                 if (!deck.length) return;
+
 
                 // Bind each array of cards to their deck in the index object
                 index[deck[0].deck_id].cards = deck;
@@ -124,6 +131,22 @@ router.post('/', function (req, res) {
             result[0].ratings = null;
             res.json(result[0]);
         });
+});
+
+
+router.post('/update/:id', function (req, res) {
+    console.log("POST request received at /update/:id");
+
+    return knex('decks')
+        .where('id', '=', req,params.id)
+        .update({
+            studied: req.body.studied
+        })
+        .returning('*')
+        .then(function (updates) {
+            res.json(updates);
+        });
+
 });
 
 module.exports = router;

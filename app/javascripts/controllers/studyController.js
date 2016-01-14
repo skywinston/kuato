@@ -2,6 +2,8 @@ angular.module('kuato')
 .controller('studyCtrl', [
     "$scope",
     "$rootScope",
+    "$q",
+    "$http",
     "$compile",
     "$stateParams",
     "Deck",
@@ -9,9 +11,12 @@ angular.module('kuato')
     "GlobalState",
     "STATE",
     "$state",
-    function studyController ($scope, $rootScope, $compile, $stateParams, Deck, CardFactory, GlobalState, STATE, $state) {
+    function studyController ($scope, $rootScope, $q, $http, $compile, $stateParams, Deck, CardFactory, GlobalState, STATE, $state) {
         // Set Global State
         GlobalState.setState(STATE['STUDYING']);
+
+        // Bind queued decks to scope for reference when done studying (need to update last studied stat in db)
+        $scope.decksToStudy = $stateParams.decks;
 
         // Fetch cards for study
         Deck.study($stateParams.decks) // TO -> decks.js
@@ -51,6 +56,12 @@ angular.module('kuato')
         });
         $scope.$on('HIDE_ANSWER', function() {
             $scope.showAnswer = false;
+        });
+
+
+        // Listen for the premature end of studying from the appnav component
+        $scope.$on('END_STUDYING', function () {
+            $state.go('app');
         });
 
 
@@ -162,8 +173,31 @@ angular.module('kuato')
         };
 
         $scope.endStudying = function () {
-            // TODO - Check previous state of the world and return to that state
-            $state.go("app");
+            // Update all the decks we've just studied to reflect a new 'studied' date
+            console.log("Decks to Study");
+            console.log($scope.decksToStudy);
+            var updates = $scope.decksToStudy.map(function (deck) {
+                // Get handle on proper deck in Deck.index
+                var target = Deck.index[deck];
+                var timestamp = moment()._d.toString();
+                target.studied = timestamp;
+                console.log("Each deck ready for update");
+                console.log(target);
+                return $http({
+                    method: "POST",
+                    url: "/api/v1/decks/update/" + deck,
+                    data: target
+                });
+            });
+
+            console.log("Array of promises");
+            console.log(updates);
+            
+            $q.all(updates).then(function (response) {
+                console.log(response);
+                $state.go("app");
+            });
+
         };
 
 }]);

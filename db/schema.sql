@@ -11,7 +11,8 @@ CREATE TABLE users (
 CREATE TABLE decks (
     id serial primary key,
     owner int references users(id),
-    title varchar(80) UNIQUE
+    title varchar(80) UNIQUE,
+    studied varchar(100)
 );
 
 CREATE TABLE cards (
