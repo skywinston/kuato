@@ -653,6 +653,34 @@ html, body {
 }
 
 
+.deck__header__component {
+  @include flex-row;
+  min-width: 100%;
+  max-width: 768px;
+
+  h1 {
+    font-family: 'Source Serif Pro', serif;
+    font-size: 32px;
+    margin: 0;
+    margin-bottom: 8px;
+  }
+
+  h3 {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 18px;
+    font-weight: normal;
+    color: $text--secondary;
+    margin: 0;
+  }
+}
+
+
+.deck__header__title {
+  @include flex-col;
+  width: 100%;
+}
+
+
 // PREVIEW CARD COMPONENT //
 
 .card__preview__container {
@@ -708,7 +736,6 @@ html, body {
   width: 100%;
   border-radius: 2px;
   overflow: hidden;
-
 
 }
 
@@ -861,6 +888,127 @@ html, body {
   font-weight: 400;
   font-size: 24px;
 }
+
+
+//--------------------------//
+// STUDY COMPONENTS         //
+//--------------------------//
+
+
+.study__component {
+  @include flex-col;
+
+  // ANIMATION CLASSES
+  &.ng-add-hide {
+    @include slideInDown;
+  }
+
+  &.ng-add-show {
+    @include slideInUp;
+  }
+
+
+  .cards_to_study_wrapper {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+  }
+
+
+  .study__nav {
+    @include flex-row;
+    @include flex-center;
+    outline: none;
+    border: 1px solid #d0d0d0;
+
+    button:first-of-type {
+      border: none;
+      border-radius: 2px 0 0 2px;
+      border-right: 1px solid #d0d0d0;
+    }
+
+    button {
+      border: none;
+      border-radius: 0 2px 2px 0;
+      height: 40px;
+      width: 50%;
+      padding: 8px;
+      margin:0;
+      outline: none;
+      background-color: $white;
+    }
+  }
+
+  .study__ratings__component {
+    @include flex-col;
+    @include flex-center;
+    @include dropshadow(3);
+
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    padding: 16px 16px 24px 16px;
+    box-sizing: border-box;
+    background-color: $white;
+
+    h3 {
+      font-family: "Source Serif Pro", serif;
+      margin: 8px;
+    }
+
+    .button-group {
+      @include flex-row;
+      @include flex-center;
+      overflow: hidden;
+      border-radius: 2px;
+      width: 100%;
+      height: 40px;
+
+      button {
+        outline: none;
+        border: none;
+        padding: 8px 16px;
+        flex: 1 0 auto;
+      }
+
+      button:nth-of-type(1) {
+        border-radius: 2px 0 0 2px;
+        background-color: #019875;
+        color: $white;
+        margin-right: 1px; // gives a gap between colors
+      }
+
+      button:nth-of-type(2) {
+        background-color: #1380b1;
+        color: $white;
+        margin-right: 1px; // gives a gap between colors
+      }
+
+      button:nth-of-type(3) {
+        border-radius: 0 2px 2px 0;
+        background-color: #e74e3c;
+        color: $white;
+      }
+    }
+
+  }
+
+
+  .study__card {
+    h1 {
+      font-family: 'Source Serif Pro', serif;
+      padding-left: 8px;
+      margin: 20px 0 12px 0;
+    }
+  }
+} // END STUDY COMPONENT
+
+
+
+
+
+
 
 
 //-------------------------//
@@ -1137,12 +1285,13 @@ and (min-device-width: 601px) {
   }
 
   .deck__header__container {
-    @include flex-col;
+    @include flex-row;
     @include flex-center;
     @include dropshadow(2);
 
     position: absolute;
     top: 56px;
+    padding-left: 104px;
 
     background-color: $white;
     width: 100%;

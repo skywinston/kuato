@@ -178,8 +178,15 @@ angular.module('kuato')
 
                     // Study selected decks
                     $scope.studyDecks = function (decks) {
-                        $rootScope.$broadcast(TRANSITION['DECK_INDEX->STUDY']);
-                        $state.go('study', {decks: decks});
+                        if (Array.isArray(decks)){
+                            $rootScope.$broadcast(TRANSITION['DECK_INDEX->STUDY']);
+                            $state.go('study', {decks: decks});
+                        } else {
+                            var singleDeck = [];
+                            singleDeck.push(decks);
+                            $rootScope.$broadcast(TRANSITION['DECK_INDEX->STUDY']);
+                            $state.go('study', {decks: singleDeck});
+                        }
                         // TO -> studyController
                     };
 

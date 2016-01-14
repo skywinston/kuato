@@ -49,7 +49,8 @@ angular.module('kuato')
 .directive('deckHeader', [function () {
 
     function link (scope, elem, attrs) {
-
+        console.log("Scope in deck header element");
+        console.log(scope);
     }
 
     return {

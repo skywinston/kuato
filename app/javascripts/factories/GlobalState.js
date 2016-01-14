@@ -40,6 +40,7 @@ angular.module('kuato')
 
         // During Study
         'STUDY->SHOW_CARD': 'STUDY->SHOW_CARD',
+        'STUDY->EDIT_CARD': 'STUDY->EDIT_CARD',
         'EDIT_CARD->STUDY': 'EDIT_CARD->STUDY',
         'RATE_CARD_1': 'RATE_CARD_1',
         'RATE_CARD_2': 'RATE_CARD_2',

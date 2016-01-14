@@ -584,6 +584,29 @@ html, body {
   padding: 8px;
   box-sizing: border-box; }
 
+.deck__header__component {
+  display: flex;
+  flex-flow: row;
+  flex-wrap: wrap;
+  min-width: 100%;
+  max-width: 768px; }
+  .deck__header__component h1 {
+    font-family: 'Source Serif Pro', serif;
+    font-size: 32px;
+    margin: 0;
+    margin-bottom: 8px; }
+  .deck__header__component h3 {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 18px;
+    font-weight: normal;
+    color: #9E9E9E;
+    margin: 0; }
+
+.deck__header__title {
+  display: flex;
+  flex-flow: column;
+  width: 100%; }
+
 .card__preview__container {
   display: flex;
   flex-flow: column;
@@ -729,6 +752,96 @@ html, body {
   margin: 0;
   font-weight: 400;
   font-size: 24px; }
+
+.study__component {
+  display: flex;
+  flex-flow: column; }
+  .study__component.ng-add-hide {
+    -webkit-animation-duration: .3s;
+    animation-duration: .3s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    animation-timing-function: cubic-bezier(0.55, 0, 0.1, 1);
+    -webkit-animation-name: slideInDown;
+    animation-name: slideInDown; }
+  .study__component.ng-add-show {
+    -webkit-animation-duration: .3s;
+    animation-duration: .3s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    animation-timing-function: cubic-bezier(0.55, 0, 0.1, 1);
+    -webkit-animation-name: slideInUp;
+    animation-name: slideInUp; }
+  .study__component .cards_to_study_wrapper {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box; }
+  .study__component .study__nav {
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    align-items: center;
+    outline: none;
+    border: 1px solid #d0d0d0; }
+    .study__component .study__nav button:first-of-type {
+      border: none;
+      border-radius: 2px 0 0 2px;
+      border-right: 1px solid #d0d0d0; }
+    .study__component .study__nav button {
+      border: none;
+      border-radius: 0 2px 2px 0;
+      height: 40px;
+      width: 50%;
+      padding: 8px;
+      margin: 0;
+      outline: none;
+      background-color: #FAFAFA; }
+  .study__component .study__ratings__component {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.23), 0 10px 40px rgba(0, 0, 0, 0.19);
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    padding: 16px 16px 24px 16px;
+    box-sizing: border-box;
+    background-color: #FAFAFA; }
+    .study__component .study__ratings__component h3 {
+      font-family: "Source Serif Pro", serif;
+      margin: 8px; }
+    .study__component .study__ratings__component .button-group {
+      display: flex;
+      flex-flow: row;
+      flex-wrap: wrap;
+      align-items: center;
+      overflow: hidden;
+      border-radius: 2px;
+      width: 100%;
+      height: 40px; }
+      .study__component .study__ratings__component .button-group button {
+        outline: none;
+        border: none;
+        padding: 8px 16px;
+        flex: 1 0 auto; }
+      .study__component .study__ratings__component .button-group button:nth-of-type(1) {
+        border-radius: 2px 0 0 2px;
+        background-color: #019875;
+        color: #FAFAFA;
+        margin-right: 1px; }
+      .study__component .study__ratings__component .button-group button:nth-of-type(2) {
+        background-color: #1380b1;
+        color: #FAFAFA;
+        margin-right: 1px; }
+      .study__component .study__ratings__component .button-group button:nth-of-type(3) {
+        border-radius: 0 2px 2px 0;
+        background-color: #e74e3c;
+        color: #FAFAFA; }
+  .study__component .study__card h1 {
+    font-family: 'Source Serif Pro', serif;
+    padding-left: 8px;
+    margin: 20px 0 12px 0; }
 
 @media screen and (max-device-width: 399px) {
   .deck__title--tablet {
@@ -940,11 +1053,13 @@ html, body {
 
   .deck__header__container {
     display: flex;
-    flex-flow: column;
+    flex-flow: row;
+    flex-wrap: wrap;
     align-items: center;
     box-shadow: 0 3px 12px rgba(0, 0, 0, 0.23), 0 3px 12px rgba(0, 0, 0, 0.16);
     position: absolute;
     top: 56px;
+    padding-left: 104px;
     background-color: #FAFAFA;
     width: 100%;
     height: 141px; }

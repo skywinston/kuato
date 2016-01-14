@@ -26,6 +26,13 @@ angular.module('kuato')
             scope.showAnswer = false;
         });
 
+        // Listen for updates to cards during studying to update the card currently being studied
+        scope.$on('UPDATED_CARD', function (event, updatedCard) {
+            // Receive updated card object from card directive and update active card in study view.
+            elem.find('#questionPreviewTarget').html("").append(marked(updatedCard.question));
+            elem.find('#answerPreviewTarget').html("").append(marked(updatedCard.answer));
+        });
+
         scope.showAnswer = false;
     }
 

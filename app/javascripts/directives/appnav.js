@@ -50,8 +50,16 @@ angular.module('kuato')
                     buttonActive(true, 'New Card', 'Cancel Card');
                 });
 
+                $scope.$on('CARD_INDEX->EDIT_CARD', function (event) {
+                    buttonActive(true, 'Edit Card', 'Dismiss Card');
+                });
+
                 $scope.$on('STUDY->SHOW_CARD', function (event) {
                     buttonActive(true, 'New Card', 'Cancel Card');
+                });
+
+                $scope.$on('STUDY->EDIT_CARD', function () {
+                    buttonActive(true, 'Edit Card', 'Dismiss Changes');
                 });
 
 

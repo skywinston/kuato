@@ -1,5 +1,11 @@
-<button card-id={{id}} deck-id="{{deck_id}}" card-operator>Edit Card</button>
-<div class="row">
-    <div class="col" id="questionPreviewTarget"></div>
-    <div class="col" id="answerPreviewTarget" ng-show="showAnswer"></div>
+<div class="study__cards__container">
+    <div class="study__card">
+        <h1 class="question">Question</h1>
+        <div class="card__preview__container" id="questionPreviewTarget"></div>
+    </div>
+
+    <div class="study__card" ng-show="showAnswer">
+        <h1 class="answer">Answer</h1>
+        <div class="card__preview__container" id="answerPreviewTarget"></div>
+    </div>
 </div>

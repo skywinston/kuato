@@ -20,11 +20,19 @@ angular.module('kuato')
                             renderCard();
                             break;
                         case STATE['CARD_INDEX'] :
-                            $rootScope.$broadcast(TRANSITION['CARD_INDEX->SHOW_CARD']);
+                            if (attrs.context == 'preview-card') {
+                                $rootScope.$broadcast(TRANSITION['CARD_INDEX->EDIT_CARD']);
+                            } else {
+                                $rootScope.$broadcast(TRANSITION['CARD_INDEX->SHOW_CARD']);
+                            }
                             renderCard();
                             break;
                         case STATE['STUDYING'] :
-                            $rootScope.$broadcast(TRANSITION['STUDY->SHOW_CARD']);
+                            if (attrs.context == 'study') {
+                                $rootScope.$broadcast(TRANSITION['STUDY->EDIT_CARD']);
+                            } else {
+                                $rootScope.$broadcast(TRANSITION['STUDY->SHOW_CARD']);
+                            }
                             renderCard();
                             break;
                         case STATE['SHOW_CARD'] :
@@ -54,11 +62,12 @@ angular.module('kuato')
 .directive('kuatoCard', [
     'CardFactory',
     'Deck',
+    '$rootScope',
     'GlobalState',
     '$timeout',
     'STATE',
     'TRANSITION',
-    function (CardFactory, Deck, GlobalState, $timeout, STATE, TRANSITION) {
+    function (CardFactory, Deck, $rootScope, GlobalState, $timeout, STATE, TRANSITION) {
 
 
         function link (scope, elem, attrs) {
@@ -165,11 +174,22 @@ angular.module('kuato')
                     updates.deck_id = selected;
                     updates.question = questionMirror.getValue();
                     updates.answer = answerMirror.getValue();
+                    updates.rating = scope.activeCard.rating;
 
                     CardFactory.update(updates)
                         .then(function (response) {
                             console.log("Did the card get updated?");
                             console.log(response.data);
+
+
+                            // If the update was made while studying we need to update the card currently being
+                            // studied with the new info.
+                            if (GlobalState.getPrevState() == STATE['STUDYING']) {
+                                $rootScope.$broadcast('UPDATED_CARD', response.data);
+                            }
+
+                            // Upon successful update, remove the card elem directive
+                            $rootScope.$broadcast(TRANSITION['REMOVE_CARD']);
                         });
                 }
 
@@ -241,7 +261,7 @@ angular.module('kuato')
         };
 
 }])
-.factory('CardFactory', ["$http", "Deck", function($http, Deck){
+.factory('CardFactory', ["$http", "Deck", "GlobalState", function($http, Deck, GlobalState){
     // TODO - We may have eliminated the need for this Factory through the refactoring of the Deck index route
     return {
         fetch: fetch,
@@ -263,13 +283,14 @@ angular.module('kuato')
             url: "/api/v1/cards/update/" + updates.id,
             data: updates
         }).then(function (response) {
-            console.log(response.data);
-            // TODO - Search the Deck index by deck_id and replace the updated card in the cards array
+            console.log("UPDATES TO CARD: ", response.data);
+            // Search the Deck index by deck_id and replace the updated card in the cards array
             Deck.index[response.data.deck_id].cards.forEach(function (card, i, arr) {
                 if (card.id = response.data.id) {
                     arr[i] = response.data;
                 }
             });
+
             return response;
         })
     }

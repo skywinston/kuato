@@ -32,7 +32,8 @@ router.post('/update/:id', function (req, res) {
             id: req.body.id,
             deck_id: req.body.deck_id,
             question: req.body.question,
-            answer: req.body.answer
+            answer: req.body.answer,
+            rating: req.body.rating
         })
         .returning('*')
         .then(function (updatedCard) {

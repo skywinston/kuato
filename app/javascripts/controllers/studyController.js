@@ -5,10 +5,11 @@ angular.module('kuato')
     "$compile",
     "$stateParams",
     "Deck",
+    "CardFactory",
     "GlobalState",
     "STATE",
     "$state",
-    function studyController ($scope, $rootScope, $compile, $stateParams, Deck, GlobalState, STATE, $state) {
+    function studyController ($scope, $rootScope, $compile, $stateParams, Deck, CardFactory, GlobalState, STATE, $state) {
         // Set Global State
         GlobalState.setState(STATE['STUDYING']);
 
@@ -19,18 +20,29 @@ angular.module('kuato')
                 // Initialize scope with queued, active, and reviewed values
                 $scope.queued = response.data;
 
-                console.log($scope.queued.length);
+                // Set inPlay attribute on each card object to determine how long the card stays in play.
+                // Set reviewed property to count incidences of study during this session.
+                $scope.queued.forEach( function (card) {
+                    card.inPlay = true;
+                    card.reviewed = 0;
+                });
 
                 // Load the first card from the array into the active slot (the card the studier sees first).
                 $scope.active = $scope.queued.shift();
 
                 $scope.reviewed = [];
 
-                $scope.doneStudying = $scope.queued.length == 0 ? true : false;
+                $scope.doneStudying = $scope.queued.length == 0;
 
                 renderCard();
             });
 
+
+        // Listen for updates to the active card and make sure this scope updates that card object.
+        $scope.$on('UPDATED_CARD', function (event, updatedCard) {
+            // Receive updated card object from card directive and update active card in this controller.
+            $scope.active = updatedCard;
+        });
 
 
         // Function to compile <kuato-card></kuato-card> directive using active card for scope
@@ -48,6 +60,7 @@ angular.module('kuato')
             $('#currentCardTarget').append($compile(template)(cardScope));
             // TO -> study-card.js
         }
+
 
         // Starts with only the q visible
         $scope.showAnswer = false;
@@ -71,11 +84,64 @@ angular.module('kuato')
         };
 
         $scope.rateCard = function (rating) {
-            // rating is 1, 2, or 3
-            // TODO - do the update op on the card
-            // TODO - In the .then(), fire $scope.nextCard();
-            $scope.nextCard();
+            // How many times has this card been reviewed during this session?
+            $scope.active.reviewed++;
+
+            // This will shuffle the card back into the deck based on the rating.
+            switch (rating) {
+                case 1 :
+                    // Remove from play
+                    $scope.active.inPlay = false;
+
+                    processUpdates(rating);
+                    break;
+
+                case 2 :
+                    // Add back into deck at the end (shows up less frequently)
+                    $scope.queued.push($scope.active);
+
+                    processUpdates(rating);
+                    break;
+
+                case 3 :
+                    // Add back into the deck in the middle (shows up more often)
+                    var queueLen = $scope.queued.length;
+                    queueLen % 2 == 0 ?
+                        $scope.queued.splice(queueLen/2 - 1, 1, $scope.active) :
+                        $scope.queued.splice( (queueLen-1) / 2, 1, $scope.active);
+                    processUpdates(rating);
+                    break;
+            }
         };
+
+
+        // processes card ratings by making changes to state in controller and calling the api with updates
+        function processUpdates (rating) {
+            // First rating is the one recorded in the database.
+            if ($scope.active.reviewed == 1) {
+                $scope.active.rating = rating;
+                // Build updates object removing properties used by study controller that don't conform to schema.
+                var updates = $scope.active;
+                delete updates.reviewed;
+                delete updates.inPlay;
+
+                // Send updates to API
+                CardFactory.update(updates)
+                    .then(function (updatedCard) {
+                        console.log("Updates to active card during study.  Check the rating.");
+                        console.log(updatedCard);
+
+                        if (rating == 2) {
+
+                        }
+                        $scope.nextCard();
+                    });
+
+            } else {
+                $scope.nextCard();
+            }
+        }
+
 
         $scope.toggleShowAnswer = function () {
             $scope.showAnswer = !$scope.showAnswer;
