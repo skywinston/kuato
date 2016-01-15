@@ -1,5 +1,5 @@
 INSERT INTO users VALUES
-    (default, 'demo@kuato.com', '$2a$08$Saidu4Z5VkIdChZg78xqJOzuW.HwEaSGbmGy3C4HiKlSsMK1z3.sy');
+    (default, 'demo', '$2a$08$Saidu4Z5VkIdChZg78xqJOzuW.HwEaSGbmGy3C4HiKlSsMK1z3.sy');
 
 INSERT INTO decks VALUES
     (default, 1, 'JavaScript', 'Wed Jan 13 2016 22:58:08 GMT-0700 (MST)'),
