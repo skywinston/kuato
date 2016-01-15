@@ -28,10 +28,12 @@ angular.module('kuato')
         restrict: 'E',
         link: link,
         template:   '<div class="newdeck__container">' +
-                        '<input class="newdeck__title" type="text" ng-model="newDeckTitle"/>' +
-                        '<div class="deck__buttongroup__mobile">' +
-                            '<button class="newdeck__cancel" ng-click="cancelDeck()">Cancel</button>' +
-                            '<button class="newdeck__save" ng-click="createDeck(newDeckTitle)">Create</button>' +
+                        '<div class="newdeck__wrapper">' +
+                            '<input class="newdeck__title" type="text" ng-model="newDeckTitle"/>' +
+                            '<div class="deck__buttongroup__mobile">' +
+                                '<button class="newdeck__cancel" ng-click="cancelDeck()">Cancel</button>' +
+                                '<button class="newdeck__save" ng-click="createDeck(newDeckTitle)">Create</button>' +
+                            '</div>' +
                         '</div>' +
                     '</div>' +
                     '<div class="newdeck__mask"></div>'
@@ -41,6 +43,8 @@ angular.module('kuato')
 
         // TODO - Animate elem into view
         $('#app__container').prepend(elem);
+
+        elem.find('input').focus();
 
         scope.createDeck = function (deckTitle) {
             Deck.create(deckTitle)

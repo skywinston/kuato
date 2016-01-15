@@ -1482,6 +1482,52 @@ html, body {
     margin-top: 72px; }
 
   .login__byline {
-    margin-bottom: 24px; } }
+    margin-bottom: 24px; }
+
+  .newdeck__container {
+    position: fixed;
+    width: 100%;
+    min-width: 100%;
+    z-index: 6;
+    top: 56px;
+    background: none;
+    box-shadow: none; }
+    .newdeck__container .newdeck__wrapper {
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.23), 0 3px 12px rgba(0, 0, 0, 0.16);
+      border-radius: 2px;
+      background-color: #FAFAFA;
+      position: absolute;
+      top: 16px;
+      width: 33%;
+      padding: 16px;
+      transform: translate(-50%, 0);
+      left: 50%;
+      border-radius: 8px; }
+    .newdeck__container input {
+      border: 1px solid #BDBDBD;
+      padding: 4px 8px;
+      box-sizing: border-box;
+      height: 40px;
+      width: 100%;
+      max-width: 100%;
+      margin-bottom: 16px;
+      outline: none;
+      border-radius: 2px; }
+    .newdeck__container .deck__buttongroup__mobile {
+      width: 100%;
+      margin-bottom: 8px; }
+      .newdeck__container .deck__buttongroup__mobile button {
+        outline: none;
+        border: none;
+        height: 40px;
+        color: #FAFAFA;
+        width: 50%; }
+      .newdeck__container .deck__buttongroup__mobile button.newdeck__cancel {
+        border-radius: 2px 0 0 2px;
+        background-color: #e74e3c;
+        border-right: 1px solid #FAFAFA; }
+      .newdeck__container .deck__buttongroup__mobile button.newdeck__save {
+        border-radius: 0 2px 2px 0;
+        background-color: #019875; } }
 
 /*# sourceMappingURL=app.css.map */

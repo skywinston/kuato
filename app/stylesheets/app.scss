@@ -1765,5 +1765,67 @@ and (min-device-width: 601px) {
     margin-bottom: 24px;
   }
 
+  // New Deck Component
+  .newdeck__container {
+
+    position: fixed;
+    width: 100%;
+    min-width: 100%;
+    z-index: 6;
+    top: 56px;
+    background: none;
+    box-shadow: none;
+
+
+    .newdeck__wrapper {
+      @include card(2);
+      background-color: $white;
+      position: absolute;
+      top: 16px;
+      width: 33%;
+      padding: 16px;
+      transform: translate(-50%, 0);
+      left: 50%;
+      border-radius: 8px;
+    }
+
+    input {
+      border: 1px solid $offwhite--accent;
+      padding: 4px 8px;
+      box-sizing: border-box;
+      height: 40px;
+      width: 100%;
+      max-width: 100%;
+      margin-bottom: 16px;
+      outline: none;
+      border-radius: 2px;
+    }
+
+    .deck__buttongroup__mobile {
+      width: 100%;
+      margin-bottom: 8px;
+
+      button {
+        outline: none;
+        border: none;
+        height: 40px;
+        color: $white;
+        width: 50%;
+      }
+
+      button.newdeck__cancel {
+        border-radius: 2px 0 0 2px;
+        background-color: #e74e3c;
+        border-right: 1px solid $white;
+      }
+
+      button.newdeck__save {
+        border-radius: 0 2px 2px 0;
+        background-color: $primary;
+      }
+    }
+  }
+
+
 } // END TABLET BREAKPOINT
 
